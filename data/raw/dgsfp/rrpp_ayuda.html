@@ -1,0 +1,824 @@
+
+<div class="modal-header">
+    <h5 class="modal-title color-RojoSede" id="">
+        Ayuda - Aseguradora y Reaseguradoras</h5>
+        <button class="close" data-dismiss="modal" aria-label="Cerrar">
+            <span aria-hidden="true">&times;</span>
+        </button>
+</div>
+
+<div class="modal-body">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-3">
+                <div class="nav flex-column nav-pills" role="tablist" aria-orientation="vertical">
+                    <a class="nav-link active" data-toggle="pill" href="#tabFuncionamiento" role="tab" aria-controls="v-pills-home" aria-selected="true">Funcionamiento</a>
+                    <a class="nav-link" data-toggle="pill" href="#tabOpcionesBusqueda" role="tab" aria-controls="v-pills-profile" aria-selected="false">Opciones de b&#xFA;squeda</a>
+                    <a class="nav-link" data-toggle="pill" href="#tabOpcionesSituacion" role="tab" aria-controls="v-pills-messages" aria-selected="false">Opciones por Situaci&#xF3;n</a>
+                    <a class="nav-link" data-toggle="pill" href="#tabOpcionesAmbito" role="tab" aria-controls="v-pills-settings" aria-selected="false">Opciones por &#xC1;mbito de Operaci&#xF3;n</a>
+                    <a class="nav-link" data-toggle="pill" href="#tabOpcionesTipoEntidad" role="tab" aria-controls="v-pills-settings" aria-selected="false">Opciones por Tipo de Entidad</a>
+                    <a class="nav-link" data-toggle="pill" href="#tabOpcionesTipoActividad" role="tab" aria-controls="v-pills-settings" aria-selected="false">Opciones por Tipo de Actividad</a>
+                    <a class="nav-link" data-toggle="pill" href="#tabOpcionesRamos" role="tab" aria-controls="v-pills-settings" aria-selected="false">Opciones por Ramos</a>
+                    <a class="nav-link" data-toggle="pill" href="#tabOpcionesModalidades" role="tab" aria-controls="v-pills-settings" aria-selected="false">Opciones por Modalidades (S&#xF3;lo para los ramos descritos)</a>
+                    <a class="nav-link" data-toggle="pill" href="#tabOpcionesPresentaciones" role="tab" aria-controls="v-pills-settings" aria-selected="false">Opciones por Presentaciones</a>
+                    <a class="nav-link" data-toggle="pill" href="#tabOpcionesPais" role="tab" aria-controls="v-pills-settings" aria-selected="false">Opciones para Pa&#xED;s de Origen</a>
+                </div>
+            </div>
+            <div class="col-9">
+                <div class="tab-content">
+                    <div class="tab-pane fade show active" id="tabFuncionamiento" role="tabpanel" aria-labelledby="v-pills-home-tab">
+
+<h5 class="color-RojoSede">Explicaci&#xF3;n</h5>
+<p>
+    En esta p&#xE1;gina se podr&#xE1; buscar todo tipo de Entidades Aseguradoras y Reaseguradoras, as&#xED; como entidades que trabajen como gestoras. Si la b&#xFA;squeda ha resultado correcta, en la parte inferior, aparecer&#xE1; la relaci&#xF3;n de entidades coincidentes con los criterios introducidos.
+</p>
+<p>
+    Si nos posicionamos sobre una entidad y hacemos click con el bot&#xF3;n izquierdo del rat&#xF3;n aparecer&#xE1; otra pantalla que mostrar&#xE1; el detalle de dicha Entidad Aseguradora Reaseguradora.
+</p></div>
+                    <div class="tab-pane fade" id="tabOpcionesBusqueda" role="tabpanel" aria-labelledby="v-pills-profile-tab">
+
+<h5 class="color-RojoSede">Opciones</h5>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="igual que">igual que</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>
+            Se introducir&#xE1; la clave o bien la primera letra y el n&#xFA;mero de la clave suprimiendo los ceros intermedios. ejem: C21, visualizando como resultado la entidad con clave C0021.
+        </p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="que contenga">que contenga</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>
+             Permite introducir los caracter/es intermedios que pueda contener la clave de entidad. ejem: 002, para visualizar la entidad cuya clave es: C0021.
+        </p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="que termine por">que termine por</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>
+            Permite introducir los &#xFA;ltimos caracteres correspondientes a la clave de la entidad. ejem: 21, para visualizar la entidad con clave: C0021.
+        </p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="que empiece por">que empiece por</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>
+            Permite introducir los primeros caracteres correspondientes a la clave de la entidad. ejem: C, para visualizar todas las entidades que empiecen por la letra C.
+        </p>
+    </div>
+</div>
+
+<h5 class="color-RojoSede">Nota</h5>
+<p>
+     Estas opciones de b&#xFA;squeda estar&#xE1;n disponibles para los siguientes apartados: Clave, Denominaci&#xF3;n y NIF.
+</p></div>
+                    <div class="tab-pane fade" id="tabOpcionesSituacion" role="tabpanel" aria-labelledby="v-pills-messages-tab">
+<h5 class="color-RojoSede">Opciones</h5>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Todos/as">Todos/as</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>Muestra todas las entidades indistintamente del tipo de situaci&#xF3;n.</p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Activa">Activa</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>
+            Entidad inscrita en el registro y autorizada o habilitada para realizar operaciones de seguro.
+        </p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Liquidaci&#xF3;n">Liquidaci&#xF3;n</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>Entidad que ha acordado su disoluci&#xF3;n y est&#xE1; en periodo de liquidaci&#xF3;n.</p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Liquidaci&#xF3;n CCS">Liquidaci&#xF3;n CCS</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>
+            Entidad disuelta (voluntariamente o de oficio) y que est&#xE1; siendo liquidada por el Consorcio de Compensaci&#xF3;n de Seguros (CCS), entidad p&#xFA;blica regulada por su Estatuto Legal, cuyo texto refundido ha sido aprobado por el Real Decreto Legislativo 7/2004, de 29 de Octubre, y que asumi&#xF3; las funciones que la ley encomendaba a la Comisi&#xF3;n Liquidadora de Entidades Aseguradoras (CLEA), conforme a la Ley 44/2002, de 22 de noviembre, de Medidas de Reforma del Sistema Financiero (B.O.E. 23-XI-2002).
+        </p>
+        <p class="color-RojoSede">
+            Los datos del CSS son los siguientes:
+            <span class="d-block font-weight-bold font-italic">P&#xBA; de la Castellana, 32-28046 MADRID- Tel: 913395500</span>
+            <span class="d-block font-weight-bold font-italic">Informaci&#xF3;n: Tel.: 913395555</span>
+            <span class="d-block font-weight-bold font-italic">Fax: 913395578</span>
+            <span class="d-block font-weight-bold font-italic">Web: www.consorseguros.es</span>
+            <span class="d-block font-weight-bold font-italic">Correo e: ccs@consorseguros.es</span>
+        </p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Pendiente de Cancelaci&#xF3;n">Pendiente de Cancelaci&#xF3;n</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>
+            Entidad cuya inscripci&#xF3;n ha sido cancelada y ha dejado de ser entidad aseguradora por disoluci&#xF3;n y posterior extinci&#xF3;n, por fusi&#xF3;n, transformaci&#xF3;n, escisi&#xF3;n, cesi&#xF3;n general de cartera o revocaci&#xF3;n de la autorizaci&#xF3;n administrativa y cambio de objeto social.
+        </p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Cancelada">Cancelada</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>
+            Entidad cuya inscripci&#xF3;n ha sido cancelada y ha dejado de ser entidad aseguradora por disoluci&#xF3;n y posterior extinci&#xF3;n, por fusi&#xF3;n, transformaci&#xF3;n, escisi&#xF3;n, cesi&#xF3;n general de cartera o revocaci&#xF3;n de la autorizaci&#xF3;n administrativa y cambio de objeto social.
+        </p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Revocada">Revocada</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>Entidad Aseguradora a la que le ha sido revocada la autorizaci&#xF3;n administrativa.</p>
+    </div>
+</div>
+</div>
+                    <div class="tab-pane fade" id="tabOpcionesAmbito" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+
+<h5 class="color-RojoSede">Opciones</h5>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Todos/as">Todos/as</option>
+</select>
+    </div>
+    <div class="col-md-9">
+        <p>
+            Muestra todas las entidades indistintamente del Ambito territorial en el que operen.
+        </p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Auton&#xF3;mico">Auton&#xF3;mico</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>Muestra todas las entidades que operen dentro de un &#xE1;mbito auton&#xF3;mico.</p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Local">Local</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>Muestra todas las entidades que operen dentro de un &#xE1;mbito local.</p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Nacional">Nacional</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>
+            Incluye las entidades aseguradoras espa&#xF1;olas, autorizadas para operar en todo el territorio nacional, y cuya autorizaci&#xF3;n es v&#xE1;lida en todo el EEE, con independencia de que est&#xE9;n habilitadas o no en otros estados.
+        </p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Provincial">Provincial</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>Muestra todas las entidades que&#xA0;operen dentro de un &#xE1;mbito provincial.</p>
+    </div>
+</div>
+</div>
+                    <div class="tab-pane fade" id="tabOpcionesTipoEntidad" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+<h5 class="color-RojoSede">Opciones</h5>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Todos/as">Todos/as</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>Muestra todas las entidades indistintamente del tipo que tengan.</p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="C">C</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>Muestra las Sociedades An&#xF3;nimas.</p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="E">E</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>Muestra las entidades Extranjeras en DE. (Delegaci&#xF3;n)</p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="GR">GR</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>Muestra los Grupos Consolidados.</p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="L">L</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>Muestra las entidades Extranjeras en LPS (Libre Prestaci&#xF3;n de Servicios)</p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="M">M</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>Muestra las Mutuas de Seguros.</p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="P">P</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>Muestra las Mutualidades de Previsi&#xF3;n Social.</p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="R">R</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>Muestra las entidades Reaseguradoras.</p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="RE">RE</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>Muestra las entidades Reaseguradoras Extranjeras.</p>
+    </div>
+</div></div>
+                    <div class="tab-pane fade" id="tabOpcionesTipoActividad" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+<h5 class="color-RojoSede">Opciones</h5>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Todos/as">Todos/as</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>
+            Muestra todas las entidades indistintamente del tipo de actividad en que trabajen.
+        </p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Vida">Vida</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>Muestra todas las Entidades que trabajan exclusivamente con el ramo de Vida.</p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="No Vida">No Vida</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>Muestra todas las entidades que NO trabajen en el ramo Vida.</p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Vida &#x2B; No Vida">Vida &#x2B; No Vida</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>
+            Muestra todas las&#xA0;Entidades que trabajen en el ramo de vida y con cualquier otro ramo que no pertenezca a vida.
+        </p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Vida &#x2B; Accidentes">Vida &#x2B; Accidentes</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>
+            Muestra todas las&#xA0;Entidades que trabajen con el ramo de Vida y adem&#xE1;s&#xA0;con el ramo de&#xA0;Accidentes.
+        </p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Vida &#x2B; Enfermedad">Vida &#x2B; Enfermedad</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>
+            Muestra todas las entidades&#xA0;que trabajen con el ramo de Vida y adem&#xE1;s con el ramo de Enfermedad.
+        </p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Vida &#x2B; Accid. &#x2B; Enferm.">Vida &#x2B; Accid. &#x2B; Enferm.</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>
+            Muestra todas las entidades que trabajen con el ramo de Vida adem&#xE1;s del ramo de Accidentes y el de Enfermedad.
+        </p>
+    </div>
+</div>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control">
+            <option label="SharedLocalizer.GetLocalizedHtmlString(" Reaseguros")">Reaseguros</option>
+        </select>
+    </div>
+    <div class="col-md-9">
+        <p>Reaseguradoras.</p>
+    </div>
+</div>
+</div>
+                    <div class="tab-pane fade" id="tabOpcionesRamos" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+<h5 class="color-RojoSede">Opciones</h5>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Vida">Vida</option>
+        </select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Accidentes">Accidentes</option>
+        </select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Enfermedad">Enfermedad</option>
+        </select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Veh&#xED;culos terrestres no ferroviarios">
+                Veh&#xED;culos terrestres no ferroviarios
+            </option>
+        </select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Veh&#xED;culos ferroviarios">Veh&#xED;culos ferroviarios</option>
+        </select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Veh&#xED;culos a&#xE9;reos">Veh&#xED;culos a&#xE9;reos</option>
+        </select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Veh&#xED;culos mar&#xED;timos, lacustres y fluviales">
+                Veh&#xED;culos mar&#xED;timos, lacustres y fluviales
+            </option>
+        </select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Mercanc&#xED;as transportadas">Mercanc&#xED;as transportadas</option>
+        </select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Incendios y elementos de la naturaleza">
+                Incendios y elementos de la naturaleza
+            </option>
+        </select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Otros da&#xF1;os a los bienes">Otros da&#xF1;os a los bienes</option>
+        </select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Responsabilidad civil veh&#xED;culos terrestres.">
+                Responsabilidad civil veh&#xED;culos terrestres.
+            </option>
+        </select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Responsabilidad civil veh&#xED;culos a&#xE9;reos">
+                Responsabilidad civil veh&#xED;culos a&#xE9;reos
+            </option>
+        </select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Responsabilidad civil veh&#xED;culos mar&#xED;timos">
+                Responsabilidad civil veh&#xED;culos mar&#xED;timos
+            </option>
+        </select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Responsabilidad civil general">Responsabilidad civil general</option>
+        </select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Cr&#xE9;dito">Cr&#xE9;dito</option>
+        </select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Todos/as">Todos/as</option>
+        </select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Cauci&#xF3;n">Cauci&#xF3;n</option>
+        </select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label=">P&#xE9;rdidas pecuniarias diversas">P&#xE9;rdidas pecuniarias diversas</option>
+        </select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Defensa Jur&#xED;dica">Defensa Jur&#xED;dica</option>
+        </select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Asistencia">Asistencia</option>
+        </select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Decesos">Decesos</option>
+        </select>
+    </div>
+</div>
+</div>
+                    <div class="tab-pane fade" id="tabOpcionesModalidades" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+
+
+<h5 class="color-RojoSede">Opciones</h5>
+
+<table class="table table-bordered">
+    <caption>Modalidades por Ramo</caption>
+    <thead class="thead-light">
+        <tr>
+            <th scope="col">Ramo</th>
+            <th scope="col">Modalidad</th>
+</tr>
+    </thead>
+    <tbody>
+        <tr>
+            <td valign="baseline" rowspan="3">
+                <p>Enfermedad</p>
+             </td>
+            <td>
+                <p><strong>(Ramo completo)</strong></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p><strong>Asistencia Sanitaria</strong></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p><strong>Enfermedad sin Asistencia Sanitaria.</strong></p>
+            </td>
+        </tr>
+        <tr>
+            <td valign="baseline" rowspan="3">
+                <p>Responsabilidad civil veh&#xED;culos terrestres.</p>
+            </td>
+            <td>
+                <p><strong>(Ramo completo)</strong></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p><strong>Responsabilidad civil en veh&#xED;culos terrestres autom&#xF3;viles</strong></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p><strong>Responsabilidad civil del transportista terrestre.</strong></p>
+            </td>
+        </tr>
+        <tr>
+            <td valign="baseline" rowspan="4">
+                <p>Defensa Jur&#xED;dica</p>
+            </td>
+            <td>
+                <p><strong>(Ramo completo)</strong></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p><strong>A/Gesti&#xF3;n otra entidad</strong></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p><strong>B/Propia entidad.</strong></p>
+            </td>
+        </tr>
+        <tr>
+            <td>
+                <p><strong>C/Libre elecci&#xF3;n.</strong></p>
+            </td>
+        </tr>
+    </tbody>
+</table>
+</div>
+                    <div class="tab-pane fade" id="tabOpcionesPresentaciones" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+<h5 class="color-RojoSede">Opciones</h5>
+
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Todos/as">Todos/as</option>
+</select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Accidentes">Accidentes</option>
+</select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Asistencia">Asistencia</option>
+</select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Decesos">Decesos</option>
+</select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Defensa Jur&#xED;dica">Defensa Jur&#xED;dica</option>
+        </select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Enfermedad">Enfermedad</option>
+</select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Incendio">Incendio</option>
+</select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Otros da&#xF1;os a los bienes">Otros da&#xF1;os a los bienes</option>
+        </select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Riesgo de empleo">Riesgo de empleo</option>
+        </select>
+    </div>
+</div>
+<div class="row mb-2">
+    <div class="col-md-3">
+        <select class="form-control mt-1">
+            <option label="Vida">Vida</option>
+</select>
+    </div>
+</div></div>
+                    <div class="tab-pane fade" id="tabOpcionesPais" role="tabpanel" aria-labelledby="v-pills-settings-tab">
+
+<h5 class="color-RojoSede">Explicaci&#xF3;n y opciones</h5>
+
+<p>
+    Muestra las entidades extranjeras que realizan actividad aseguradora en&#xA0; Espa&#xF1;a a trav&#xE9;s de una sucursal, (DE) con clave administrativa E0000, o en r&#xE9;gimen de libre prestaci&#xF3;n de servicios desde otro estado miembro del EEE, (LPS) con clave administrativa L0000. El control financiero de las entidades domiciliadas en el EEE (Espacio Econ&#xF3;mico Europeo) que operan en Espa&#xF1;a corresponde al estado del domicilio social. S&#xF3;lo en caso de las sucursales, el estado de origen puede ser un tercer pa&#xED;s fuera del EEE, por lo que por defecto est&#xE1; seleccionado el &#xE1;mbito del EEE.
+</p>
+
+<div class="row">
+    <div class="col-12">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" id="ckAyudaLPS" class="custom-control-input" checked="checked">
+            <label for="ckAyudaLPS" class="custom-control-label color-RojoSede font-weight-bold">Actividad en LPS o DE</label>
+        </div>
+    </div>
+    <div class="col-12">
+        <p>
+            Activando esta opci&#xF3;n&#xA0; se habilitar&#xE1; el desplegable de pa&#xED;ses para poder&#xA0;seleccionar&#xA0;una Entidad Aseguradora de un pa&#xED;s que opera&#xA0;en Libre Prestaci&#xF3;n de Servicios.
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" id="ckAyudaDE" class="custom-control-input" checked="checked" />
+            <label for="ckAyudaDE" class="custom-control-label color-RojoSede font-weight-bold">(DE) Delegaci&#xF3;n</label>
+        </div>
+    </div>
+    <div class="col-12">
+        <p>
+            Activando esta opci&#xF3;n&#xA0; se habilitar&#xE1; el desplegable de pa&#xED;ses para poder seleccionar&#xA0;una&#xA0;Entidad Aseguradora de un&#xA0;pa&#xED;s que opere por Delegaci&#xF3;n.
+        </p>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-12">
+        <div class="custom-control custom-checkbox">
+            <input type="checkbox" id="ckAyudaEEE" class="custom-control-input" checked="checked"/>
+            <label for="ckAyudaEEE" class="custom-control-label color-RojoSede font-weight-bold">Espacio Econ&#xF3;mico Europeo</label>
+        </div>
+    </div>
+    <div class="col-12">
+        <p>
+            El habilitar o deshabilitar esta opci&#xF3;n implica que en el desplegable de pa&#xED;ses s&#xF3;lo aparezcan los pa&#xED;ses pertenecientes a Europa o en caso contrario todos los del Resto del Mundo.
+        </p>
+    </div>
+</div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

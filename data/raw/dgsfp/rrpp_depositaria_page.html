@@ -1,0 +1,299 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Depositarias</title>
+
+
+
+
+    <script type="text/javascript" src="/ruxitagentjs_ICA7NVfqrux_10343260715123811.js" data-dtconfig="rid=RID_-447072823|rpid=1777369998|domain=mineco.es|reportUrl=/rb_bf99376qoj|app=48fed5968e1bb5fa|cuc=glnrmrcb|owasp=1|mel=100000|expw=1|featureHash=ICA7NVfqrux|dpvc=1|lastModification=1787139493214|tp=500,50,0|rdnt=1|uxrgce=1|srbbv=2|agentUri=/ruxitagentjs_ICA7NVfqrux_10343260715123811.js"></script><script src="/js/minified/jquery.site.min.js"></script>
+    <script src="/js/minified/bootstrap.site.min.js"></script>
+    <script src="/js/minified/excel.site.min.js"></script>
+    <script src="/js/minified/pdf.site.min.js"></script>
+    <script src="/js/minified/jqgrid.site.min.js"></script>
+    <script src="/js/minified/site.min.js"></script>
+
+
+
+    <link href="/css/minified/site.min.css" rel="stylesheet" />
+
+    <script src="/js/modernizr/modernizr-2.8.3.js"></script>
+</head>
+<body>
+    
+
+    <script type="text/javascript">
+        var colModel = [
+            {
+                label: "Clave",
+                sorttype: 'text',
+                name: 'clave',
+                width: 35,
+            },
+            {
+                label: "Clave de la Entidad",
+                sorttype: 'text',
+                name: 'descripcion',
+                width: 250,
+            },
+            {
+                label: "NIF",
+                sorttype: 'text',
+                name: 'cif',
+                width: 85,
+            },
+            {
+                label: "Tel&#xE9;fono",
+                sorttype: 'text',
+                name: 'telefono',
+                width: 85,
+            },
+            {
+                name: '',
+                width: 15,
+                sortable: false, resizable: false,
+                search: false,
+                formatter: formatAccionVerDetalle
+            }
+        ];
+
+        $("#Clave").on('blur', function () {
+            agregarCeros($(this));
+        });
+
+        $(document).ready(function () {
+            initToolTips();
+            loadAyuda("/Depositaria/Ayuda");
+            initVistaBuscador("/Depositaria/GetDepositariasBusqueda", "formBusqDepositaria", colModel, "/Depositaria/GetDepositaria"+ '/?culture=es-ES&ui-culture=es-ES');
+
+            $('input[type=text]').each(function () {
+                $("#" + this.id).keydown(function (e) {
+                    if (e.originalEvent.keyCode == 13) {
+                        e.preventDefault();
+                        reloadGrid();
+                    }
+                });
+            })
+        });
+
+    </script>
+
+    <script src="/js/Depositaria/grids.js"></script>
+
+
+
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12 col-lg-2 sideNavBox pl-0 pr-0">
+                <nav class="navbar navbar-expand-md navbar-toggleable-md navbar-light border-bottom box-shadow p-0">
+                    
+
+
+
+
+
+<button class="navbar-toggler bg-white" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="navbar-collapse collapse d-md-inline-flex flex-md-row-reverse">
+    <ul id="menuGeneral" class="navbar-nav flex-grow-1">
+        <li class="nav-item pl-3 mt-3">
+            <a class="nav-link text-white nav-itemA" href="/">Entidades Aseguradoras y Reaseguradoras</a>
+        </li>
+        <li class="nav-item pl-3">
+            <a class="nav-link text-white nav-itemA" href="/CCAA">Registros de entidades aseguradoras de las CCAA con competencias de ordenaci&#xF3;n y supervisi&#xF3;n</a>
+        </li>
+        <li class="nav-item pl-3">
+            <a class="nav-link text-white nav-itemA" href="/Fondo">Fondos de Pensiones</a>
+        </li>
+        <li class="nav-item pl-3">
+            <a class="nav-link text-white nav-itemA" href="/Plan">Planes de Pensiones</a>
+        </li>
+        <li class="nav-item pl-3">
+            <a class="nav-link text-white nav-itemA" href="/Gestora">Gestoras de Fondos de Pensiones</a>
+        </li>
+        <li class="nav-item pl-3">
+            <a class="nav-link text-white nav-itemA" href="/Depositaria">Depositarias de Fondos de Pensiones</a>
+        </li>
+        <li class="nav-item pl-3">
+            <a class="nav-link text-white nav-itemA" href="/Mediador">
+                Punto &#xDA;nico de Informaci&#xF3;n (PUI) de distribuidores de seguros y de reaseguros
+            </a>
+        </li>
+        <li class="nav-item pl-3">
+            <a class="nav-link text-white nav-itemA" href="https://dgsfp.mineco.gob.es/es/Consumidor/RegistrosPublicos/Paginas/No-autorizadas.aspx" target="_blank">Sujetos no autorizados para la actividad aseguradora y/o de distribuci&#xF3;n</a>
+        </li>
+        <li class="nav-item pl-3 mb-3">
+            <a class="nav-link text-white nav-itemA" href="https://dgsfp.mineco.gob.es/es/supervision/Paginas/Infracciones.aspx" target="_blank">Sanciones impuestas por la DGSFP</a>
+        </li>
+    </ul>
+</div>
+                </nav>
+                <div class="pl-3 mt-3">
+                    <button type="button" id="btnAyuda" class="btn btn-red btn-circle mr-2" data-toggle="modal" data-target="#fm-modal-grid">
+                        <i class="fa fa-question" aria-hidden="true"></i>
+                    </button>
+                    <a href="https://www.sededgsfp.gob.es/es/paginas/ConsultasIncidencias.aspx" target="_blank" class="btn btn-red btn-circle"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                </div>
+            </div>
+            <div class="col-12 col-lg-10">
+
+
+
+<div id="containerBuscador" class="row">
+    <div class="col">
+
+        <h5 class="tituloSede">Criterios de b&#xFA;squeda depositarias</h5>
+
+        <form id="formBusqDepositaria">
+
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col-md-6">
+        
+                        <label for="cmbOperadorClave">Clave</label>
+                        <i class="fa fa-question-circle text-primary tip" data-tip="ayudaClave" aria-hidden="true"></i>
+                        <div>
+                            <select class="form-control d-inline-block col-sm-5" data-val="true" data-val-required="The OperadorClave field is required." id="cmbOperadorClave" name="OperadorClave"><option value="1">Que empiece por</option>
+<option value="2">Que termine por</option>
+<option selected="selected" value="3">Que contenga</option>
+<option value="4">Igual que</option>
+</select>
+                            <input class="form-control d-inline-block col-sm-5 ml-0 ml-sm-3" id="Clave" name="Clave" type="text" value="" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="cmbOperadorCif">NIF</label>
+                        <div>
+                            <select class="form-control d-inline-block col-sm-5" data-val="true" data-val-required="The OperadorCif field is required." id="cmbOperadorCif" name="OperadorCif"><option value="1">Que empiece por</option>
+<option value="2">Que termine por</option>
+<option selected="selected" value="3">Que contenga</option>
+<option value="4">Igual que</option>
+</select>
+                            <input class="form-control d-inline-block col-sm-5 ml-0 ml-sm-3" id="Cif" name="Cif" type="text" value="" />
+                        </div>
+                    </div>
+                </div>
+
+                <div class="form-group row mb-2">
+                    <div class="col-md-6">
+                        <label for="cmbOperadorDenominacion">Denominaci&#xF3;n</label>
+                        <div>
+                            <select class="form-control d-inline-block col-sm-5" data-val="true" data-val-required="The OperadorDescripcion field is required." id="cmbOperadorDenominacion" name="OperadorDescripcion"><option value="1">Que empiece por</option>
+<option value="2">Que termine por</option>
+<option selected="selected" value="3">Que contenga</option>
+<option value="4">Igual que</option>
+</select>
+                            <input class="form-control d-inline-block col-sm-5 ml-0 ml-sm-3" id="Descripcion" name="Descripcion" type="text" value="" />
+                        </div>
+                    </div>
+                </div>
+
+            </div>
+
+            <div class="d-flex justify-content-center mt-5">
+                <input type="button" class="btn btn-rrpp w-em-15 mr-3" value="Buscar" onclick="reloadGrid();" />
+                <input type="reset" class="btn btn-secondary w-em-15" value="Limpiar" />
+            </div>
+
+        </form>
+
+
+
+<div id="ayudaClave" class="d-none">
+    <p>
+        Ayuda Clave Depositaria
+    </p>
+    <p>Relaci&#xF3;n de ejemplos v&#xE1;lidos para (igual que)</p>
+    <ul class="inlineBlock">
+        <li><strong class="color-RojoSede">D21:</strong>El resultado de la b&#xFA;squeda ser&#xE1; la Depositaria con clave igual a &#x27;D00021&#x27; </li>
+        <li><strong class="color-RojoSede">C:</strong>Muestra las Sociedades An&#xF3;nimas espa&#xF1;olas.</li>
+    </ul>
+</div>
+
+    </div>
+</div>
+
+
+<div id="containerResultBusqueda" class="row" style="display:none;">
+
+<div class="col">
+    <h5 class="tituloSede">Resultados de la b&#xFA;squeda</h5>
+
+    <div class="containerGrid position-relative px-2 mt-3" data-idgrid="jqGrid">
+        <table id="jqGrid">
+            <caption>Resultados de la b&#xFA;squeda</caption>
+            <tr><th scope="col"></th></tr>
+        </table>
+        <div id="jqGridPager"></div>
+    </div>
+
+    <div class="d-flex justify-content-end mr-1 mt-3">
+        <button class="btn btn-success mr-2" onclick="exportarGridExcel('jqGrid', 'Busqueda_Depositarias');">
+            <i class="fa fa-file-excel-o" aria-hidden="true"></i> Exportar a Excel
+        </button>
+        <button class="btn btn-rrpp" onclick="exportarGridPdf('jqGrid', 'Busqueda_Depositarias', LANDSCAPE);">
+            <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Exportar a PDF
+        </button>
+    </div>
+
+    <div class="d-flex justify-content-center mt-4">
+        <button class="btn btn-rrpp w-em-15" onclick="volverBuscador();">
+            <i class="fa fa-search" aria-hidden="true"></i> Volver al buscador 
+        </button>
+    </div>
+</div></div>
+
+
+<div id="containerDetalle" class="row" style="display:none;">
+</div>
+
+
+
+</div>
+        </div>
+    </div>
+
+    <div id="loader" class="loader loader-default" data-text=""></div>
+
+    <div class="modal fade" id="fm-modal-grid" tabindex="-1" role="dialog" aria-labelledby="fm-modal-grid" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content" id="modalContentAyuda">
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#menuGeneral li a').each(function () {
+                var baseUrl = $(this).attr("href").endsWith("/") ? $(this).attr("href").slice(0, -1) : $(this).attr("href");
+
+                $(this).attr("href", baseUrl + '/?culture=es-ES&ui-culture=es-ES');
+            });
+
+            $('#menuPUI li a').each(function () {
+                var baseUrl = $(this).attr("href").endsWith("/") ? $(this).attr("href").slice(0, -1) : $(this).attr("href");
+
+                $(this).attr("href", baseUrl + '/?culture=es-ES&ui-culture=es-ES');
+            });
+
+            marcarOpcionMenuSeleccionada();
+        });
+
+    </script>
+</body>
+</html>
+

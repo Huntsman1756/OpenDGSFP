@@ -1,0 +1,185 @@
+
+
+
+
+<div class="col">
+    <h5 class="tituloSede">Detalle Gestoras de Fondos de Pensiones</h5>
+
+    <div class="row mt-3">
+        <div class="col">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a href="#tabDatosGenerales" class="nav-link active" data-toggle="tab">Datos generales</a>
+                </li>
+
+                <li class="nav-item">
+                    <a href="#tabListadoFondos" class="nav-link" data-toggle="tab">Fondos</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#tabListadoCargos" class="nav-link" data-toggle="tab">Altos Cargos</a>
+                </li>
+            </ul>
+
+            <div class="tab-content p-3">
+                <div class="tab-pane active" id="tabDatosGenerales" role="tabpanel">
+
+
+<div class="row">
+    <div class="col-sm-4">
+        <label class="label-literal">Clave:</label>
+        <label aria-label="Clave" class="label-value">G0002</label>
+    </div>
+    <div class="col-sm-4">
+        <label class="label-literal">C&#xF3;digo LEI:</label>
+        <label aria-label="Código LEI" class="label-value">95980020140005677005</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <label class="label-literal">Denominaci&#xF3;n:</label>
+        <label aria-label="Denominación" class="label-value">ABANCA VIDA Y PENSIONES DE SEGUROS Y REASEGUROS, S.A</label>
+    </div>
+</div>
+
+<hr class="w-95 bg-RojoSede">
+
+<div class="row">
+    <div class="col-sm-4">
+        <label class="label-literal">NIF:</label>
+        <label aria-label="NIF" class="label-value">A15140387</label>
+    </div>
+    <div class="col-sm-4">
+        <label class="label-literal">Situaci&#xF3;n:</label>
+        <label aria-label="Situacion" class="label-value">Activa / Autorizado</label>
+    </div>
+</div>
+
+<hr class="w-95 bg-RojoSede">
+
+<div class="row">
+    <div class="col">
+        <label class="label-literal">Direcci&#xF3;n:</label>
+        <label aria-label="Dirección" class="label-value">Av. de la Marina, 1</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-4">
+        <label class="label-literal">C&#xF3;digo Postal:</label>
+        <label aria-label="Codigo postal" class="label-value">15001</label>
+    </div>
+    <div class="col-sm-4">
+        <label class="label-literal">Provincia:</label>
+        <label aria-label="Provincia" class="label-value">Coru&#xF1;a, A</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-4">
+        <label class="label-literal">Municipio postal:</label>
+        <label aria-label="Municipio" class="label-value">Galicia</label>
+    </div>
+    <div class="col-sm-4">
+        <label class="label-literal">Comunidad:</label>
+        <label aria-label="Comunidad" class="label-value">Galicia</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <label class="label-literal">Pa&#xED;s de Origen:</label>
+        <label aria-label="Pais de origen" class="label-value">Espa&#xF1;a</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col-sm-4">
+        <label class="label-literal">Tel&#xE9;fono:</label>
+        <label aria-label="Telefono" class="label-value">902390450</label>
+    </div>
+    <div class="col-sm-4">
+        <label class="label-literal">Fax:</label>
+        <label aria-label="Comunidad" class="label-value">902390451</label>
+    </div>
+</div>
+                </div>
+
+                <div class="tab-pane" id="tabListadoFondos" role="tabpanel">
+
+
+<div class="containerGrid mt-3" data-idgrid="jqGridFondos">
+        <table id="jqGridFondos">
+            <caption>Listado de fondos</caption>
+            <tr><th scope="col"></th></tr>
+        </table>
+        <div id="jqGridPagerFondos"></div>
+        <div class="d-flex justify-content-end mr-1 mt-3">
+            <button class="btn btn-success mr-2" onclick="exportarGridExcel('jqGridFondos', 'Gestoras_Fondos_DGSFP');">
+                <i class="fa fa-file-excel-o" aria-hidden="true"></i> Exportar a Excel
+            </button>
+            <button class="btn btn-rrpp" onclick="exportarGridPdf('jqGridFondos', 'Gestoras_Fondos_DGSFP', LANDSCAPE);">
+                <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Exportar a PDF
+            </button>
+        </div>
+</div>
+
+
+    <script type="text/javascript">
+        var data = [{"clave":"F0062","lei":null,"descripcion":"ABANCA EMPLEO, FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null},{"clave":"F0151","lei":null,"descripcion":"ABANCA RENTA FIJA MIXTA MODERADO, FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null},{"clave":"F0250","lei":null,"descripcion":"FONDO DE PENSIONES A DEL PERSONAL DE ABANCA, FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null},{"clave":"F0473","lei":null,"descripcion":"ABANCA RENTA VARIABLE, FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null},{"clave":"F0474","lei":null,"descripcion":"ABANCA RENTA FIJA MIXTA CONSERVADOR, FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null},{"clave":"F0475","lei":null,"descripcion":"ABANCA RENTA VARIABLE MIXTA  DECIDIDO, FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null},{"clave":"F0825","lei":null,"descripcion":"ABANCA JUBILACI\u00D3N IV, FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null},{"clave":"F0826","lei":null,"descripcion":"ABANCA JUBILACION  II, FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null},{"clave":"F0827","lei":null,"descripcion":"ABANCA JUBILACION III, FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null},{"clave":"F0846","lei":null,"descripcion":"ABANCA RENTA VARIABLE MIXTA DINAMICO, FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null},{"clave":"F0847","lei":null,"descripcion":"ABANCA RENTA FIJA FLEXIBLE, FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null},{"clave":"F1013","lei":null,"descripcion":"ABANCA JUBILACION VIII, FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null},{"clave":"F1014","lei":null,"descripcion":"ABANCA PREVISION SOCIAL III, FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null},{"clave":"F1015","lei":null,"descripcion":"ABANCA JUBILACION VII, FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null},{"clave":"F1131","lei":null,"descripcion":"ABANCA PREVISION SOCIAL V, FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null},{"clave":"F1132","lei":null,"descripcion":"ABANCA JUBILACION XII, FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null},{"clave":"F1553","lei":null,"descripcion":"ABANCA PREVISION SOCIAL VI, FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null},{"clave":"F1555","lei":null,"descripcion":"ABANCA PREVISION SOCIAL VIII, FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null},{"clave":"F1661","lei":null,"descripcion":"ABANCA PREVISION SOCIAL XI,  FONDO DE PENSIONES, FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null},{"clave":"F1662","lei":null,"descripcion":"ABANCA PREVISION SOCIAL XII, FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null},{"clave":"F1886","lei":null,"descripcion":"ABANCA RENTA FIJA CORTO PLAZO, FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null},{"clave":"F1889","lei":null,"descripcion":"ABANCA JUBILACI\u00D3N V, FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null},{"clave":"F2263","lei":null,"descripcion":"ABANCA PREVISI\u00D3N SOCIAL I, FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null},{"clave":"F2264","lei":null,"descripcion":"ABANCA PREVISI\u00D3N SOCIAL II, FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null},{"clave":"F2280","lei":null,"descripcion":"ABANCA PREVISI\u00D3N SOCIAL VII, F.P., FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null},{"clave":"F2281","lei":null,"descripcion":"ABANCA PREVISI\u00D3N SOCIAL IV, F.P., FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null},{"clave":"F2282","lei":null,"descripcion":"ABANCA JUBILACI\u00D3N VI, F.P., FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null},{"clave":"F2283","lei":null,"descripcion":"ABANCA JUBILACI\u00D3N I, F.P., FONDO DE PENSIONES","cif":null,"situacion":null,"tipoFondo":null,"idTipoFondo":0,"fechaAutorizacion":null,"direccion":null,"pais":null,"codPostal":null,"municipio":null,"telefono":null,"fax":null,"provincia":null,"comunidad":null,"direccionWeb":null,"email":null,"claveDepositaria":null,"denominacionClaveDepositaria":null,"claveGestora":null,"denominacionClaveGestora":null,"promotores":null,"planes":null,"subplanes":null,"fondoPromocionPublica":null}];
+        loadGridFondos(data);
+    </script>
+                </div>
+
+                <div class="tab-pane" id="tabListadoCargos" role="tabpanel">
+
+
+<div class="containerGrid mt-3" data-idgrid="jqGridCargos">
+        <table id="jqGridCargos">
+            <caption>Listado de altos cargos</caption>
+            <tr><th scope="col"></th></tr>
+        </table>
+        <div id="jqGridPagerCargos"></div>
+        <div class="d-flex justify-content-end mr-1 mt-3">
+            <button class="btn btn-success mr-2" onclick="exportarGridExcel('jqGridCargos', 'Gestora_Altos_Cargos_DGSFP');">
+                <i class="fa fa-file-excel-o" aria-hidden="true"></i> Exportar a Excel
+            </button>
+            <button class="btn btn-rrpp" onclick="exportarGridPdf('jqGridCargos', 'Gestora_Altos_Cargos_DGSFP', LANDSCAPE);">
+                <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Exportar a PDF
+            </button>
+        </div>
+</div>
+
+
+    <script type="text/javascript">
+        var data = [{"acreditacion":"","nombre":"Alonso Ruiz-Ojeda Javier","cargo":"Consejero independiente","fechaBaja":null,"clave":null},{"acreditacion":"","nombre":"Alvarez  Sanchez Eduardo","cargo":"Consejero","fechaBaja":null,"clave":null},{"acreditacion":"","nombre":"Alvarez  Sanchez Eduardo","cargo":"Secretario Consejero","fechaBaja":null,"clave":null},{"acreditacion":"","nombre":"Botas Ratera Francisco","cargo":"Vicepresidente","fechaBaja":null,"clave":null},{"acreditacion":"","nombre":"Escotet  Rodriguez Juan Carlos","cargo":"Presidente","fechaBaja":null,"clave":null},{"acreditacion":"","nombre":"Fuertes Ayerdi Gerardo Carlos","cargo":"Consejero","fechaBaja":null,"clave":null},{"acreditacion":"","nombre":"L\u00F3pez Rodr\u00EDguez Jose Luis","cargo":"Consejero independiente","fechaBaja":null,"clave":null},{"acreditacion":"","nombre":"Lucio Velez Sonia","cargo":"Consejero","fechaBaja":null,"clave":null},{"acreditacion":"","nombre":"Lucio Velez Sonia","cargo":"Director General","fechaBaja":null,"clave":null},{"acreditacion":"","nombre":"Rivero Barreiros Pablo","cargo":"Vicesecretario No Consejero","fechaBaja":null,"clave":null},{"acreditacion":"","nombre":"Vargas-Zu\u00F1iga Mendoza Juan Luis","cargo":"Consejero","fechaBaja":null,"clave":null}];
+        loadGridCargos(data);
+    </script>
+                </div>
+            </div>
+
+
+            <div class="d-flex justify-content-center  mt-5">
+                <button class="btn btn-rrpp w-em-15 mr-3" onclick="volverBuscador();">
+                    <i class="fa fa-search" aria-hidden="true"></i>Volver al buscador
+                </button>
+
+                <button class="btn btn-secondary w-em-15" onclick="volverResultados()">
+                    <i class="fa fa-reply" aria-hidden="true"></i>Volver a resultados
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        resizeGrids();
+    });
+
+</script>
+

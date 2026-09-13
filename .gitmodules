@@ -1,0 +1,3 @@
+[submodule "third_party/insurance-register-ontology"]
+	path = third_party/insurance-register-ontology
+	url = https://github.com/fabio-rovai/insurance-register-ontology.git

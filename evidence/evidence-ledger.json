@@ -1,0 +1,4789 @@
+{
+ "_meta": {
+  "project": "OpenDGSFP",
+  "gate": "G0",
+  "generated_at": "2026-09-13T14:32:50.878325+00:00",
+  "identity_policy": "canonical edges only via exact identifiers (DGSFP clave, BdE supervisor/european code, EIOPA identification code, LEI). Name similarity is diagnostic-only and never load-bearing.",
+  "tiers": [
+   "T0_PRIMARY_DIRECT",
+   "T1_PRIMARY_DOCUMENT",
+   "T2_PRIMARY_UI",
+   "T3_DERIVED_REPRODUCIBLE",
+   "T4_DONOR",
+   "T5_MANUAL_REVIEW"
+  ]
+ },
+ "edges": [
+  {
+   "edge_id": "A001",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0001"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "9598003REPS2DQZC4946"
+   },
+   "relation": "REGISTER_KEY_PUBLISHES_LEI",
+   "identifier_used": "LEI 9598003REPS2DQZC4946",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0001.html",
+     "content_sha256": "4d45684e1f6b8fdf81826f8c4dc8c0f402f28bf1d663e409b15cdbdd1e03dba1"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "LEI field in live RRPP detail; ISO 7064 valid; GLEIF record exists"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gleif_status": "ACTIVE",
+    "gleif_name": "ASEGURADORES AGRUPADOS SOCIEDAD ANONIMA DE SEGUROS"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "A002",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0001"
+   },
+   "dest": {
+    "system": "BDE",
+    "id": "ESA37001369"
+   },
+   "relation": "DGSFP_KEY_BDE_SUPERVISOR_CODE_EXACT",
+   "identifier_used": "supervisor code 'C0001'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0001.html",
+     "content_sha256": "4d45684e1f6b8fdf81826f8c4dc8c0f402f28bf1d663e409b15cdbdd1e03dba1"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "DGSFP clave equals BdE 'Código de supervisor' (normalized, zero-padded)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A003",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0001"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": "C0001/Dirección General de Seguros y Fondos de Pensiones (DGSFP)"
+   },
+   "relation": "DGSFP_KEY_EIOPA_ID_EXACT",
+   "identifier_used": "identification code 'C0001' + LEI 9598003REPS2DQZC4946",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0001.html",
+     "content_sha256": "4d45684e1f6b8fdf81826f8c4dc8c0f402f28bf1d663e409b15cdbdd1e03dba1"
+    },
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "EIOPA identification code equals DGSFP clave; LEI equals RRPP LEI (exact string)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A004",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "GLEIF_LEI",
+    "id": "9598003REPS2DQZC4946"
+   },
+   "dest": {
+    "system": "GLEIF",
+    "id": "ASEGURADORES AGRUPADOS SOCIEDAD ANONIMA DE SEGUROS"
+   },
+   "relation": "LEI_RESOLVES_GLEIF",
+   "identifier_used": "LEI 9598003REPS2DQZC4946",
+   "evidence_tier": "T0_PRIMARY_DIRECT",
+   "sources": [
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "ISO 7064 MOD 97-10 valid; record present in GLEIF API harvest"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A005",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0002"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "9598007S1Q7FKMLC0D44"
+   },
+   "relation": "REGISTER_KEY_PUBLISHES_LEI",
+   "identifier_used": "LEI 9598007S1Q7FKMLC0D44",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0002.html",
+     "content_sha256": "6e627348db83941aa2e068a29cbcdb77908be8e498fd2d9fdf7962ee334229a5"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "LEI field in live RRPP detail; ISO 7064 valid; GLEIF record exists"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gleif_status": "ACTIVE",
+    "gleif_name": "LA ALIANZA ESPAÑOLA SOCIEDAD ANONIMA DE SEGUROS"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "A006",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0002"
+   },
+   "dest": {
+    "system": "BDE",
+    "id": "ESA28072197"
+   },
+   "relation": "DGSFP_KEY_BDE_SUPERVISOR_CODE_EXACT",
+   "identifier_used": "supervisor code 'C0002'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0002.html",
+     "content_sha256": "6e627348db83941aa2e068a29cbcdb77908be8e498fd2d9fdf7962ee334229a5"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "DGSFP clave equals BdE 'Código de supervisor' (normalized, zero-padded)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A007",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0002"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": "C0002/Dirección General de Seguros y Fondos de Pensiones (DGSFP)"
+   },
+   "relation": "DGSFP_KEY_EIOPA_ID_EXACT",
+   "identifier_used": "identification code 'C0002' + LEI 9598007S1Q7FKMLC0D44",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0002.html",
+     "content_sha256": "6e627348db83941aa2e068a29cbcdb77908be8e498fd2d9fdf7962ee334229a5"
+    },
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "EIOPA identification code equals DGSFP clave; LEI equals RRPP LEI (exact string)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A008",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "GLEIF_LEI",
+    "id": "9598007S1Q7FKMLC0D44"
+   },
+   "dest": {
+    "system": "GLEIF",
+    "id": "LA ALIANZA ESPAÑOLA SOCIEDAD ANONIMA DE SEGUROS"
+   },
+   "relation": "LEI_RESOLVES_GLEIF",
+   "identifier_used": "LEI 9598007S1Q7FKMLC0D44",
+   "evidence_tier": "T0_PRIMARY_DIRECT",
+   "sources": [
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "ISO 7064 MOD 97-10 valid; record present in GLEIF API harvest"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A009",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0016"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "9598006T82YN2LPQY896"
+   },
+   "relation": "REGISTER_KEY_PUBLISHES_LEI",
+   "identifier_used": "LEI 9598006T82YN2LPQY896",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0016.html",
+     "content_sha256": "c79c344ac616146d7ab26d15a66c4e640012fbb6f0c77a6297b5a412b6f8512f"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "LEI field in live RRPP detail; ISO 7064 valid; GLEIF record exists"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gleif_status": "ACTIVE",
+    "gleif_name": "AURA SOCIEDAD ANONIMA DE SEGUROS"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "A010",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0016"
+   },
+   "dest": {
+    "system": "BDE",
+    "id": "ESA08169674"
+   },
+   "relation": "DGSFP_KEY_BDE_SUPERVISOR_CODE_EXACT",
+   "identifier_used": "supervisor code 'C0016'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0016.html",
+     "content_sha256": "c79c344ac616146d7ab26d15a66c4e640012fbb6f0c77a6297b5a412b6f8512f"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "DGSFP clave equals BdE 'Código de supervisor' (normalized, zero-padded)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A011",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0016"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": "C0016/Dirección General de Seguros y Fondos de Pensiones (DGSFP)"
+   },
+   "relation": "DGSFP_KEY_EIOPA_ID_EXACT",
+   "identifier_used": "identification code 'C0016' + LEI 9598006T82YN2LPQY896",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0016.html",
+     "content_sha256": "c79c344ac616146d7ab26d15a66c4e640012fbb6f0c77a6297b5a412b6f8512f"
+    },
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "EIOPA identification code equals DGSFP clave; LEI equals RRPP LEI (exact string)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A012",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "GLEIF_LEI",
+    "id": "9598006T82YN2LPQY896"
+   },
+   "dest": {
+    "system": "GLEIF",
+    "id": "AURA SOCIEDAD ANONIMA DE SEGUROS"
+   },
+   "relation": "LEI_RESOLVES_GLEIF",
+   "identifier_used": "LEI 9598006T82YN2LPQY896",
+   "evidence_tier": "T0_PRIMARY_DIRECT",
+   "sources": [
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "ISO 7064 MOD 97-10 valid; record present in GLEIF API harvest"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A013",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0031"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "95980020140005375044"
+   },
+   "relation": "REGISTER_KEY_PUBLISHES_LEI",
+   "identifier_used": "LEI 95980020140005375044",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0031.html",
+     "content_sha256": "219aed69b5cddd01102a94b1fd8234beb3d09518f86b073951e847593d476e1d"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "LEI field in live RRPP detail; ISO 7064 valid; GLEIF record exists"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gleif_status": "ACTIVE",
+    "gleif_name": "CAJA DE SEGUROS REUNIDOS, COMPAÑÍA DE SEGUROS Y REASEGUROS, S.A."
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "A014",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0031"
+   },
+   "dest": {
+    "system": "BDE",
+    "id": "ESA28013050"
+   },
+   "relation": "DGSFP_KEY_BDE_SUPERVISOR_CODE_EXACT",
+   "identifier_used": "supervisor code 'C0031'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0031.html",
+     "content_sha256": "219aed69b5cddd01102a94b1fd8234beb3d09518f86b073951e847593d476e1d"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "DGSFP clave equals BdE 'Código de supervisor' (normalized, zero-padded)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A015",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0031"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": "C0031/Dirección General de Seguros y Fondos de Pensiones (DGSFP)"
+   },
+   "relation": "DGSFP_KEY_EIOPA_ID_EXACT",
+   "identifier_used": "identification code 'C0031' + LEI 95980020140005375044",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0031.html",
+     "content_sha256": "219aed69b5cddd01102a94b1fd8234beb3d09518f86b073951e847593d476e1d"
+    },
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "EIOPA identification code equals DGSFP clave; LEI equals RRPP LEI (exact string)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A016",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "GLEIF_LEI",
+    "id": "95980020140005375044"
+   },
+   "dest": {
+    "system": "GLEIF",
+    "id": "CAJA DE SEGUROS REUNIDOS, COMPAÑÍA DE SEGUROS Y REASEGUROS, S.A."
+   },
+   "relation": "LEI_RESOLVES_GLEIF",
+   "identifier_used": "LEI 95980020140005375044",
+   "evidence_tier": "T0_PRIMARY_DIRECT",
+   "sources": [
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "ISO 7064 MOD 97-10 valid; record present in GLEIF API harvest"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A017",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0039"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "549300OVMBOL2UDDC705"
+   },
+   "relation": "REGISTER_KEY_PUBLISHES_LEI",
+   "identifier_used": "LEI 549300OVMBOL2UDDC705",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0039.html",
+     "content_sha256": "4e735a99aa8d7b2bea3bc1908edec9a9c7987f7eac2d7f6e310cc7d0a4be9f90"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "LEI field in live RRPP detail; ISO 7064 valid; GLEIF record exists"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gleif_status": "ACTIVE",
+    "gleif_name": "ZURICH VIDA COMPAÑIA DE SEGUROS Y REASEGUROS SA"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "A018",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0039"
+   },
+   "dest": {
+    "system": "BDE",
+    "id": "ESA08168213"
+   },
+   "relation": "DGSFP_KEY_BDE_SUPERVISOR_CODE_EXACT",
+   "identifier_used": "supervisor code 'C0039'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0039.html",
+     "content_sha256": "4e735a99aa8d7b2bea3bc1908edec9a9c7987f7eac2d7f6e310cc7d0a4be9f90"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "DGSFP clave equals BdE 'Código de supervisor' (normalized, zero-padded)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A019",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0039"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": "C0039/Dirección General de Seguros y Fondos de Pensiones (DGSFP)"
+   },
+   "relation": "DGSFP_KEY_EIOPA_ID_EXACT",
+   "identifier_used": "identification code 'C0039' + LEI 549300OVMBOL2UDDC705",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0039.html",
+     "content_sha256": "4e735a99aa8d7b2bea3bc1908edec9a9c7987f7eac2d7f6e310cc7d0a4be9f90"
+    },
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "EIOPA identification code equals DGSFP clave; LEI equals RRPP LEI (exact string)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A020",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "GLEIF_LEI",
+    "id": "549300OVMBOL2UDDC705"
+   },
+   "dest": {
+    "system": "GLEIF",
+    "id": "ZURICH VIDA COMPAÑIA DE SEGUROS Y REASEGUROS SA"
+   },
+   "relation": "LEI_RESOLVES_GLEIF",
+   "identifier_used": "LEI 549300OVMBOL2UDDC705",
+   "evidence_tier": "T0_PRIMARY_DIRECT",
+   "sources": [
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "ISO 7064 MOD 97-10 valid; record present in GLEIF API harvest"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A021",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0467"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "549300ODC1UIUYG6ZW52"
+   },
+   "relation": "REGISTER_KEY_PUBLISHES_LEI",
+   "identifier_used": "LEI 549300ODC1UIUYG6ZW52",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0467.html",
+     "content_sha256": "462455c09cef4b823da0c864b5fe4e9c991705d646f2573d922af3f54437b071"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "LEI field in live RRPP detail; ISO 7064 valid; GLEIF record exists"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gleif_status": "ACTIVE",
+    "gleif_name": "GENERALI ESPAÑA DE SEGUROS Y REASEGUROS, S.A"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "A022",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0467"
+   },
+   "dest": {
+    "system": "BDE",
+    "id": "ESA48037642"
+   },
+   "relation": "DGSFP_KEY_BDE_SUPERVISOR_CODE_EXACT",
+   "identifier_used": "supervisor code 'C0467'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0467.html",
+     "content_sha256": "462455c09cef4b823da0c864b5fe4e9c991705d646f2573d922af3f54437b071"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "DGSFP clave equals BdE 'Código de supervisor' (normalized, zero-padded)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A023",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0467"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": "C0467/Dirección General de Seguros y Fondos de Pensiones (DGSFP)"
+   },
+   "relation": "DGSFP_KEY_EIOPA_ID_EXACT",
+   "identifier_used": "identification code 'C0467' + LEI 549300ODC1UIUYG6ZW52",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0467.html",
+     "content_sha256": "462455c09cef4b823da0c864b5fe4e9c991705d646f2573d922af3f54437b071"
+    },
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "EIOPA identification code equals DGSFP clave; LEI equals RRPP LEI (exact string)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A024",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "GLEIF_LEI",
+    "id": "549300ODC1UIUYG6ZW52"
+   },
+   "dest": {
+    "system": "GLEIF",
+    "id": "GENERALI ESPAÑA DE SEGUROS Y REASEGUROS, S.A"
+   },
+   "relation": "LEI_RESOLVES_GLEIF",
+   "identifier_used": "LEI 549300ODC1UIUYG6ZW52",
+   "evidence_tier": "T0_PRIMARY_DIRECT",
+   "sources": [
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "ISO 7064 MOD 97-10 valid; record present in GLEIF API harvest"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A025",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0628"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "95980020140005677005"
+   },
+   "relation": "REGISTER_KEY_PUBLISHES_LEI",
+   "identifier_used": "LEI 95980020140005677005",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0628.html",
+     "content_sha256": "aa2c85b0285e2debaab85089bc11aeb684a1085d7961432d586b0093a1bb74d8"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "LEI field in live RRPP detail; ISO 7064 valid; GLEIF record exists"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gleif_status": "ACTIVE",
+    "gleif_name": "ABANCA VIDA Y PENSIONES DE SEGUROS Y REASEGUROS, S. A."
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "A026",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0628"
+   },
+   "dest": {
+    "system": "BDE",
+    "id": "ESA15140387"
+   },
+   "relation": "DGSFP_KEY_BDE_SUPERVISOR_CODE_EXACT",
+   "identifier_used": "supervisor code 'C0628'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0628.html",
+     "content_sha256": "aa2c85b0285e2debaab85089bc11aeb684a1085d7961432d586b0093a1bb74d8"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "DGSFP clave equals BdE 'Código de supervisor' (normalized, zero-padded)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A027",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0628"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": "C0628/Dirección General de Seguros y Fondos de Pensiones (DGSFP)"
+   },
+   "relation": "DGSFP_KEY_EIOPA_ID_EXACT",
+   "identifier_used": "identification code 'C0628' + LEI 95980020140005677005",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0628.html",
+     "content_sha256": "aa2c85b0285e2debaab85089bc11aeb684a1085d7961432d586b0093a1bb74d8"
+    },
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "EIOPA identification code equals DGSFP clave; LEI equals RRPP LEI (exact string)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A028",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "GLEIF_LEI",
+    "id": "95980020140005677005"
+   },
+   "dest": {
+    "system": "GLEIF",
+    "id": "ABANCA VIDA Y PENSIONES DE SEGUROS Y REASEGUROS, S. A."
+   },
+   "relation": "LEI_RESOLVES_GLEIF",
+   "identifier_used": "LEI 95980020140005677005",
+   "evidence_tier": "T0_PRIMARY_DIRECT",
+   "sources": [
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "ISO 7064 MOD 97-10 valid; record present in GLEIF API harvest"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A029",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0693"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "95980020140005694562"
+   },
+   "relation": "REGISTER_KEY_PUBLISHES_LEI",
+   "identifier_used": "LEI 95980020140005694562",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0693.html",
+     "content_sha256": "3a4f045a997fab626512b150b67e8352f4378755226da245074ad020cee0129d"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "LEI field in live RRPP detail; ISO 7064 valid; GLEIF record exists"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gleif_status": "ACTIVE",
+    "gleif_name": "PELAYO VIDA SEGUROS Y REASEGUROS SA"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "A030",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0693"
+   },
+   "dest": {
+    "system": "BDE",
+    "id": "ESA47091665"
+   },
+   "relation": "DGSFP_KEY_BDE_SUPERVISOR_CODE_EXACT",
+   "identifier_used": "supervisor code 'C0693'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0693.html",
+     "content_sha256": "3a4f045a997fab626512b150b67e8352f4378755226da245074ad020cee0129d"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "DGSFP clave equals BdE 'Código de supervisor' (normalized, zero-padded)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A031",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0693"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": "C0693/Dirección General de Seguros y Fondos de Pensiones (DGSFP)"
+   },
+   "relation": "DGSFP_KEY_EIOPA_ID_EXACT",
+   "identifier_used": "identification code 'C0693' + LEI 95980020140005694562",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0693.html",
+     "content_sha256": "3a4f045a997fab626512b150b67e8352f4378755226da245074ad020cee0129d"
+    },
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "EIOPA identification code equals DGSFP clave; LEI equals RRPP LEI (exact string)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A032",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "GLEIF_LEI",
+    "id": "95980020140005694562"
+   },
+   "dest": {
+    "system": "GLEIF",
+    "id": "PELAYO VIDA SEGUROS Y REASEGUROS SA"
+   },
+   "relation": "LEI_RESOLVES_GLEIF",
+   "identifier_used": "LEI 95980020140005694562",
+   "evidence_tier": "T0_PRIMARY_DIRECT",
+   "sources": [
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "ISO 7064 MOD 97-10 valid; record present in GLEIF API harvest"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A033",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0723"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "213800P7QU9BRRX4LI42"
+   },
+   "relation": "REGISTER_KEY_PUBLISHES_LEI",
+   "identifier_used": "LEI 213800P7QU9BRRX4LI42",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0723.html",
+     "content_sha256": "dbea822c9ca696c4c346b9fc43812dda6471c98e95712469a18c4a8492422e4d"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "LEI field in live RRPP detail; ISO 7064 valid; GLEIF record exists"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gleif_status": "ACTIVE",
+    "gleif_name": "AXA SEGUROS GENERALES SOCIEDAD ANONIMA DE SEGUROS Y REASEGUROS"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "A034",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0723"
+   },
+   "dest": {
+    "system": "BDE",
+    "id": "ESA60917978"
+   },
+   "relation": "DGSFP_KEY_BDE_SUPERVISOR_CODE_EXACT",
+   "identifier_used": "supervisor code 'C0723'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0723.html",
+     "content_sha256": "dbea822c9ca696c4c346b9fc43812dda6471c98e95712469a18c4a8492422e4d"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "DGSFP clave equals BdE 'Código de supervisor' (normalized, zero-padded)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A035",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0723"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": "C0723/Dirección General de Seguros y Fondos de Pensiones (DGSFP)"
+   },
+   "relation": "DGSFP_KEY_EIOPA_ID_EXACT",
+   "identifier_used": "identification code 'C0723' + LEI 213800P7QU9BRRX4LI42",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0723.html",
+     "content_sha256": "dbea822c9ca696c4c346b9fc43812dda6471c98e95712469a18c4a8492422e4d"
+    },
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "EIOPA identification code equals DGSFP clave; LEI equals RRPP LEI (exact string)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A036",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "GLEIF_LEI",
+    "id": "213800P7QU9BRRX4LI42"
+   },
+   "dest": {
+    "system": "GLEIF",
+    "id": "AXA SEGUROS GENERALES SOCIEDAD ANONIMA DE SEGUROS Y REASEGUROS"
+   },
+   "relation": "LEI_RESOLVES_GLEIF",
+   "identifier_used": "LEI 213800P7QU9BRRX4LI42",
+   "evidence_tier": "T0_PRIMARY_DIRECT",
+   "sources": [
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "ISO 7064 MOD 97-10 valid; record present in GLEIF API harvest"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A037",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0806"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "959800UUFFK59MW8AU78"
+   },
+   "relation": "REGISTER_KEY_PUBLISHES_LEI",
+   "identifier_used": "LEI 959800UUFFK59MW8AU78",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0806.html",
+     "content_sha256": "427948de0d3049f7938ba08eb9dfc4fb0a40cade5f958c2f75e705e66b714178"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "LEI field in live RRPP detail; ISO 7064 valid; GLEIF record exists"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gleif_status": "ACTIVE",
+    "gleif_name": "SANTANDER MAPFRE SEGUROS Y REASEGUROS SA"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "A038",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0806"
+   },
+   "dest": {
+    "system": "BDE",
+    "id": "ESA88256714"
+   },
+   "relation": "DGSFP_KEY_BDE_SUPERVISOR_CODE_EXACT",
+   "identifier_used": "supervisor code 'C0806'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0806.html",
+     "content_sha256": "427948de0d3049f7938ba08eb9dfc4fb0a40cade5f958c2f75e705e66b714178"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "DGSFP clave equals BdE 'Código de supervisor' (normalized, zero-padded)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A039",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "C0806"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": "C0806/Dirección General de Seguros y Fondos de Pensiones (DGSFP)"
+   },
+   "relation": "DGSFP_KEY_EIOPA_ID_EXACT",
+   "identifier_used": "identification code 'C0806' + LEI 959800UUFFK59MW8AU78",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/C0806.html",
+     "content_sha256": "427948de0d3049f7938ba08eb9dfc4fb0a40cade5f958c2f75e705e66b714178"
+    },
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "EIOPA identification code equals DGSFP clave; LEI equals RRPP LEI (exact string)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A040",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "GLEIF_LEI",
+    "id": "959800UUFFK59MW8AU78"
+   },
+   "dest": {
+    "system": "GLEIF",
+    "id": "SANTANDER MAPFRE SEGUROS Y REASEGUROS SA"
+   },
+   "relation": "LEI_RESOLVES_GLEIF",
+   "identifier_used": "LEI 959800UUFFK59MW8AU78",
+   "evidence_tier": "T0_PRIMARY_DIRECT",
+   "sources": [
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "ISO 7064 MOD 97-10 valid; record present in GLEIF API harvest"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A041",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "M0083"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "95980020140005325671"
+   },
+   "relation": "REGISTER_KEY_PUBLISHES_LEI",
+   "identifier_used": "LEI 95980020140005325671",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/M0083.html",
+     "content_sha256": "118804dd528b07f4252d5af1b6fe43c23723f266d0754a7d422ba1c9013da21b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "LEI field in live RRPP detail; ISO 7064 valid; GLEIF record exists"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gleif_status": "ACTIVE",
+    "gleif_name": "MUTUA MADRILEÑA AUTOMOVILISTA SOCIEDAD DE SEGUROS A PRIMA FIJA"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "A042",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "M0083"
+   },
+   "dest": {
+    "system": "BDE",
+    "id": "ESV28027118"
+   },
+   "relation": "DGSFP_KEY_BDE_SUPERVISOR_CODE_EXACT",
+   "identifier_used": "supervisor code 'M0083'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/M0083.html",
+     "content_sha256": "118804dd528b07f4252d5af1b6fe43c23723f266d0754a7d422ba1c9013da21b"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "DGSFP clave equals BdE 'Código de supervisor' (normalized, zero-padded)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A043",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "M0083"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": "M0083/Dirección General de Seguros y Fondos de Pensiones (DGSFP)"
+   },
+   "relation": "DGSFP_KEY_EIOPA_ID_EXACT",
+   "identifier_used": "identification code 'M0083' + LEI 95980020140005325671",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/M0083.html",
+     "content_sha256": "118804dd528b07f4252d5af1b6fe43c23723f266d0754a7d422ba1c9013da21b"
+    },
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "EIOPA identification code equals DGSFP clave; LEI equals RRPP LEI (exact string)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "A044",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "GLEIF_LEI",
+    "id": "95980020140005325671"
+   },
+   "dest": {
+    "system": "GLEIF",
+    "id": "MUTUA MADRILEÑA AUTOMOVILISTA SOCIEDAD DE SEGUROS A PRIMA FIJA"
+   },
+   "relation": "LEI_RESOLVES_GLEIF",
+   "identifier_used": "LEI 95980020140005325671",
+   "evidence_tier": "T0_PRIMARY_DIRECT",
+   "sources": [
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "ISO 7064 MOD 97-10 valid; record present in GLEIF API harvest"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1045",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "E0193"
+   },
+   "dest": {
+    "system": "BDE",
+    "id": "ESW0047088J"
+   },
+   "relation": "BRANCH_REGISTER_KEY_BDE_SUPERVISOR_CODE",
+   "identifier_used": "supervisor code 'E0193'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/E0193.html",
+     "content_sha256": "917057c9fad0fb02115dcee4e869dc0a5a8d29b1fe6f6a42f3881bb58b58ea4d"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "E-clave equals BdE supervisor code"
+   },
+   "notes": {
+    "branch_name_rrpp": "ALLIANZ GLOBAL CORPORATE & SPECIALTY S.E. SUC ESPAÑA",
+    "branch_name_bde": "ALLIANZ GLOBAL CORPORATE & SPECIALTY S.E. SUC ESPAÑA"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1046",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "BDE",
+    "id": "ESW0047088J"
+   },
+   "dest": {
+    "system": "BDE_HOME_LIST",
+    "id": "DE:DEA00PQ"
+   },
+   "relation": "BRANCH_PARENT_CODE_RESOLVES_HOME_ENTITY",
+   "identifier_used": "ENTIDAD MATRIZ 'DEA00PQ' == home-list 'Código europeo'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-de.csv",
+     "content_sha256": "f736262c399871cc536f54b96ccfe3b6824d26fc97c9fb258f42950355d9ba9b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "parent id resolves to exactly one home-country row"
+   },
+   "notes": {
+    "parent_name": "Allianz Global Corporate & Specialty SE"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1047",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "BDE_HOME_LIST",
+    "id": "DE:DEA00PQ"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "F240A7PWJB2BLKELB442"
+   },
+   "relation": "HOME_ENTITY_PUBLISHES_LEI",
+   "identifier_used": "LEI F240A7PWJB2BLKELB442",
+   "evidence_tier": "T1_PRIMARY_DOCUMENT",
+   "sources": [
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "parent LEI exact in home list; GLEIF record present; ISO 7064 valid"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gleif_status": "ACTIVE"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "B1048",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "GLEIF_LEI",
+    "id": "F240A7PWJB2BLKELB442"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": "F240A7PWJB2BLKELB442"
+   },
+   "relation": "HOME_LEI_MATCHES_EIOPA_HOME_UNDERTAKING",
+   "identifier_used": "LEI F240A7PWJB2BLKELB442",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "EIOPA home undertaking row carries the same LEI (exact)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1049",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "E0210"
+   },
+   "dest": {
+    "system": "BDE",
+    "id": "ESW0049001A"
+   },
+   "relation": "BRANCH_REGISTER_KEY_BDE_SUPERVISOR_CODE",
+   "identifier_used": "supervisor code 'E0210'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/E0210.html",
+     "content_sha256": "17267856fe84c28640447d37cfeec52c2b54db3ecf34b494d44fa9d2d15bef0a"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "E-clave equals BdE supervisor code"
+   },
+   "notes": {
+    "branch_name_rrpp": "ARAG SE SUC.ESPAÑA",
+    "branch_name_bde": "ARAG SE SUC.ESPAÑA"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1050",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "BDE",
+    "id": "ESW0049001A"
+   },
+   "dest": {
+    "system": "BDE_HOME_LIST",
+    "id": "DE:DEA3J2C"
+   },
+   "relation": "BRANCH_PARENT_CODE_RESOLVES_HOME_ENTITY",
+   "identifier_used": "ENTIDAD MATRIZ 'DEA3J2C' == home-list 'Código europeo'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-de.csv",
+     "content_sha256": "f736262c399871cc536f54b96ccfe3b6824d26fc97c9fb258f42950355d9ba9b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "parent id resolves to exactly one home-country row"
+   },
+   "notes": {
+    "parent_name": "ARAG SE"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1051",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "BDE_HOME_LIST",
+    "id": "DE:DEA3J2C"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "391200QKNZJ8J1XWFE16"
+   },
+   "relation": "HOME_ENTITY_PUBLISHES_LEI",
+   "identifier_used": "LEI 391200QKNZJ8J1XWFE16",
+   "evidence_tier": "T1_PRIMARY_DOCUMENT",
+   "sources": [
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "parent LEI exact in home list; GLEIF record present; ISO 7064 valid"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gleif_status": "ACTIVE"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "B1052",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "GLEIF_LEI",
+    "id": "391200QKNZJ8J1XWFE16"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": "391200QKNZJ8J1XWFE16"
+   },
+   "relation": "HOME_LEI_MATCHES_EIOPA_HOME_UNDERTAKING",
+   "identifier_used": "LEI 391200QKNZJ8J1XWFE16",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "EIOPA home undertaking row carries the same LEI (exact)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1053",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "E0226"
+   },
+   "dest": {
+    "system": "BDE",
+    "id": "ESW0186206I"
+   },
+   "relation": "BRANCH_REGISTER_KEY_BDE_SUPERVISOR_CODE",
+   "identifier_used": "supervisor code 'E0226'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/E0226.html",
+     "content_sha256": "90be7c047009cc7ba455e6e3fac748b87b0d50dd6bb7fb83553d7855942069b0"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "E-clave equals BdE supervisor code"
+   },
+   "notes": {
+    "branch_name_rrpp": "AIG EUROPE S.A. SUCURSAL ESPAÑA",
+    "branch_name_bde": "AIG EUROPE S.A. SUCURSAL ESPAÑA"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1054",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "BDE",
+    "id": "ESW0186206I"
+   },
+   "dest": {
+    "system": "BDE_HOME_LIST",
+    "id": "LU:LURCSB0218806"
+   },
+   "relation": "BRANCH_PARENT_CODE_RESOLVES_HOME_ENTITY",
+   "identifier_used": "ENTIDAD MATRIZ 'LURCSB0218806' == home-list 'Código europeo'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-lu.csv",
+     "content_sha256": "50cc33c3bfcad2dabf3357aa08cc3fc0a8adb8c0266490ad8254a6b0371300cf"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "parent id resolves to exactly one home-country row"
+   },
+   "notes": {
+    "parent_name": "AIG Europe S.A."
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1055",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "BDE_HOME_LIST",
+    "id": "LU:LURCSB0218806"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "213800SCCLMKOWSSX732"
+   },
+   "relation": "HOME_ENTITY_PUBLISHES_LEI",
+   "identifier_used": "LEI 213800SCCLMKOWSSX732",
+   "evidence_tier": "T1_PRIMARY_DOCUMENT",
+   "sources": [
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "parent LEI exact in home list; GLEIF record present; ISO 7064 valid"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gleif_status": "ACTIVE"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "B1056",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "GLEIF_LEI",
+    "id": "213800SCCLMKOWSSX732"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": "213800SCCLMKOWSSX732"
+   },
+   "relation": "HOME_LEI_MATCHES_EIOPA_HOME_UNDERTAKING",
+   "identifier_used": "LEI 213800SCCLMKOWSSX732",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "EIOPA home undertaking row carries the same LEI (exact)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1057",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "E0238"
+   },
+   "dest": {
+    "system": "BDE",
+    "id": "ESW2502653E"
+   },
+   "relation": "BRANCH_REGISTER_KEY_BDE_SUPERVISOR_CODE",
+   "identifier_used": "supervisor code 'E0238'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/E0238.html",
+     "content_sha256": "a1887d14ed777cc07dc716761568955c3469ba64c72a71b7f42d88244f81c03f"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "E-clave equals BdE supervisor code"
+   },
+   "notes": {
+    "branch_name_rrpp": "AXA FRANCE IARD SUC, ESPAÑA",
+    "branch_name_bde": "AXA FRANCE IARD SUC, ESPAÑA"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1058",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "BDE",
+    "id": "ESW2502653E"
+   },
+   "dest": {
+    "system": "BDE_HOME_LIST",
+    "id": "FR:FR722057460"
+   },
+   "relation": "BRANCH_PARENT_CODE_RESOLVES_HOME_ENTITY",
+   "identifier_used": "ENTIDAD MATRIZ 'FR722057460' == home-list 'Código europeo'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-fr.csv",
+     "content_sha256": "74a9c5b111dd31da9fb632c3b40ef3619e25a48850b4754cf64abe736e544f68"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "parent id resolves to exactly one home-country row"
+   },
+   "notes": {
+    "parent_name": "AXA FRANCE IARD"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1059",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "BDE_HOME_LIST",
+    "id": "FR:FR722057460"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "969500798WFE82RZZU93"
+   },
+   "relation": "HOME_ENTITY_PUBLISHES_LEI",
+   "identifier_used": "LEI 969500798WFE82RZZU93",
+   "evidence_tier": "T1_PRIMARY_DOCUMENT",
+   "sources": [
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "parent LEI exact in home list; GLEIF record present; ISO 7064 valid"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gleif_status": "ACTIVE"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "B1060",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "GLEIF_LEI",
+    "id": "969500798WFE82RZZU93"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": "969500798WFE82RZZU93"
+   },
+   "relation": "HOME_LEI_MATCHES_EIOPA_HOME_UNDERTAKING",
+   "identifier_used": "LEI 969500798WFE82RZZU93",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "EIOPA home undertaking row carries the same LEI (exact)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1061",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "E0245"
+   },
+   "dest": {
+    "system": "BDE",
+    "id": "ESW0070796H"
+   },
+   "relation": "BRANCH_REGISTER_KEY_BDE_SUPERVISOR_CODE",
+   "identifier_used": "supervisor code 'E0245'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/E0245.html",
+     "content_sha256": "ae094b69b8823aa42a13f5850fcdc73f134451fcc7ef582487c1059e94197f09"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "E-clave equals BdE supervisor code"
+   },
+   "notes": {
+    "branch_name_rrpp": "ACCELERANT INSURANCE EUROPE, SUCURSAL EN ESPAÑA",
+    "branch_name_bde": "ACCELERANT INSURANCE EUROPE, SUCURSAL EN ESPAÑA"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1062",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "BDE",
+    "id": "ESW0070796H"
+   },
+   "dest": {
+    "system": "BDE_HOME_LIST",
+    "id": "BE:BE0758632842"
+   },
+   "relation": "BRANCH_PARENT_CODE_RESOLVES_HOME_ENTITY",
+   "identifier_used": "ENTIDAD MATRIZ 'BE0758632842' == home-list 'Código europeo'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-be.csv",
+     "content_sha256": "5cc9d9bc22ae41b14b16ba26bd0d64b224326bb475bef23356812db3ede97408"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "parent id resolves to exactly one home-country row"
+   },
+   "notes": {
+    "parent_name": "Accelerant Insurance Europe"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1063",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "BDE_HOME_LIST",
+    "id": "BE:BE0758632842"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "699400GVF1570ZK5NJ34"
+   },
+   "relation": "HOME_ENTITY_PUBLISHES_LEI",
+   "identifier_used": "LEI 699400GVF1570ZK5NJ34",
+   "evidence_tier": "T1_PRIMARY_DOCUMENT",
+   "sources": [
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "parent LEI exact in home list; GLEIF record present; ISO 7064 valid"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gleif_status": "ACTIVE"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "B1064",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "GLEIF_LEI",
+    "id": "699400GVF1570ZK5NJ34"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": "699400GVF1570ZK5NJ34"
+   },
+   "relation": "HOME_LEI_MATCHES_EIOPA_HOME_UNDERTAKING",
+   "identifier_used": "LEI 699400GVF1570ZK5NJ34",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "EIOPA home undertaking row carries the same LEI (exact)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1065",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "E0247"
+   },
+   "dest": {
+    "system": "BDE",
+    "id": "ESW0115165C"
+   },
+   "relation": "BRANCH_REGISTER_KEY_BDE_SUPERVISOR_CODE",
+   "identifier_used": "supervisor code 'E0247'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/E0247.html",
+     "content_sha256": "1a2fde194722c4d4ffd2b25f6598d635b0a6b9941f78bbd72c77b1b85464d7eb"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "E-clave equals BdE supervisor code"
+   },
+   "notes": {
+    "branch_name_rrpp": "ALLIANZ DIRECT VERSICHERUNGS SUCURSAL EN ESPAÑA",
+    "branch_name_bde": "ALLIANZ DIRECT VERSICHERUNGS SUCURSAL EN ESPAÑA"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1066",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "BDE",
+    "id": "ESW0115165C"
+   },
+   "dest": {
+    "system": "BDE_HOME_LIST",
+    "id": "DE:DEA4T0X"
+   },
+   "relation": "BRANCH_PARENT_CODE_RESOLVES_HOME_ENTITY",
+   "identifier_used": "ENTIDAD MATRIZ 'DEA4T0X' == home-list 'Código europeo'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-de.csv",
+     "content_sha256": "f736262c399871cc536f54b96ccfe3b6824d26fc97c9fb258f42950355d9ba9b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "parent id resolves to exactly one home-country row"
+   },
+   "notes": {
+    "parent_name": "Allianz Direct Versicherungs-AG"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1067",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "BDE_HOME_LIST",
+    "id": "DE:DEA4T0X"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "5299008FXA9QQZ79GM59"
+   },
+   "relation": "HOME_ENTITY_PUBLISHES_LEI",
+   "identifier_used": "LEI 5299008FXA9QQZ79GM59",
+   "evidence_tier": "T1_PRIMARY_DOCUMENT",
+   "sources": [
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "parent LEI exact in home list; GLEIF record present; ISO 7064 valid"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gleif_status": "ACTIVE"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "B1068",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "GLEIF_LEI",
+    "id": "5299008FXA9QQZ79GM59"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": "5299008FXA9QQZ79GM59"
+   },
+   "relation": "HOME_LEI_MATCHES_EIOPA_HOME_UNDERTAKING",
+   "identifier_used": "LEI 5299008FXA9QQZ79GM59",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "EIOPA home undertaking row carries the same LEI (exact)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1069",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "E0246"
+   },
+   "dest": {
+    "system": "BDE",
+    "id": "ESW0059358B"
+   },
+   "relation": "BRANCH_REGISTER_KEY_BDE_SUPERVISOR_CODE",
+   "identifier_used": "supervisor code 'E0246'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/E0246.html",
+     "content_sha256": "7acba034737866dbe980db294bbd40ae0d2485953bbb978293bf46f96e487284"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "E-clave equals BdE supervisor code"
+   },
+   "notes": {
+    "branch_name_rrpp": "ALLIANZ LEBENSVERSICHERUNGS-AG SUCURSAL EN ESPAÑA",
+    "branch_name_bde": "ALLIANZ LEBENSVERSICHERUNGS-AG SUCURSAL EN ESPAÑA"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1070",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "BDE",
+    "id": "ESW0059358B"
+   },
+   "dest": {
+    "system": "BDE_HOME_LIST",
+    "id": "DE:DEA056W"
+   },
+   "relation": "BRANCH_PARENT_CODE_RESOLVES_HOME_ENTITY",
+   "identifier_used": "ENTIDAD MATRIZ 'DEA056W' == home-list 'Código europeo'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-de.csv",
+     "content_sha256": "f736262c399871cc536f54b96ccfe3b6824d26fc97c9fb258f42950355d9ba9b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "parent id resolves to exactly one home-country row"
+   },
+   "notes": {
+    "parent_name": "Allianz Lebensversicherungs-Aktiengesellschaft"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1071",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "BDE_HOME_LIST",
+    "id": "DE:DEA056W"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "529900Z5H1N62JMB3K96"
+   },
+   "relation": "HOME_ENTITY_PUBLISHES_LEI",
+   "identifier_used": "LEI 529900Z5H1N62JMB3K96",
+   "evidence_tier": "T1_PRIMARY_DOCUMENT",
+   "sources": [
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "parent LEI exact in home list; GLEIF record present; ISO 7064 valid"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gleif_status": "ACTIVE"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "B1072",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "GLEIF_LEI",
+    "id": "529900Z5H1N62JMB3K96"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": "529900Z5H1N62JMB3K96"
+   },
+   "relation": "HOME_LEI_MATCHES_EIOPA_HOME_UNDERTAKING",
+   "identifier_used": "LEI 529900Z5H1N62JMB3K96",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "EIOPA home undertaking row carries the same LEI (exact)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1073",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "E0257"
+   },
+   "dest": {
+    "system": "BDE",
+    "id": "ESW0275415H"
+   },
+   "relation": "BRANCH_REGISTER_KEY_BDE_SUPERVISOR_CODE",
+   "identifier_used": "supervisor code 'E0257'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/E0257.html",
+     "content_sha256": "a8d95d8e0d351fd228f1ee6d3c23155801fb5cd1bffa16c82d1c8e3449b9ee2a"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "E-clave equals BdE supervisor code"
+   },
+   "notes": {
+    "branch_name_rrpp": "Arch Insurance (EU) dac, Sucursal en España",
+    "branch_name_bde": "ARCH INSURANCE (EU) DESIGNATED ACTIVITY COMPANY SUCURSAL EN ESPAÑA"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1074",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "BDE",
+    "id": "ESW0275415H"
+   },
+   "dest": {
+    "system": "BDE_HOME_LIST",
+    "id": "IE:IEC90125"
+   },
+   "relation": "BRANCH_PARENT_CODE_RESOLVES_HOME_ENTITY",
+   "identifier_used": "ENTIDAD MATRIZ 'IEC90125' == home-list 'Código europeo'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-ie.csv",
+     "content_sha256": "22eba3ecf89bdca0e4c99da1e3dc8ca70d0cc59403b0f3ae4838a6cca59bace5"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "parent id resolves to exactly one home-country row"
+   },
+   "notes": {
+    "parent_name": "Arch Insurance (EU) dac"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1075",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "BDE_HOME_LIST",
+    "id": "IE:IEC90125"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "6354005DZDWWWYUJYC44"
+   },
+   "relation": "HOME_ENTITY_PUBLISHES_LEI",
+   "identifier_used": "LEI 6354005DZDWWWYUJYC44",
+   "evidence_tier": "T1_PRIMARY_DOCUMENT",
+   "sources": [
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "parent LEI exact in home list; GLEIF record present; ISO 7064 valid"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gleif_status": "ACTIVE"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "B1076",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "GLEIF_LEI",
+    "id": "6354005DZDWWWYUJYC44"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": "6354005DZDWWWYUJYC44"
+   },
+   "relation": "HOME_LEI_MATCHES_EIOPA_HOME_UNDERTAKING",
+   "identifier_used": "LEI 6354005DZDWWWYUJYC44",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "EIOPA home undertaking row carries the same LEI (exact)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1077",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "E0202"
+   },
+   "dest": {
+    "system": "BDE",
+    "id": "ESW0034957A"
+   },
+   "relation": "BRANCH_REGISTER_KEY_BDE_SUPERVISOR_CODE",
+   "identifier_used": "supervisor code 'E0202'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/E0202.html",
+     "content_sha256": "beaeaf2a8b690eddf0ccd9ba3e6c3ca03e1e9e977e8fb8aac07158ba57172982"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "E-clave equals BdE supervisor code"
+   },
+   "notes": {
+    "branch_name_rrpp": "AWP P&C SUCURSAL EN ESPAÑA",
+    "branch_name_bde": "AWP P&C SUCURSAL EN ESPAÑA"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1078",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "BDE",
+    "id": "ESW0034957A"
+   },
+   "dest": {
+    "system": "BDE_HOME_LIST",
+    "id": "FR:FR519490080"
+   },
+   "relation": "BRANCH_PARENT_CODE_RESOLVES_HOME_ENTITY",
+   "identifier_used": "ENTIDAD MATRIZ 'FR519490080' == home-list 'Código europeo'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-fr.csv",
+     "content_sha256": "74a9c5b111dd31da9fb632c3b40ef3619e25a48850b4754cf64abe736e544f68"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "parent id resolves to exactly one home-country row"
+   },
+   "notes": {
+    "parent_name": "AWP P&C"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1079",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "BDE_HOME_LIST",
+    "id": "FR:FR519490080"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "96950033AVS80NZOSJ78"
+   },
+   "relation": "HOME_ENTITY_PUBLISHES_LEI",
+   "identifier_used": "LEI 96950033AVS80NZOSJ78",
+   "evidence_tier": "T1_PRIMARY_DOCUMENT",
+   "sources": [
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "parent LEI exact in home list; GLEIF record present; ISO 7064 valid"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gleif_status": "ACTIVE"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "B1080",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "GLEIF_LEI",
+    "id": "96950033AVS80NZOSJ78"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": "96950033AVS80NZOSJ78"
+   },
+   "relation": "HOME_LEI_MATCHES_EIOPA_HOME_UNDERTAKING",
+   "identifier_used": "LEI 96950033AVS80NZOSJ78",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "EIOPA home undertaking row carries the same LEI (exact)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1081",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "E0233"
+   },
+   "dest": {
+    "system": "BDE",
+    "id": "ESE0233"
+   },
+   "relation": "BRANCH_REGISTER_KEY_BDE_SUPERVISOR_CODE",
+   "identifier_used": "supervisor code 'E0233'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/E0233.html",
+     "content_sha256": "b5eb6b7920587718e724dc34b0e28da695a8eb5c871f2949531d2d5a90339f9b"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "E-clave equals BdE supervisor code"
+   },
+   "notes": {
+    "branch_name_rrpp": "AXA FRANCE VIE SUCURSAL EN ESPAÑA",
+    "branch_name_bde": "AXA FRANCE VIE SUC, ESPAÑA"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1082",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "BDE",
+    "id": "ESE0233"
+   },
+   "dest": {
+    "system": "BDE_HOME_LIST",
+    "id": "FR:FR310499959"
+   },
+   "relation": "BRANCH_PARENT_CODE_RESOLVES_HOME_ENTITY",
+   "identifier_used": "ENTIDAD MATRIZ 'FR310499959' == home-list 'Código europeo'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-fr.csv",
+     "content_sha256": "74a9c5b111dd31da9fb632c3b40ef3619e25a48850b4754cf64abe736e544f68"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "parent id resolves to exactly one home-country row"
+   },
+   "notes": {
+    "parent_name": "AXA FRANCE VIE"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1083",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "BDE_HOME_LIST",
+    "id": "FR:FR310499959"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "969500JYOZHAIBIU3513"
+   },
+   "relation": "HOME_ENTITY_PUBLISHES_LEI",
+   "identifier_used": "LEI 969500JYOZHAIBIU3513",
+   "evidence_tier": "T1_PRIMARY_DOCUMENT",
+   "sources": [
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "parent LEI exact in home list; GLEIF record present; ISO 7064 valid"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gleif_status": "ACTIVE"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "B1084",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "GLEIF_LEI",
+    "id": "969500JYOZHAIBIU3513"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": "969500JYOZHAIBIU3513"
+   },
+   "relation": "HOME_LEI_MATCHES_EIOPA_HOME_UNDERTAKING",
+   "identifier_used": "LEI 969500JYOZHAIBIU3513",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "EIOPA home undertaking row carries the same LEI (exact)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1085",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "E0241"
+   },
+   "dest": {
+    "system": "BDE",
+    "id": "ESW0602031G"
+   },
+   "relation": "BRANCH_REGISTER_KEY_BDE_SUPERVISOR_CODE",
+   "identifier_used": "supervisor code 'E0241'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/E0241.html",
+     "content_sha256": "3cb6009739a2f24befb9fc49ad63a7f9d4ab1df1c76baf9ce45db49fd0100bc5"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "E-clave equals BdE supervisor code"
+   },
+   "notes": {
+    "branch_name_rrpp": "AZUAGA COMPANHIA DE SEGUROS S.A., SUCURSAL EN ESPAÑA",
+    "branch_name_bde": "AZUAGA COMPANHIA DE SEGUROS S.A., SUCURSAL EN ESPAÑA"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1086",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "BDE",
+    "id": "ESW0602031G"
+   },
+   "dest": {
+    "system": "BDE_HOME_LIST",
+    "id": "PT:PT513851020"
+   },
+   "relation": "BRANCH_PARENT_CODE_RESOLVES_HOME_ENTITY",
+   "identifier_used": "ENTIDAD MATRIZ 'PT513851020' == home-list 'Código europeo'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-pt.csv",
+     "content_sha256": "13b2a4d0fa44348bec1d15d10cbc6e945b56730cc327168d31b5b00894350ef7"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "parent id resolves to exactly one home-country row"
+   },
+   "notes": {
+    "parent_name": "AZUAGA - COMPANHIA DE SEGUROS, S.A."
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1087",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "BDE_HOME_LIST",
+    "id": "PT:PT513851020"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "254900KSFPKUVOA0PT05"
+   },
+   "relation": "HOME_ENTITY_PUBLISHES_LEI",
+   "identifier_used": "LEI 254900KSFPKUVOA0PT05",
+   "evidence_tier": "T1_PRIMARY_DOCUMENT",
+   "sources": [
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "parent LEI exact in home list; GLEIF record present; ISO 7064 valid"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gleif_status": "ACTIVE"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "B1088",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "GLEIF_LEI",
+    "id": "254900KSFPKUVOA0PT05"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": "254900KSFPKUVOA0PT05"
+   },
+   "relation": "HOME_LEI_MATCHES_EIOPA_HOME_UNDERTAKING",
+   "identifier_used": "LEI 254900KSFPKUVOA0PT05",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "EIOPA home undertaking row carries the same LEI (exact)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1089",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "E0172"
+   },
+   "dest": {
+    "system": "BDE",
+    "id": "ESW0071771J"
+   },
+   "relation": "BRANCH_REGISTER_KEY_BDE_SUPERVISOR_CODE",
+   "identifier_used": "supervisor code 'E0172'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/E0172.html",
+     "content_sha256": "89f6bcdc90cfadd64980a3bc5519c203c43bf9f6f5220df572547e0ec026984a"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "E-clave equals BdE supervisor code"
+   },
+   "notes": {
+    "branch_name_rrpp": "AXA LIFE EUROPE DAC SUC.EN ESPAÑA",
+    "branch_name_bde": "AXA LIFE EUROPE DAC SUC.EN ESPAÑA"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1090",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "BDE",
+    "id": "ESW0071771J"
+   },
+   "dest": {
+    "system": "BDE_HOME_LIST",
+    "id": "IE:IEC40479"
+   },
+   "relation": "BRANCH_PARENT_CODE_RESOLVES_HOME_ENTITY",
+   "identifier_used": "ENTIDAD MATRIZ 'IEC40479' == home-list 'Código europeo'",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-es.csv",
+     "content_sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-ic-ie.csv",
+     "content_sha256": "22eba3ecf89bdca0e4c99da1e3dc8ca70d0cc59403b0f3ae4838a6cca59bace5"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "parent id resolves to exactly one home-country row"
+   },
+   "notes": {
+    "parent_name": "AXA Life Europe Designated Activity Company"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B1091",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "BDE_HOME_LIST",
+    "id": "IE:IEC40479"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "549300VZSVY64J454B32"
+   },
+   "relation": "HOME_ENTITY_PUBLISHES_LEI",
+   "identifier_used": "LEI 549300VZSVY64J454B32",
+   "evidence_tier": "T1_PRIMARY_DOCUMENT",
+   "sources": [
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "parent LEI exact in home list; GLEIF record present; ISO 7064 valid"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gleif_status": "ACTIVE"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "B1092",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "GLEIF_LEI",
+    "id": "549300VZSVY64J454B32"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": "549300VZSVY64J454B32"
+   },
+   "relation": "HOME_LEI_MATCHES_EIOPA_HOME_UNDERTAKING",
+   "identifier_used": "LEI 549300VZSVY64J454B32",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "EIOPA home undertaking row carries the same LEI (exact)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "B2093",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "L0359"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "5299009UN4CBXZ336M65"
+   },
+   "relation": "LPS_REGISTER_KEY_PUBLISHES_LEI",
+   "identifier_used": "LEI 5299009UN4CBXZ336M65",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/L0359.html",
+     "content_sha256": "e8d4fd14bb8b53371dd7221d216454e08b2066261edfd2111660b5e828649956"
+    },
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "RRPP L-detail publishes LEI; equal (exact string) to EIOPA home undertaking LEI; EIOPA Home Country == RRPP pais de origen; ISO 7064 valid; GLEIF record present"
+   },
+   "notes": {
+    "denominacion": "R+V ALLGEMEINE VERSICHERUNG AKTIENGESELLCHAFT",
+    "pais_origen": "Alemania",
+    "eiopa_home_id": "5438",
+    "eiopa_nca": "Bundesanstalt für Finanzdienstleistungsaufsicht (BaFin)",
+    "eiopa_es_operation_present": true
+   },
+   "diagnostic": {
+    "name_dgsfp_vs_eiopa": "different"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "B2094",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "L0316"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "969500798WFE82RZZU93"
+   },
+   "relation": "LPS_REGISTER_KEY_PUBLISHES_LEI",
+   "identifier_used": "LEI 969500798WFE82RZZU93",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/L0316.html",
+     "content_sha256": "896749e94a95eb853a519ce13cceaa148be3e0f6fdfcd0fb899514db49e93864"
+    },
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "RRPP L-detail publishes LEI; equal (exact string) to EIOPA home undertaking LEI; EIOPA Home Country == RRPP pais de origen; ISO 7064 valid; GLEIF record present"
+   },
+   "notes": {
+    "denominacion": "AXA FRANCE IARD",
+    "pais_origen": "Francia",
+    "eiopa_home_id": "722057460",
+    "eiopa_nca": "L’Autorité de Contrôle Prudentiel et de Résolution (ACPR)",
+    "eiopa_es_operation_present": true
+   },
+   "diagnostic": {
+    "name_dgsfp_vs_eiopa": "exact_norm"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "B2095",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "L0831"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "635400ZAF97CXELCYI79"
+   },
+   "relation": "LPS_REGISTER_KEY_PUBLISHES_LEI",
+   "identifier_used": "LEI 635400ZAF97CXELCYI79",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/L0831.html",
+     "content_sha256": "aad7259ad76ccf312272d93351795330c744996bd3465f51d7b1833a923e3cd5"
+    },
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "RRPP L-detail publishes LEI; equal (exact string) to EIOPA home undertaking LEI; EIOPA Home Country == RRPP pais de origen; ISO 7064 valid; GLEIF record present"
+   },
+   "notes": {
+    "denominacion": "Bridgehaven Europe Specialty Dac",
+    "pais_origen": "Irlanda",
+    "eiopa_home_id": "C33637",
+    "eiopa_nca": "Central Bank of Ireland",
+    "eiopa_es_operation_present": true
+   },
+   "diagnostic": {
+    "name_dgsfp_vs_eiopa": "exact_norm"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "B2096",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "L1011"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "2221004JZS1OVTAB1650"
+   },
+   "relation": "LPS_REGISTER_KEY_PUBLISHES_LEI",
+   "identifier_used": "LEI 2221004JZS1OVTAB1650",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/L1011.html",
+     "content_sha256": "f52c3e30a87469f4af7a020b3610092344eb5e0619de6c8b46f598d11c220eef"
+    },
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "RRPP L-detail publishes LEI; equal (exact string) to EIOPA home undertaking LEI; EIOPA Home Country == RRPP pais de origen; ISO 7064 valid; GLEIF record present"
+   },
+   "notes": {
+    "denominacion": "IPTIQ LIFE S.A SUC PAISES BAJOS",
+    "pais_origen": "Luxemburgo",
+    "eiopa_home_id": "AIPTVI",
+    "eiopa_nca": "Commissariat aux Assurances (CAA)",
+    "eiopa_es_operation_present": true
+   },
+   "diagnostic": {
+    "name_dgsfp_vs_eiopa": "token_subset"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "B2097",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "L1228"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "213800XGIP5HHIO5WV42"
+   },
+   "relation": "LPS_REGISTER_KEY_PUBLISHES_LEI",
+   "identifier_used": "LEI 213800XGIP5HHIO5WV42",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/L1228.html",
+     "content_sha256": "23cce3b8795a25cd42cd451116d7fac6e10c1890bce75a8504b04fc6eab20837"
+    },
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "RRPP L-detail publishes LEI; equal (exact string) to EIOPA home undertaking LEI; EIOPA Home Country == RRPP pais de origen; ISO 7064 valid; GLEIF record present"
+   },
+   "notes": {
+    "denominacion": "LLOYD'S INSURANCE COMPANY SA/NV",
+    "pais_origen": "Belgica",
+    "eiopa_home_id": "3094",
+    "eiopa_nca": "Banque nationale de Belgique (NBB)",
+    "eiopa_es_operation_present": true
+   },
+   "diagnostic": {
+    "name_dgsfp_vs_eiopa": "different"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "B2098",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "L0565"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "213800IKMAZTEEFEMF91"
+   },
+   "relation": "LPS_REGISTER_KEY_PUBLISHES_LEI",
+   "identifier_used": "LEI 213800IKMAZTEEFEMF91",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/L0565.html",
+     "content_sha256": "eef5feabf073602a3f5f2a2b1d07976b2bcdbcb630bab081cf70acc549d4933a"
+    },
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "RRPP L-detail publishes LEI; equal (exact string) to EIOPA home undertaking LEI; EIOPA Home Country == RRPP pais de origen; ISO 7064 valid; GLEIF record present"
+   },
+   "notes": {
+    "denominacion": "Vodafone Insurance Ltd",
+    "pais_origen": "Malta",
+    "eiopa_home_id": "C 37030",
+    "eiopa_nca": "Malta Financial Services Authority (MFSA)",
+    "eiopa_es_operation_present": true
+   },
+   "diagnostic": {
+    "name_dgsfp_vs_eiopa": "exact_norm"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "B2099",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "L1218"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "724500TDGD235R4BEH31"
+   },
+   "relation": "LPS_REGISTER_KEY_PUBLISHES_LEI",
+   "identifier_used": "LEI 724500TDGD235R4BEH31",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/L1218.html",
+     "content_sha256": "6112ed5c92d0b23235ff9c06c1f4aa952d5f4cc595f73ab5a04e1c730b5f7b82"
+    },
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "RRPP L-detail publishes LEI; equal (exact string) to EIOPA home undertaking LEI; EIOPA Home Country == RRPP pais de origen; ISO 7064 valid; GLEIF record present"
+   },
+   "notes": {
+    "denominacion": "ANKER VERZEKERINGEN N.V",
+    "pais_origen": "Países Bajos",
+    "eiopa_home_id": "W1860",
+    "eiopa_nca": "De Nederlandsche Bank (DNB)",
+    "eiopa_es_operation_present": true
+   },
+   "diagnostic": {
+    "name_dgsfp_vs_eiopa": "token_subset"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "B2100",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "L1231"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "4GQQ1LC5PZ0OUD5AO806"
+   },
+   "relation": "LPS_REGISTER_KEY_PUBLISHES_LEI",
+   "identifier_used": "LEI 4GQQ1LC5PZ0OUD5AO806",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/L1231.html",
+     "content_sha256": "18a8f8ff15b3aa53732a1cab2e32a2e159a10a29448464dee677d2204e2a51f0"
+    },
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "RRPP L-detail publishes LEI; equal (exact string) to EIOPA home undertaking LEI; EIOPA Home Country == RRPP pais de origen; ISO 7064 valid; GLEIF record present"
+   },
+   "notes": {
+    "denominacion": "SiriusPoint International Försäkringsaktiebolag AB (publ), suc. en Bélgica",
+    "pais_origen": "Suecia",
+    "eiopa_home_id": "22061",
+    "eiopa_nca": "Finansinspektionen (FI)",
+    "eiopa_es_operation_present": true
+   },
+   "diagnostic": {
+    "name_dgsfp_vs_eiopa": "different"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "B2101",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "L0121"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "8156005CE5E7340CCA86"
+   },
+   "relation": "LPS_REGISTER_KEY_PUBLISHES_LEI",
+   "identifier_used": "LEI 8156005CE5E7340CCA86",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/L0121.html",
+     "content_sha256": "5e1daa657f3cc0045709a4473455a109d93f03e62ad10e6ea5b2726a2d889016"
+    },
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "RRPP L-detail publishes LEI; equal (exact string) to EIOPA home undertaking LEI; EIOPA Home Country == RRPP pais de origen; ISO 7064 valid; GLEIF record present"
+   },
+   "notes": {
+    "denominacion": "Unipol Assicurazioni S.p.A.",
+    "pais_origen": "Italia",
+    "eiopa_home_id": "100183",
+    "eiopa_nca": "Istituto per la Vigilanza sulle Assicurazioni (IVASS)",
+    "eiopa_es_operation_present": true
+   },
+   "diagnostic": {
+    "name_dgsfp_vs_eiopa": "exact_norm"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "B2102",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "L0419"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": null
+   },
+   "relation": "LPS_KEY_CROSSWALK",
+   "identifier_used": "none available",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/L0419.html",
+     "content_sha256": "bf418045eee751b75bc37a09ea415591349cb7204e244757bc9283688a4237f6"
+    }
+   ],
+   "validation": {
+    "result": "DOCUMENTED_GAP",
+    "check": "NO_LEI_IN_DGSFP"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": false
+  },
+  {
+   "edge_id": "B2103",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "L1160"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": null
+   },
+   "relation": "LPS_KEY_CROSSWALK",
+   "identifier_used": "none available",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/L1160.html",
+     "content_sha256": "8f31b4fe35435a7589cd2a6534464be8c25c31912da6ecd479ee8bd5e4a5a9db"
+    }
+   ],
+   "validation": {
+    "result": "DOCUMENTED_GAP",
+    "check": "NO_LEI_IN_DGSFP"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": false
+  },
+  {
+   "edge_id": "B2104",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "L1522"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": null
+   },
+   "relation": "LPS_KEY_CROSSWALK",
+   "identifier_used": "none available",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_details/L1522.html",
+     "content_sha256": "6ace871041711b95fa728819d4782d42d8cd369236d0b4903ca6d817b0d8c7bc"
+    }
+   ],
+   "validation": {
+    "result": "DOCUMENTED_GAP",
+    "check": "STALE_LEI_DISAGREEMENT"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": false
+  },
+  {
+   "edge_id": "C105",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "G0002"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "95980020140005677005"
+   },
+   "relation": "PENSION_UNIT_PUBLISHES_LEI",
+   "identifier_used": "LEI 95980020140005677005",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_pensions/G0002.html",
+     "content_sha256": "dadf24dd14352192541661f44dc01f09e004da6b669ab08d14a5ec503566cbc8"
+    },
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "DGSFP pension-section detail publishes LEI; ISO 7064 valid; GLEIF record present"
+   },
+   "notes": {
+    "unit": "gestora",
+    "denominacion": "ABANCA VIDA Y PENSIONES DE SEGUROS Y REASEGUROS, S.A"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "C106",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "95980020140005677005"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": "C0628"
+   },
+   "relation": "GESTORA_LEI_MATCHES_EIOPA_INSURER_ROW",
+   "identifier_used": "LEI 95980020140005677005 -> identification code C0628",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "gestora (an insurer) resolves to the EIOPA ES home row with the same LEI"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "C107",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "G0021"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "95980020140005337796"
+   },
+   "relation": "PENSION_UNIT_PUBLISHES_LEI",
+   "identifier_used": "LEI 95980020140005337796",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_pensions/G0021.html",
+     "content_sha256": "1dcfbe69cdac3a2cd861e9e5fc2918b058d4d4c94eefe4dc9feab56bfc5e624e"
+    },
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "DGSFP pension-section detail publishes LEI; ISO 7064 valid; GLEIF record present"
+   },
+   "notes": {
+    "unit": "gestora",
+    "denominacion": "VIDA-CAIXA, SOCIEDAD ANÓNIMA DE SEGUROS Y REASEGUROS"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "C108",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "95980020140005337796"
+   },
+   "dest": {
+    "system": "EIOPA",
+    "id": "C0611"
+   },
+   "relation": "GESTORA_LEI_MATCHES_EIOPA_INSURER_ROW",
+   "identifier_used": "LEI 95980020140005337796 -> identification code C0611",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "EIOPA",
+     "url": "https://register.eiopa.europa.eu/registers/register-of-insurance-undertakings",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/eiopa/eiopa_register.csv",
+     "content_sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "gestora (an insurer) resolves to the EIOPA ES home row with the same LEI"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "C109",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "F0050"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "959800D6SYPWHA62DY28"
+   },
+   "relation": "PENSION_UNIT_PUBLISHES_LEI",
+   "identifier_used": "LEI 959800D6SYPWHA62DY28",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_pensions/F0050.html",
+     "content_sha256": "07a635242e865ef4d4baebe9dcd4d874b2e9e1afc0a964fc3d39dd4b27d6bc4c"
+    },
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "DGSFP pension-section detail publishes LEI; ISO 7064 valid; GLEIF record present"
+   },
+   "notes": {
+    "unit": "fondo",
+    "denominacion": "AHORRO CR III FONDO DE PENSIONES"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "C110",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "F0050"
+   },
+   "dest": {
+    "system": "BDE_PF_LIST",
+    "id": "959800D6SYPWHA62DY28"
+   },
+   "relation": "FUND_LEI_MATCHES_BDE_PF_ROW",
+   "identifier_used": "LEI 959800D6SYPWHA62DY28",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_pensions/F0050.html",
+     "content_sha256": "07a635242e865ef4d4baebe9dcd4d874b2e9e1afc0a964fc3d39dd4b27d6bc4c"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-pf-es.csv",
+     "content_sha256": "7e8b70a4a312710325076973ca4f712edbb351009046f8b8e8a1ab4df97b64b3"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "DGSFP fondo LEI equals BdE pension-funds list LEI (exact)"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gestora_name_agreement": "different"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "C111",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "F0131"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "95980020140005373880"
+   },
+   "relation": "PENSION_UNIT_PUBLISHES_LEI",
+   "identifier_used": "LEI 95980020140005373880",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_pensions/F0131.html",
+     "content_sha256": "185d636dcc61143d18cbc6f14818613ca568bfdc30516ddf3c7a36e6a438043c"
+    },
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "DGSFP pension-section detail publishes LEI; ISO 7064 valid; GLEIF record present"
+   },
+   "notes": {
+    "unit": "fondo",
+    "denominacion": "BBVA  ADHESION , FONDO DE PENSIONES"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "C112",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "F0131"
+   },
+   "dest": {
+    "system": "BDE_PF_LIST",
+    "id": "95980020140005373880"
+   },
+   "relation": "FUND_LEI_MATCHES_BDE_PF_ROW",
+   "identifier_used": "LEI 95980020140005373880",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_pensions/F0131.html",
+     "content_sha256": "185d636dcc61143d18cbc6f14818613ca568bfdc30516ddf3c7a36e6a438043c"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-pf-es.csv",
+     "content_sha256": "7e8b70a4a312710325076973ca4f712edbb351009046f8b8e8a1ab4df97b64b3"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "DGSFP fondo LEI equals BdE pension-funds list LEI (exact)"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gestora_name_agreement": "different"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "C113",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "F0016"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "95980020140005371746"
+   },
+   "relation": "PENSION_UNIT_PUBLISHES_LEI",
+   "identifier_used": "LEI 95980020140005371746",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_pensions/F0016.html",
+     "content_sha256": "263dde66beb6f2670f8632d978e6cc178d35e2ac169f10a81124c2cc1eefba2a"
+    },
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "DGSFP pension-section detail publishes LEI; ISO 7064 valid; GLEIF record present"
+   },
+   "notes": {
+    "unit": "fondo",
+    "denominacion": "BBVA INDIVIDUAL, FONDO DE PENSIONES"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "C114",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "F0016"
+   },
+   "dest": {
+    "system": "BDE_PF_LIST",
+    "id": "95980020140005371746"
+   },
+   "relation": "FUND_LEI_MATCHES_BDE_PF_ROW",
+   "identifier_used": "LEI 95980020140005371746",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_pensions/F0016.html",
+     "content_sha256": "263dde66beb6f2670f8632d978e6cc178d35e2ac169f10a81124c2cc1eefba2a"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-pf-es.csv",
+     "content_sha256": "7e8b70a4a312710325076973ca4f712edbb351009046f8b8e8a1ab4df97b64b3"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "DGSFP fondo LEI equals BdE pension-funds list LEI (exact)"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gestora_name_agreement": "different"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "C115",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "F1131"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "95980020140005763238"
+   },
+   "relation": "PENSION_UNIT_PUBLISHES_LEI",
+   "identifier_used": "LEI 95980020140005763238",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_pensions/F1131.html",
+     "content_sha256": "b6f4243448437261017f85deaf9819f8161cbc6c28f555c73a418f65ae24736d"
+    },
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "DGSFP pension-section detail publishes LEI; ISO 7064 valid; GLEIF record present"
+   },
+   "notes": {
+    "unit": "fondo",
+    "denominacion": "ABANCA PREVISION SOCIAL V, FONDO DE PENSIONES"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "C116",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "F1131"
+   },
+   "dest": {
+    "system": "BDE_PF_LIST",
+    "id": "95980020140005763238"
+   },
+   "relation": "FUND_LEI_MATCHES_BDE_PF_ROW",
+   "identifier_used": "LEI 95980020140005763238",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_pensions/F1131.html",
+     "content_sha256": "b6f4243448437261017f85deaf9819f8161cbc6c28f555c73a418f65ae24736d"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-pf-es.csv",
+     "content_sha256": "7e8b70a4a312710325076973ca4f712edbb351009046f8b8e8a1ab4df97b64b3"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "DGSFP fondo LEI equals BdE pension-funds list LEI (exact)"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gestora_name_agreement": "different"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "C117",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "F1989"
+   },
+   "dest": {
+    "system": "GLEIF_LEI",
+    "id": "95980020140005980130"
+   },
+   "relation": "PENSION_UNIT_PUBLISHES_LEI",
+   "identifier_used": "LEI 95980020140005980130",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_pensions/F1989.html",
+     "content_sha256": "6eac53e7e12233239d2797b72fe772fc1d45399421513c6d407529cd6f984489"
+    },
+    {
+     "system": "GLEIF",
+     "url": "https://api.gleif.org/api/v1/lei-records",
+     "snapshot_date": "2026-09-13",
+     "tier": "T0_PRIMARY_DIRECT",
+     "raw_file": "data/raw/gleif/gleif_records.jsonl",
+     "content_sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "DGSFP pension-section detail publishes LEI; ISO 7064 valid; GLEIF record present"
+   },
+   "notes": {
+    "unit": "fondo",
+    "denominacion": "BBVA NOVENTA Y SEIS FONDO DE PENSIONES"
+   },
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "C118",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "F1989"
+   },
+   "dest": {
+    "system": "BDE_PF_LIST",
+    "id": "95980020140005980130"
+   },
+   "relation": "FUND_LEI_MATCHES_BDE_PF_ROW",
+   "identifier_used": "LEI 95980020140005980130",
+   "evidence_tier": "T3_DERIVED_REPRODUCIBLE",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_pensions/F1989.html",
+     "content_sha256": "6eac53e7e12233239d2797b72fe772fc1d45399421513c6d407529cd6f984489"
+    },
+    {
+     "system": "BDE",
+     "url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/",
+     "snapshot_date": "Fri, 11 Sep 2026 20:21:31 GMT",
+     "tier": "T1_PRIMARY_DOCUMENT",
+     "raw_file": "data/raw/bde/lista-pf-es.csv",
+     "content_sha256": "7e8b70a4a312710325076973ca4f712edbb351009046f8b8e8a1ab4df97b64b3"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "DGSFP fondo LEI equals BdE pension-funds list LEI (exact)"
+   },
+   "notes": null,
+   "diagnostic": {
+    "gestora_name_agreement": "different"
+   },
+   "canonical": true
+  },
+  {
+   "edge_id": "C119",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "N0002"
+   },
+   "dest": {
+    "system": "DGSFP_RRPP",
+    "id": [
+     "F0151"
+    ]
+   },
+   "relation": "PLAN_LINKS_FUND_BY_EXACT_KEY",
+   "identifier_used": "fondo clave ['F0151']",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_pensions/F1989.html",
+     "content_sha256": "6eac53e7e12233239d2797b72fe772fc1d45399421513c6d407529cd6f984489"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "plan detail embeds the exact DGSFP fondo clave(s)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "C120",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "N0003"
+   },
+   "dest": {
+    "system": "DGSFP_RRPP",
+    "id": [
+     "F0001"
+    ]
+   },
+   "relation": "PLAN_LINKS_FUND_BY_EXACT_KEY",
+   "identifier_used": "fondo clave ['F0001']",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_pensions/F1989.html",
+     "content_sha256": "6eac53e7e12233239d2797b72fe772fc1d45399421513c6d407529cd6f984489"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "plan detail embeds the exact DGSFP fondo clave(s)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "C121",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "DGSFP_RRPP",
+    "id": "N0007"
+   },
+   "dest": {
+    "system": "DGSFP_RRPP",
+    "id": [
+     "F0353"
+    ]
+   },
+   "relation": "PLAN_LINKS_FUND_BY_EXACT_KEY",
+   "identifier_used": "fondo clave ['F0353']",
+   "evidence_tier": "T2_PRIMARY_UI",
+   "sources": [
+    {
+     "system": "DGSFP_RRPP",
+     "url": "https://rrpp.dgsfp.mineco.es/Aseguradora/GetAseguradora/",
+     "snapshot_date": "2026-09-13",
+     "tier": "T2_PRIMARY_UI",
+     "raw_file": "data/raw/dgsfp/rrpp_pensions/F1989.html",
+     "content_sha256": "6eac53e7e12233239d2797b72fe772fc1d45399421513c6d407529cd6f984489"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "plan detail embeds the exact DGSFP fondo clave(s)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "M122",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "OpenDGSFP"
+   },
+   "dest": {
+    "system": "EIOPA bulk export"
+   },
+   "relation": "REUSED_DONOR_MECHANISM",
+   "identifier_used": "ASP.NET postback replay",
+   "evidence_tier": "T4_DONOR",
+   "sources": [
+    {
+     "system": "DONOR_fabio-rovai/insurance-register-ontology",
+     "url": "https://github.com/fabio-rovai/insurance-register-ontology",
+     "snapshot_date": "2026-09-13",
+     "tier": "T4_DONOR"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "fetch_eiopa.py mechanism reused from donor pipeline/fetch_eiopa.py (MIT); export verified by Content-Disposition attachment"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  },
+  {
+   "edge_id": "M123",
+   "recorded_at": "2026-09-13T14:32:50.878325+00:00",
+   "origin": {
+    "system": "OpenDGSFP"
+   },
+   "dest": {
+    "system": "GLEIF harvest"
+   },
+   "relation": "REUSED_DONOR_MECHANISM",
+   "identifier_used": "batched filter[lei] API + ISO 7064",
+   "evidence_tier": "T4_DONOR",
+   "sources": [
+    {
+     "system": "DONOR_fabio-rovai/insurance-register-ontology",
+     "url": "https://github.com/fabio-rovai/insurance-register-ontology",
+     "snapshot_date": "2026-09-13",
+     "tier": "T4_DONOR"
+    }
+   ],
+   "validation": {
+    "result": "PASS_EXACT",
+    "check": "harvest_gleif.py batching and lei_checksum_valid reused from donor (MIT)"
+   },
+   "notes": null,
+   "diagnostic": null,
+   "canonical": true
+  }
+ ],
+ "observations": [
+  {
+   "gate": "G0-D",
+   "system": "DGSFP_PUI",
+   "url": "https://rrpp.dgsfp.mineco.es/Mediador/GetMediadoresBusqueda",
+   "snapshot_date": "2026-09-13",
+   "tier": "T2_PRIMARY_UI",
+   "facts": {
+    "rows": 56105,
+    "fields": [
+     "clave",
+     "claveRegistro",
+     "razonSocial",
+     "claseMediador",
+     "situacion",
+     "sLEI",
+     "descripcion"
+    ],
+    "claseMediador_top": {
+     "Agente exclusivo PF": 39202,
+     "Agente exclusivo PJ": 10901,
+     "Corredor de Seguros PJ": 3859,
+     "Corredor de Seguros PF": 1398,
+     "Agente de seguros vinculado Persona Juridica": 455
+    },
+    "rows_with_sLEI": 195,
+    "EIOPA_ENTITY_JOIN_EXPECTED": false
+   },
+   "raw_file": "data/raw/dgsfp/rrpp_mediadores.json"
+  }
+ ],
+ "documented_gaps": [
+  {
+   "id": "GAP-B2-DGSFP-LPS-NO-IDENTIFIER",
+   "scope": "616 of 825 Activa L-keys",
+   "statement": "DGSFP RRPP LPS detail exposes no exact identifier (no LEI, no home NCA code, no home identification code). Only denominacion + pais de origen. No official crosswalk artifact (Anexo) was located for L-keys. Counting note: 825 Activa = 209 with LEI + 616 without; total without exact resolution is 617 (616 no-identifier + L1522, tracked separately under GAP-B2-L1522-STALE-LEI).",
+   "consequence": "No canonical edge can be produced for these keys without fuzzy matching, which is forbidden. They remain unjoined by design.",
+   "tier": "T2_PRIMARY_UI",
+   "snapshot": "2026-09-13"
+  },
+  {
+   "id": "GAP-B2-L1522-STALE-LEI",
+   "scope": "L1522 (TT Club Mutual Insurance N.V.)",
+   "statement": "RRPP publishes LEI 7245004QN0BFE9Q9EV42 which GLEIF reports as INACTIVE; EIOPA lists the same undertaking under LEI 724500D3EHHJWKLWY913. Two official sources disagree; no silent merge performed.",
+   "tier": "T0_PRIMARY_DIRECT",
+   "snapshot": "2026-09-13"
+  },
+  {
+   "id": "GAP-B1-BDE-PARENT-CODE-COVERAGE",
+   "scope": "10 of 70 BdE E-rows lack ENTIDAD MATRIZ; 3 non-EEA parents (MX/GB/LI)",
+   "statement": "Parent chain is exact for 57/70 rows (81.4%). Non-EEA parents are outside BdE EU lists; recent branches (E0253-E0261) not yet carried in the BdE statistics list.",
+   "tier": "T1_PRIMARY_DOCUMENT",
+   "snapshot": "Fri, 11 Sep 2026 20:21:31 GMT"
+  },
+  {
+   "id": "GAP-C-EIOPA-IORP-REGISTER-401",
+   "scope": "pension funds (IORP) cross-check",
+   "statement": "EIOPA register-of-iorps returns HTTP 401 for this environment; IORP identity cross-check limited to gestoras (insurers) via the insurance register.",
+   "tier": "T0_PRIMARY_DIRECT",
+   "snapshot": "2026-09-13"
+  },
+  {
+   "id": "GAP-D-EIOPA-NO-MEDIATOR-DATASET",
+   "scope": "intermediaries (PUI)",
+   "statement": "EIOPA_ENTITY_JOIN_EXPECTED = FALSE. The PUI has no European counterpart dataset; only opportunistic sLEI (195 of 56,105 rows).",
+   "tier": "T2_PRIMARY_UI",
+   "snapshot": "2026-09-13"
+  }
+ ],
+ "counts": {
+  "edges": 123,
+  "canonical": 120,
+  "documented_gap": 3,
+  "by_gate": {
+   "G0-A": 44,
+   "G0-B1": 48,
+   "G0-B2": 12,
+   "G0-C": 17,
+   "mechanisms": 2
+  }
+ }
+}

@@ -1,0 +1,156 @@
+
+
+
+<div class="col">
+    <h5 class="tituloSede">Detalle del plan</h5>
+
+    <div class="row mt-3">
+        <div class="col">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a href="#tabDatosGenerales" class="nav-link active" data-toggle="tab">Datos generales</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#tabListadoPromotores" class="nav-link" data-toggle="tab">Promotores</a>
+                </li>
+                    <li class="nav-item">
+                        <a href="#tabListadoFondosplanes" class="nav-link" data-toggle="tab">Fondos</a>
+                    </li>
+
+            </ul>
+
+            <div class="tab-content p-3">
+                <div class="tab-pane active" id="tabDatosGenerales" role="tabpanel">
+
+
+<div class="row">
+    <div class="col-sm-4">
+        <label class="label-literal">Clave:</label>
+        <label aria-label="Clave" class="label-value">N0299</label>
+    </div>
+    <div class="col-sm-4">
+        <label class="label-literal">Denominaci&#xF3;n:</label>
+        <label aria-label="Denominación" class="label-value">PLAN DE PENSIONES DE EMPLEO DE PROMOCION CONJUNTA DE LOS EMPLEADOS DEL GRUPO NATURGY</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <label class="label-literal">Modalidad:</label>
+        <label aria-label="Modalidad" class="label-value">Empleo mixto</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <label class="label-literal">Fecha Admisi&#xF3;n:</label>
+        <label aria-label="Fecha de admisión" class="label-value">02/11/1990</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <label class="label-literal">Situaci&#xF3;n:</label>
+        <label aria-label="Situacion" class="label-value">Activa / Autorizado</label>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <label class="label-literal">Es Plan Simplificado:</label>
+        <label aria-label="Situacion" class="label-value">NO</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <label class="label-literal">Tipo Plan Simplificado:</label>
+        <label aria-label="Situacion" class="label-value"></label>
+    </div>
+</div>                </div>
+
+                <div class="tab-pane" id="tabListadoPromotores" role="tabpanel">
+                    <div class="d-flex justify-content-center">
+
+
+<div class="col-12 col-sm-8 col-md-6">
+    <div class="containerGrid mt-3" data-idgrid="jqGridPromotor">
+            <table id="jqGridPromotor">
+                <caption>Listado de promotores</caption>
+                <tr><th scope="col"></th></tr>
+            </table>
+            <div id="jqGridPagerPromotor"></div>
+            <div class="d-flex justify-content-end mr-1 mt-3">
+                <button class="btn btn-success mr-2" onclick="exportarGridExcel('jqGridPromotor', 'Planes_Promotores_DGSFP');">
+                    <i class="fa fa-file-excel-o" aria-hidden="true"></i> Exportar a Excel
+                </button>
+                <button class="btn btn-rrpp" onclick="exportarGridPdf('jqGridPromotor', 'Planes_Promotores_DGSFP', LANDSCAPE);">
+                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Exportar a PDF
+                </button>
+            </div>
+    </div>
+</div>
+
+
+
+    <script type="text/javascript">
+        var data = [{"Nombre Promotor":"NEDGIA CEGAS SA"},{"Nombre Promotor":"NEDGIA ANDALUC\u00CDA, SA"},{"Nombre Promotor":"NEDGIA CASTILLA-LA MANCHA SA"},{"Nombre Promotor":"NEDGIA CASTILLA Y LEON SA"},{"Nombre Promotor":"NEDGIA GALICIA SA"},{"Nombre Promotor":"NEDGIA RIOJA SA"},{"Nombre Promotor":"NEDGIA NAVARRA SA"},{"Nombre Promotor":"NATURGY RENOVABLES SLU"},{"Nombre Promotor":"PETROLEUM OIL \u0026 GAS ESPA\u00D1A, S.A."},{"Nombre Promotor":"GLOBAL POWER GENERATION SA"},{"Nombre Promotor":"REPSOL-GAS NATURAL LNG,S.L"},{"Nombre Promotor":"NATURGY ENERGY GROUP SA"},{"Nombre Promotor":"NEDGIA CATALUNYA SA"},{"Nombre Promotor":"NATURGY IBERIA SA"},{"Nombre Promotor":"NATURGY INFORM\u00C1TICA, SA"},{"Nombre Promotor":"GAS NATURAL COMERCIALIZADORA, S.A."},{"Nombre Promotor":"UFD DISTRIBUCI\u00D3N DE ELECTRICIDAD SA"},{"Nombre Promotor":"OPERACION Y MANTENIMIENTO ENERGY SA"},{"Nombre Promotor":"NATURGY ENGINEERING SL"},{"Nombre Promotor":"NEDGIA MADRID SA"},{"Nombre Promotor":"NATURGY GENERACION SLU"},{"Nombre Promotor":"GPG INGENIER\u00CDA Y DESARROLLO DE GENERACI\u00D3N SL"},{"Nombre Promotor":"NEDGIA ARAG\u00D3N, SA"},{"Nombre Promotor":"GAS NATURAL REDES GLP SA"},{"Nombre Promotor":"NEDGIA BALEARS SA"},{"Nombre Promotor":"NEDGIA SA"},{"Nombre Promotor":"NATURGY GENERACI\u00D3N T\u00C9RMICA S.L.U."},{"Nombre Promotor":"NATURGY CICLOS COMBINADOS S.L.U."},{"Nombre Promotor":"CORPORACI\u00D3N E\u00D3LICA DE ZARAGOZA SL"},{"Nombre Promotor":"NATURGY NUEVAS ENERG\u00CDAS, SL"},{"Nombre Promotor":"NATURGY APROVISIONAMIENTOS SA "},{"Nombre Promotor":"NATURGY INFRAESTRUCTURAS EMEA S.L."},{"Nombre Promotor":"NATURGY INGENIER\u00CDA NUCLEAR S.L. "}];
+        loadGridPromotores(data);
+    </script>
+                    </div>
+                </div>
+                    <div class="tab-pane" id="tabListadoFondosplanes" role="tabpanel">
+                        <div class="d-flex justify-content-center">
+
+
+<div class="col-12 col-sm-8">
+    <div class="containerGrid mt-3" data-idgrid="jqGridFondosplan">
+            <table id="jqGridFondosplan">
+                <caption>Fondos</caption>
+                <tr><th scope="col"></th></tr>
+            </table>
+            <div id="jqGridPagerFondos"></div>
+            <div class="d-flex justify-content-end mr-1 mt-3">
+                <button class="btn btn-success mr-2" onclick="exportarGridExcel('jqGridFondosplan', 'Planes_FondosPlanes_DGSFP');">
+                    <i class="fa fa-file-excel-o" aria-hidden="true"></i> Exportar a Excel
+                </button>
+                <button class="btn btn-rrpp" onclick="exportarGridPdf('jqGridFondosplan', 'Planes_FondosPlanes_DGSFP', LANDSCAPE);">
+                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Exportar a PDF
+                </button>
+            </div>
+    </div>
+</div>
+
+
+
+    <script type="text/javascript">
+        var data = [{"fondo":"F0241","denominacionFondo":"FONDO DE PENSIONES NATURGY, FONDO DE PENSIONES"}];
+        loadGridFondosplanes(data);
+    </script>
+                        </div>
+                    </div>
+            </div>
+
+
+            <div class="d-flex justify-content-center  mt-5">
+                <button class="btn btn-rrpp w-em-15 mr-3" onclick="volverBuscador();">
+                    <i class="fa fa-search" aria-hidden="true"></i> Volver al buscador
+                </button>
+
+                <button class="btn btn-secondary w-em-15" onclick="volverResultados()">
+                    <i class="fa fa-reply" aria-hidden="true"></i> Volver a resultados
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        resizeGrids();
+    });
+
+</script>

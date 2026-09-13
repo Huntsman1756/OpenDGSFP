@@ -1,0 +1,323 @@
+
+
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="Cache-Control" content="no-cache, no-store, must-revalidate">
+    <meta http-equiv="Pragma" content="no-cache">
+    <meta http-equiv="Expires" content="0">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Distribuidores de seguros y reaseguros</title>
+
+
+
+
+    <script type="text/javascript" src="/ruxitagentjs_ICA7NVfqrux_10343260715123811.js" data-dtconfig="rid=RID_-796268081|rpid=155152399|domain=mineco.es|reportUrl=/rb_bf99376qoj|app=48fed5968e1bb5fa|cuc=glnrmrcb|owasp=1|mel=100000|expw=1|featureHash=ICA7NVfqrux|dpvc=1|lastModification=1787139493214|tp=500,50,0|rdnt=1|uxrgce=1|srbbv=2|agentUri=/ruxitagentjs_ICA7NVfqrux_10343260715123811.js"></script><script src="/js/minified/jquery.site.min.js"></script>
+    <script src="/js/minified/bootstrap.site.min.js"></script>
+    <script src="/js/minified/excel.site.min.js"></script>
+    <script src="/js/minified/pdf.site.min.js"></script>
+    <script src="/js/minified/jqgrid.site.min.js"></script>
+    <script src="/js/minified/site.min.js"></script>
+
+
+
+    <link href="/css/minified/site.min.css" rel="stylesheet" />
+
+    <script src="/js/modernizr/modernizr-2.8.3.js"></script>
+</head>
+<body>
+    
+
+    <script type="text/javascript">
+        var colModel = [
+            {
+                label: "Clave",
+                sorttype: 'text',
+                hidden: true,
+                name: 'clave',
+            },
+            {
+                label: "Clave Registro",
+                sorttype: 'text',
+                name: 'claveRegistro',
+            },
+            {
+                label: "Autoridad de Control",
+                sorttype: 'text',
+                name: 'descripcion',
+            },
+            {
+                label: "Nombre / Raz&#xF3;n Social",
+                sorttype: 'text',
+                name: 'razonSocial',
+            },
+            {
+                label: "Tipo",
+                sorttype: 'text',
+                name: 'tipo',
+            },
+            {
+                name: '',
+                width: 15,
+                sortable: false, resizable: false,
+                search: false,
+                formatter: formatAccionVerDetalle
+            }
+        ];
+
+        $(document).ready(function () {
+            initVistaBuscador("/Mediador/GetMediadoresBusqueda", "formBusqMediadores", colModel, "/Mediador/GetMediador"+ '/?culture=es-ES&ui-culture=es-ES');
+            loadAyuda("/Mediador/Ayuda");
+
+            $('input[type=text]').each(function () {
+                $("#" + this.id).keydown(function (e) {
+                    if (e.originalEvent.keyCode == 13) {
+                        e.preventDefault();
+                        reloadGrid();
+                    }
+                });
+            })
+        });
+
+        function permutarReloadGrid() {
+            var busqRP = $("#cmbTiposMediador").val();
+            if (busqRP != "RD") {
+                reloadGrid();
+            } else {
+                reloadGridRD();
+            }
+        }
+
+    </script>
+
+    <script src="/js/Mediador/grids.js"></script>
+
+
+
+    <div class="container-fluid p-0">
+        <div class="row">
+            <div class="col-12 col-lg-2 sideNavBox pl-0 pr-0">
+                <nav class="navbar navbar-expand-md navbar-toggleable-md navbar-light border-bottom box-shadow p-0">
+                    
+
+<button class="navbar-toggler bg-white" type="button" data-toggle="collapse" data-target=".navbar-collapse" aria-controls="navbarSupportedContent"
+        aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+</button>
+
+<div class="navbar-collapse collapse d-md-inline-flex flex-md-row-reverse">
+    <ul id="menuPUI" class="navbar-nav flex-grow-1">
+        <li class="nav-item pl-3 mt-3">
+            <a class="nav-link text-white nav-itemA" href="/Mediador">Distribuidores de seguros y reaseguros</a>
+        </li>
+        <li class="nav-item pl-3">
+            <a class="nav-link text-white nav-itemA" href="/Mediador/AltosCargos">Buscador de altos cargos</a>
+        </li>
+        <li class="nav-item pl-3">
+            <a class="nav-link text-white nav-itemA" href="/Mediador/ResponsablesDistribucion">Buscador de Responsables de Distribuci&#xF3;n de Entidades aseguradoras y reaseguradoras</a>
+        </li>
+        <li class="nav-item pl-3 mb-3">
+            <a class="nav-link text-white nav-itemA" href="/Mediador/MediadoresEEE">Mediadores del Espacio Econ&#xF3;mico Europeo que operan en Espa&#xF1;a</a>
+        </li>
+        <li class="nav-item pl-3">
+            <a class="nav-link text-white nav-itemA" href="/AltasBajasMediadores">Altas / Bajas Mediadores</a>
+        </li>
+    </ul>
+</div>
+                </nav>
+                <div class="pl-3 mt-3">
+                    <button type="button" id="btnAyuda" class="btn btn-red btn-circle mr-2" data-toggle="modal" data-target="#fm-modal-grid">
+                        <i class="fa fa-question" aria-hidden="true"></i>
+                    </button>
+                    <a href="https://www.sededgsfp.gob.es/es/paginas/ConsultasIncidencias.aspx" target="_blank" class="btn btn-red btn-circle"><i class="fa fa-envelope" aria-hidden="true"></i></a>
+                </div>
+            </div>
+            <div class="col-12 col-lg-10">
+
+
+
+<div id="containerBuscador" class="row">
+    <div class="col">
+
+        <h5 class="tituloSede">Criterios de b&#xFA;squeda distribuidores de seguros</h5>
+
+        <form id="formBusqMediadores">
+
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col-md-6">
+                        <label for="cmbOperadorIdentificador">Acreditaci&#xF3;n</label>
+                        <div>
+                            <select class="form-control d-inline-block col-sm-5" data-val="true" data-val-required="The OperadorIdentificador field is required." id="cmbOperadorIdentificador" name="OperadorIdentificador"><option value="1">Que empiece por</option>
+<option value="2">Que termine por</option>
+<option value="3">Que contenga</option>
+<option selected="selected" value="4">Igual que</option>
+</select>
+                            <input class="form-control d-inline-block col-sm-5 ml-0 ml-sm-3" id="Identificador" name="Identificador" type="text" value="" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="cmbOperadorClaveRegistro">Clave Inscripci&#xF3;n Registro</label>
+                        <div>
+                            <select class="form-control d-inline-block col-sm-5" data-val="true" data-val-required="The OperadorClaveRegistro field is required." id="cmbOperadorClaveRegistro" name="OperadorClaveRegistro"><option value="1">Que empiece por</option>
+<option value="2">Que termine por</option>
+<option value="3">Que contenga</option>
+<option selected="selected" value="4">Igual que</option>
+</select>
+                            <input class="form-control d-inline-block col-sm-5 ml-0 ml-sm-3" id="ClaveRegistro" name="ClaveRegistro" type="text" value="" />
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col-md-6 noRD">
+                        <label for="cmbOperadorNombreRazonSocial">Nombre / Raz&#xF3;n Social</label>
+                        <div>
+                            <select class="form-control d-inline-block col-sm-5" data-val="true" data-val-required="The OperadorNombreRazonSocial field is required." id="cmbOperadorNombreRazonSocial" name="OperadorNombreRazonSocial"><option value="1">Que empiece por</option>
+<option value="2">Que termine por</option>
+<option selected="selected" value="3">Que contenga</option>
+<option value="4">Igual que</option>
+</select>
+                            <input class="form-control d-inline-block col-sm-5 ml-0 ml-sm-3" id="NombreRazonSocial" name="NombreRazonSocial" type="text" value="" />
+                        </div>
+                    </div>
+
+                    <div class="col-md-6">
+                        <label for="cmbTiposMediador">Clase de Distribuidor</label>
+                        <select class="form-control d-block col-sm-5" id="cmbTiposMediador" name="TipoMediador"><option value="">Todos/as</option>
+<option value="AF">Agente de seguros vinculado Persona F&#xED;sica</option>
+<option value="AJ">Agente de seguros vinculado Persona Juridica</option>
+<option value="XF">Agente exclusivo PF</option>
+<option value="XJ">Agente exclusivo PJ</option>
+<option value="RF">Corredor de Reaseguros RF</option>
+<option value="RJ">Corredor de Reaseguros RJ</option>
+<option value="F ">Corredor de Seguros PF</option>
+<option value="J ">Corredor de Seguros PJ</option>
+<option value="OV">Operador de banca-seguros Vinculados</option>
+<option value="OE">Operador de banca-seguros Exclusivos</option>
+</select>
+                    </div>
+
+                    
+                </div>
+            </div>
+
+
+            <div class="col">
+                <div class="form-group row">
+                    <div class="col-12 col-sm-6">
+                        <label for="cmbTiposOrganismos">Organismo Origen</label>
+                        <select class="form-control d-block col-sm-5" id="cmbTiposOrganismos" name="OrganismoOrigen"><option value="">Todos/as</option>
+<option value="00">DGSFP</option>
+<option value="01">Andalucia</option>
+<option value="02">Arag&#xF3;n</option>
+<option value="03">Asturias</option>
+<option value="04">Baleares</option>
+<option value="05">Canarias</option>
+<option value="06">Cantabria</option>
+<option value="07">Castilla la Mancha</option>
+<option value="08">Castilla y Le&#xF3;n</option>
+<option value="09">Catalu&#xF1;a</option>
+<option value="18">Ceuta</option>
+<option value="10">Comunidad Valenciana</option>
+<option value="11">Extremadura</option>
+<option value="12">Galicia</option>
+<option value="13">Madrid</option>
+<option value="19">Melilla</option>
+<option value="14">Murcia</option>
+<option value="15">Navarra</option>
+<option value="16">Pa&#xED;s Vasco</option>
+<option value="17">Rioja (La)</option>
+</select>
+                    </div>
+                </div>
+            </div>
+
+
+            <div class="d-flex justify-content-center mt-5">
+                <input type="button" class="btn btn-rrpp w-em-15 mr-3" value="Buscar" onclick="permutarReloadGrid();" />
+                <input type="reset" class="btn btn-secondary w-em-15" value="Limpiar" />
+            </div>
+
+        </form>
+
+    </div>
+</div>
+
+
+<div id="containerResultBusqueda" class="row" style="display:none;">
+
+<div class="col">
+    <h5 class="tituloSede">Resultados de la b&#xFA;squeda</h5>
+
+    <div class="containerGrid position-relative px-2 mt-3" data-idgrid="jqGrid">
+        <table id="jqGrid">
+            <caption>Resultados de la b&#xFA;squeda</caption>
+            <tr><th scope="col"></th></tr>
+        </table>
+        <div id="jqGridPager"></div>
+    </div>
+
+    <div class="d-flex justify-content-end mr-1 mt-3">
+        <button class="btn btn-success mr-2" onclick="exportarGridExcel('jqGrid', 'Busqueda_Mediadores');">
+            <i class="fa fa-file-excel-o" aria-hidden="true"></i> Exportar a Excel
+        </button>
+        <button class="btn btn-rrpp" onclick="exportarGridPdf('jqGrid', 'Busqueda_Mediadores', LANDSCAPE);">
+            <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Exportar a PDF
+        </button>
+    </div>
+
+    <div class="d-flex justify-content-center mt-4">
+        <button class="btn btn-rrpp w-em-15" onclick="volverBuscador();">
+            <i class="fa fa-search" aria-hidden="true"></i> Volver al buscador
+        </button>
+    </div>
+</div></div>
+
+<div id="containerDetalle" class="row" style="display:none;">
+</div>
+
+
+
+
+</div>
+        </div>
+    </div>
+
+    <div id="loader" class="loader loader-default" data-text=""></div>
+
+    <div class="modal fade" id="fm-modal-grid" tabindex="-1" role="dialog" aria-labelledby="fm-modal-grid" aria-hidden="true">
+        <div class="modal-dialog modal-xl">
+            <div class="modal-content" id="modalContentAyuda">
+
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $('#menuGeneral li a').each(function () {
+                var baseUrl = $(this).attr("href").endsWith("/") ? $(this).attr("href").slice(0, -1) : $(this).attr("href");
+
+                $(this).attr("href", baseUrl + '/?culture=es-ES&ui-culture=es-ES');
+            });
+
+            $('#menuPUI li a').each(function () {
+                var baseUrl = $(this).attr("href").endsWith("/") ? $(this).attr("href").slice(0, -1) : $(this).attr("href");
+
+                $(this).attr("href", baseUrl + '/?culture=es-ES&ui-culture=es-ES');
+            });
+
+            marcarOpcionMenuSeleccionada();
+        });
+
+    </script>
+</body>
+</html>
+

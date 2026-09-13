@@ -1,0 +1,137 @@
+[
+ {
+  "file": "data/raw/dgsfp/rrpp_home_2026-09-13.html",
+  "bytes": 40456,
+  "sha256": "9d2fafe1da39014c59b4528f3139cb6860a767bcaace40bae1429a5a5e373890"
+ },
+ {
+  "file": "data/raw/dgsfp/site.min.js",
+  "bytes": 9339,
+  "sha256": "5023e6f4d8bdef0efd623d95e8986d8756ea584848564e6bb68ff1571f81e84a"
+ },
+ {
+  "file": "data/raw/dgsfp/rrpp_ayuda.html",
+  "bytes": 30614,
+  "sha256": "28c22b962c361d0883d1378d187b4b6a8f67dba3bffaf5c90e0e51c7e611062e"
+ },
+ {
+  "file": "data/raw/dgsfp/rrpp_details/_capture_log.jsonl",
+  "bytes": 1406417,
+  "sha256": "ba6c5653cd9e7879b6cda2e0859d988a227fc649fe7eaa9997f52770b687bf35"
+ },
+ {
+  "file": "data/raw/dgsfp/rrpp_pensions/_capture_log_fondo.jsonl",
+  "bytes": 0,
+  "sha256": "e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855"
+ },
+ {
+  "file": "data/raw/dgsfp/rrpp_pensions/_capture_log_plan.jsonl",
+  "bytes": 637736,
+  "sha256": "86061eb5eabf380898f5d588afa2a96c81f046ef7bc588de3268118fbdca9e4a"
+ },
+ {
+  "file": "data/raw/dgsfp/rrpp_gestoras.json",
+  "bytes": 6050,
+  "sha256": "ea78a19bffb2eb8f2d8fe4374b60fefb6f53754224ecd17d22c49e57b90c9137"
+ },
+ {
+  "file": "data/raw/dgsfp/rrpp_fondos.json",
+  "bytes": 235157,
+  "sha256": "d234c49425b2f4f4130b198afaf4743daba4583bb07a21d357026da46725b650"
+ },
+ {
+  "file": "data/raw/dgsfp/rrpp_depositarias.json",
+  "bytes": 2497,
+  "sha256": "c4b97092be92b8f1cf40ec8ce77eac3a0fb15eab0f98ce2e04bdc2cc1f06b33c"
+ },
+ {
+  "file": "data/raw/dgsfp/rrpp_mediadores.json",
+  "bytes": 10665966,
+  "sha256": "a515fc9839ff4277abbbf09ee47ea157453d156cd59dd6962b7efc7b0f6490e9"
+ },
+ {
+  "file": "data/raw/dgsfp/rrpp_pensions/F0021.html",
+  "bytes": 8594,
+  "sha256": "79ea598c73f4345bac8d9a65cc99234f4ae6eadb1c0087575dfd77664ec751a4"
+ },
+ {
+  "file": "data/raw/bde/lista-ic-es.csv",
+  "bytes": 256551,
+  "sha256": "b504b6ac1634dc54b9c15ee029fca93e3a7513df967579d5d7b08068276d377b"
+ },
+ {
+  "file": "data/raw/bde/lista-ic-de.csv",
+  "bytes": 484127,
+  "sha256": "f736262c399871cc536f54b96ccfe3b6824d26fc97c9fb258f42950355d9ba9b"
+ },
+ {
+  "file": "data/raw/bde/lista-ic-fr.csv",
+  "bytes": 651694,
+  "sha256": "74a9c5b111dd31da9fb632c3b40ef3619e25a48850b4754cf64abe736e544f68"
+ },
+ {
+  "file": "data/raw/bde/lista-ic-lu.csv",
+  "bytes": 284357,
+  "sha256": "50cc33c3bfcad2dabf3357aa08cc3fc0a8adb8c0266490ad8254a6b0371300cf"
+ },
+ {
+  "file": "data/raw/bde/lista-ic-ie.csv",
+  "bytes": 210226,
+  "sha256": "22eba3ecf89bdca0e4c99da1e3dc8ca70d0cc59403b0f3ae4838a6cca59bace5"
+ },
+ {
+  "file": "data/raw/bde/lista-ic-be.csv",
+  "bytes": 372508,
+  "sha256": "5cc9d9bc22ae41b14b16ba26bd0d64b224326bb475bef23356812db3ede97408"
+ },
+ {
+  "file": "data/raw/bde/lista-ic-pt.csv",
+  "bytes": 94406,
+  "sha256": "13b2a4d0fa44348bec1d15d10cbc6e945b56730cc327168d31b5b00894350ef7"
+ },
+ {
+  "file": "data/raw/bde/lista-pf-es.csv",
+  "bytes": 1229069,
+  "sha256": "7e8b70a4a312710325076973ca4f712edbb351009046f8b8e8a1ab4df97b64b3"
+ },
+ {
+  "file": "data/raw/eiopa/eiopa_register.csv",
+  "bytes": 11352067,
+  "sha256": "8431647b41893e6c6431c19064445b541c56ae082d41ce22bb38580eb604995a"
+ },
+ {
+  "file": "data/raw/gleif/gleif_records.jsonl",
+  "bytes": 122209,
+  "sha256": "272a60203901016637d4df55bdb25bf674fdced39e007c478f05093493fdc206"
+ },
+ {
+  "file": "data/derived/dgsfp_rrpp_entities.jsonl",
+  "bytes": 2027753,
+  "sha256": "eaf7ce199ba2c997cbf78e922a7ac79962a6af4d7932aa13463128f85ebcf89e"
+ },
+ {
+  "file": "data/derived/g0a_checks.jsonl",
+  "bytes": 160291,
+  "sha256": "aa0c9079ea8cdf267a5d70ffb2811b3087116cf1dcf76534555f495ce29d2e76"
+ },
+ {
+  "file": "data/derived/g0b1_checks.jsonl",
+  "bytes": 72172,
+  "sha256": "0fe2850dca0c4180eb61c8f2006b70ba2402dee655929cdbad72e60c3b9384b5"
+ },
+ {
+  "file": "data/derived/g0b2_checks.jsonl",
+  "bytes": 1323995,
+  "sha256": "f91d2602055d9c5214255bd2a9d303c37086f793c9cb14da22304e59dd66cec4"
+ },
+ {
+  "file": "data/derived/g0c_checks.jsonl",
+  "bytes": 8188,
+  "sha256": "6a68904c04be28172f09b1ccc60ea38a5514b3bfa4088f79e127e35112bcfd2e"
+ },
+ {
+  "file": "evidence/evidence-ledger.json",
+  "bytes": 156854,
+  "sha256": "9182ea06318c0ae28bf15a55d4410c26945dca9dace4582e9933646d5181134a"
+ }
+]

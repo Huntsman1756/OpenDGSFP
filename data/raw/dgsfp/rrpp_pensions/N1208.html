@@ -1,0 +1,156 @@
+
+
+
+<div class="col">
+    <h5 class="tituloSede">Detalle del plan</h5>
+
+    <div class="row mt-3">
+        <div class="col">
+            <ul class="nav nav-tabs">
+                <li class="nav-item">
+                    <a href="#tabDatosGenerales" class="nav-link active" data-toggle="tab">Datos generales</a>
+                </li>
+                <li class="nav-item">
+                    <a href="#tabListadoPromotores" class="nav-link" data-toggle="tab">Promotores</a>
+                </li>
+                    <li class="nav-item">
+                        <a href="#tabListadoFondosplanes" class="nav-link" data-toggle="tab">Fondos</a>
+                    </li>
+
+            </ul>
+
+            <div class="tab-content p-3">
+                <div class="tab-pane active" id="tabDatosGenerales" role="tabpanel">
+
+
+<div class="row">
+    <div class="col-sm-4">
+        <label class="label-literal">Clave:</label>
+        <label aria-label="Clave" class="label-value">N1208</label>
+    </div>
+    <div class="col-sm-4">
+        <label class="label-literal">Denominaci&#xF3;n:</label>
+        <label aria-label="Denominación" class="label-value">PLAN DE PENSIONES GRUPO AJUNTAMENT DE BARCELONA</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <label class="label-literal">Modalidad:</label>
+        <label aria-label="Modalidad" class="label-value">Empleo aportaci&#xF3;n definida</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <label class="label-literal">Fecha Admisi&#xF3;n:</label>
+        <label aria-label="Fecha de admisión" class="label-value">15/05/1997</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <label class="label-literal">Situaci&#xF3;n:</label>
+        <label aria-label="Situacion" class="label-value">Activa / Autorizado</label>
+    </div>
+</div>
+<div class="row">
+    <div class="col">
+        <label class="label-literal">Es Plan Simplificado:</label>
+        <label aria-label="Situacion" class="label-value">NO</label>
+    </div>
+</div>
+
+<div class="row">
+    <div class="col">
+        <label class="label-literal">Tipo Plan Simplificado:</label>
+        <label aria-label="Situacion" class="label-value"></label>
+    </div>
+</div>                </div>
+
+                <div class="tab-pane" id="tabListadoPromotores" role="tabpanel">
+                    <div class="d-flex justify-content-center">
+
+
+<div class="col-12 col-sm-8 col-md-6">
+    <div class="containerGrid mt-3" data-idgrid="jqGridPromotor">
+            <table id="jqGridPromotor">
+                <caption>Listado de promotores</caption>
+                <tr><th scope="col"></th></tr>
+            </table>
+            <div id="jqGridPagerPromotor"></div>
+            <div class="d-flex justify-content-end mr-1 mt-3">
+                <button class="btn btn-success mr-2" onclick="exportarGridExcel('jqGridPromotor', 'Planes_Promotores_DGSFP');">
+                    <i class="fa fa-file-excel-o" aria-hidden="true"></i> Exportar a Excel
+                </button>
+                <button class="btn btn-rrpp" onclick="exportarGridPdf('jqGridPromotor', 'Planes_Promotores_DGSFP', LANDSCAPE);">
+                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Exportar a PDF
+                </button>
+            </div>
+    </div>
+</div>
+
+
+
+    <script type="text/javascript">
+        var data = [{"Nombre Promotor":"AJUNTAMENT DE BARCELONA"},{"Nombre Promotor":"CONSORCI DE BIBLIOTEQUES"},{"Nombre Promotor":"INSTITUT MUNICIPAL DE PERSONES AMB DISMINUCIO"},{"Nombre Promotor":"INSTITUT MUNICIPAL DEL PAISATGE URBA I LA QUALITAT DE VIDA"},{"Nombre Promotor":"INSTITUT MUNICIPAL D\u0027INFORMATICA"},{"Nombre Promotor":"INSTITUT MUNICIPAL D\u0027URBANISME DE BARCELONA"},{"Nombre Promotor":"INSTITUT MUNICIPAL D\u0027HISENDA DE BARCELONA"},{"Nombre Promotor":"PATRONAT MUNICIPAL DE L\u0027HABITATGE"},{"Nombre Promotor":"AGENCIA DE SALUT PUBLICA"},{"Nombre Promotor":"INSTITUT MUNICIPAL DE MERCATS"},{"Nombre Promotor":"INSTITUT DE CULTURA DE BARCELONA"},{"Nombre Promotor":"INSTITUT MUNICIPAL D\u00B4EDUCACI\u00D3 DE BARCELONA"},{"Nombre Promotor":"INSTITUT BARCELONA ESPORTS "},{"Nombre Promotor":"PROEIXAMPLE"},{"Nombre Promotor":"PRO NOU BARRIS S.A"},{"Nombre Promotor":"22 ARROBA BCN, S.A."},{"Nombre Promotor":"AGENCIA DE PROMOCI\u00D3 DEL CARMEL I ENTORNS, S.A."},{"Nombre Promotor":"CONSORCI MERCAT DE LES FLORS/CENTRE DE LES ARTS DE MOVIMENT"},{"Nombre Promotor":"INSTITUT MUNICIPAL DE SERVEIS SOCIALS DE BARCELONA"},{"Nombre Promotor":"CONSORCI DE L\u0027AUDITORI I L\u0027ORQUESTRA"},{"Nombre Promotor":"CONSORCI DEL MUSEU DE CIENCES NATURALS DE BARCELONA"},{"Nombre Promotor":"FUNDACI\u00D3 MUSEU PICASSO"},{"Nombre Promotor":"AGENCIA LOCAL D\u00B4ENERGIA DE BARCELONA"}];
+        loadGridPromotores(data);
+    </script>
+                    </div>
+                </div>
+                    <div class="tab-pane" id="tabListadoFondosplanes" role="tabpanel">
+                        <div class="d-flex justify-content-center">
+
+
+<div class="col-12 col-sm-8">
+    <div class="containerGrid mt-3" data-idgrid="jqGridFondosplan">
+            <table id="jqGridFondosplan">
+                <caption>Fondos</caption>
+                <tr><th scope="col"></th></tr>
+            </table>
+            <div id="jqGridPagerFondos"></div>
+            <div class="d-flex justify-content-end mr-1 mt-3">
+                <button class="btn btn-success mr-2" onclick="exportarGridExcel('jqGridFondosplan', 'Planes_FondosPlanes_DGSFP');">
+                    <i class="fa fa-file-excel-o" aria-hidden="true"></i> Exportar a Excel
+                </button>
+                <button class="btn btn-rrpp" onclick="exportarGridPdf('jqGridFondosplan', 'Planes_FondosPlanes_DGSFP', LANDSCAPE);">
+                    <i class="fa fa-file-pdf-o" aria-hidden="true"></i> Exportar a PDF
+                </button>
+            </div>
+    </div>
+</div>
+
+
+
+    <script type="text/javascript">
+        var data = [{"fondo":"F0424","denominacionFondo":"AJUNTAMENT DE BARCELONA, FONDO DE PENSIONES"}];
+        loadGridFondosplanes(data);
+    </script>
+                        </div>
+                    </div>
+            </div>
+
+
+            <div class="d-flex justify-content-center  mt-5">
+                <button class="btn btn-rrpp w-em-15 mr-3" onclick="volverBuscador();">
+                    <i class="fa fa-search" aria-hidden="true"></i> Volver al buscador
+                </button>
+
+                <button class="btn btn-secondary w-em-15" onclick="volverResultados()">
+                    <i class="fa fa-reply" aria-hidden="true"></i> Volver a resultados
+                </button>
+            </div>
+
+        </div>
+    </div>
+
+</div>
+
+
+<script type="text/javascript">
+
+    $('a[data-toggle="tab"]').on('shown.bs.tab', function (e) {
+        resizeGrids();
+    });
+
+</script>
