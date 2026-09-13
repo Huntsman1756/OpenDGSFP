@@ -105,10 +105,15 @@ CI uses Python 3.11. See `docs/REPRODUCIBILITY.md` for the reproducibility contr
 | [`docs/gates/G0.md`](docs/gates/G0.md) | Frozen feasibility/source-access gate |
 | [`docs/gates/V0.1.md`](docs/gates/V0.1.md) | Frozen v0.1 identity/provenance contract |
 | [`docs/UPSTREAM.md`](docs/UPSTREAM.md) | Donor relationship and upstream contribution policy |
+| [`docs/ROADMAP.md`](docs/ROADMAP.md) | Evidence-based direction and deferred verticals |
 | [`GOVERNANCE.md`](GOVERNANCE.md) | Maintainer model and decision/release policy |
-| [`CONTRIBUTING.md`](CONTRIBUTING.md) | Contribution rules and development workflow |
+| [`CONTRIBUTING.md`](CONTRIBUTING.md) | Development and contribution workflow |
+| [`CHANGELOG.md`](CHANGELOG.md) | Development milestones and release history |
 | [`SECURITY.md`](SECURITY.md) | Vulnerability-reporting and security scope |
+| [`CODE_OF_CONDUCT.md`](CODE_OF_CONDUCT.md) | Participation and technical-discussion expectations |
+| [`SUPPORT.md`](SUPPORT.md) | Support boundaries and issue-reporting guidance |
 | [`THIRD_PARTY_NOTICES.md`](THIRD_PARTY_NOTICES.md) | Donor attribution and official-data reuse terms |
+| [`CITATION.cff`](CITATION.cff) | Software citation metadata |
 
 ## Repository layout
 
