@@ -1,0 +1,54 @@
+name: Feature request
+description: Propose a bounded capability that fits the evidence-first project model.
+title: "feat: "
+labels: []
+body:
+  - type: textarea
+    id: problem
+    attributes:
+      label: Problem to solve
+      description: Describe the concrete user/research problem, not only the desired implementation.
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Evidence / source basis
+      description: If this touches identity or regulatory semantics, cite the relevant source/specification and identifiers.
+  - type: textarea
+    id: proposal
+    attributes:
+      label: Proposed scope
+      description: What is the smallest useful change?
+    validations:
+      required: true
+  - type: dropdown
+    id: layer
+    attributes:
+      label: Layer
+      options:
+        - Canonical model / identity
+        - Source loader / provenance
+        - Derived export / schema
+        - Validation / tests
+        - Documentation / governance
+        - Consumer interface (future)
+        - Upstream donor contribution
+    validations:
+      required: true
+  - type: textarea
+    id: reuse
+    attributes:
+      label: Existing OSS / upstream reuse
+      description: Is there an existing project, donor feature or standard that should be reused instead of building this from scratch?
+  - type: checkboxes
+    id: scope
+    attributes:
+      label: Scope checks
+      options:
+        - label: The proposal does not require fuzzy/name-based canonical identity.
+          required: true
+        - label: I have considered whether this belongs upstream rather than only in OpenDGSFP.
+          required: true
+        - label: I understand that identity/provenance semantic changes require a contract update before code.
+          required: true
