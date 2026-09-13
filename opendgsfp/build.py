@@ -131,6 +131,7 @@ def build_dataset(root=ROOT):
                            midx, "2026-09-13", "gleif_harvest/0.1")
 
     # ---------------- 1. DGSFP universe ----------------
+    e_lei_pending = {}        # E clave -> (lei, assertion_id); subject decided later
     for e in dgsfp:
         clave, tipo = e["clave"], e["tipo"]
         prov = dict(e["source"])
@@ -163,8 +164,14 @@ def build_dataset(root=ROOT):
             a_lei = M.make_assertion(subj, "PUBLISHES_IDENTIFIER",
                                      {"scheme": M.NS_LEI, "value": lei}, prov)
             ent["source_assertions"].append(a_lei)
-            add_lei(ent, lei, a_lei["assertion_id"])
-        if tipo in ("E", "L"):
+            # For E records the published LEI may refer to the home
+            # undertaking (proven when it equals the ENTIDAD MATRIZ LEI), not
+            # to the branch presence — subject is decided in section 4.
+            if tipo == "E":
+                e_lei_pending[clave] = (lei, a_lei["assertion_id"])
+            else:
+                add_lei(ent, lei, a_lei["assertion_id"])
+        if tipo in ("E", "L"):  # noqa: E501 - home-country assertion for E/L
             a_hc = M.make_assertion(subj, "PUBLISHES_HOME_COUNTRY",
                                     {"pais_origen": e.get("pais_origen") or None,
                                      "iso": pais_to_iso(e.get("pais_origen"))}, prov)
@@ -221,14 +228,20 @@ def build_dataset(root=ROOT):
         log_merge(ent, "SHARED_DGSFP_KEY", f"dgsfp:clave:{sup}",
                   [a_row["assertion_id"]])
         if lei:
-            prior = _lei_of(ent)
-            if not prior or lei in prior:
-                add_lei(ent, lei, a_row["assertion_id"])
-            else:
-                # divergent LEI on the same register record: keep it in the
-                # assertion (evidence) but out of canonical identifiers until
-                # the subject is determined (see section 4 for branches).
+            if sup.startswith("E"):
+                # For branch rows the LEI subject is undetermined until the
+                # parent is resolved (it may be the home undertaking's LEI or
+                # a branch-establishment LEI) — decided in section 4.
                 bde_lei_pending[ent["entity_id"]] = (lei, a_row["assertion_id"])
+            else:
+                prior = _lei_of(ent)
+                if not prior or lei in prior:
+                    add_lei(ent, lei, a_row["assertion_id"])
+                else:
+                    # divergent LEI on the same register record: kept in the
+                    # assertion (evidence) but out of canonical identifiers
+                    # until the subject is determined.
+                    bde_lei_pending[ent["entity_id"]] = (lei, a_row["assertion_id"])
         add_rel(M.make_relation(
             "DGSFP_KEY_BDE_SUPERVISOR_CODE_EXACT",
             [{"entity_id": ent["entity_id"],
@@ -351,6 +364,7 @@ def build_dataset(root=ROOT):
 
     for eid, matriz in e_matriz.items():
         branch = entities[eid]
+        clave = eid.rsplit(":", 1)[-1]
         cc = matriz[:2].lower()
         rows, prov_h = bde_home_list(cc)
         hits = [h for h in rows if h.get("CÓDIGO EUROPEO", "").strip() == matriz]
@@ -378,8 +392,12 @@ def build_dataset(root=ROOT):
              "tipo_de_seguro": h.get("TIPO DE SEGURO") or None,
              "lei": plei or None}, prov_h)
 
+        # the branch (presence node) and the home undertaking (legal person)
+        # are always distinct entities — never merged.
         parent = by_lei.get(plei) if plei else None
-        if parent is None:
+        if parent is None or parent is branch:
+            # parent is branch is unreachable while E-ficha LEIs are deferred,
+            # but a branch must never resolve to itself — create a fresh node.
             parent = M.empty_entity("INSURANCE_UNDERTAKING")
             parent["source_assertions"].append(a_h)
             parent["registrations"].append(
@@ -387,9 +405,11 @@ def build_dataset(root=ROOT):
                  "register_type": f"IC_LIST_{cc.upper()}", "situacion": None,
                  "assertion": a_h["assertion_id"]})
             _add_ident(parent, M.NS_BDE_EU, matriz, a_h["assertion_id"], cc.upper())
+            if plei:
+                _add_ident(parent, M.NS_LEI, plei, a_h["assertion_id"])
             register(parent)
             if plei:
-                add_lei(parent, plei, a_h["assertion_id"])
+                by_lei[plei] = parent
         else:
             if a_h["assertion_id"] not in {a["assertion_id"]
                                            for a in parent["source_assertions"]}:
@@ -400,34 +420,48 @@ def build_dataset(root=ROOT):
                      "assertion": a_h["assertion_id"]})
             _add_ident(parent, M.NS_BDE_EU, matriz, a_h["assertion_id"], cc.upper())
             if plei:
+                _add_ident(parent, M.NS_LEI, plei, a_h["assertion_id"])
                 log_merge(parent, "SHARED_LEI", f"lei:{plei}",
                           [a_h["assertion_id"]])
 
-        same_legal_person = parent is branch
-        if same_legal_person:
-            # branch ficha published the home undertaking's LEI: one legal
-            # person, two registrations. No self-edge.
-            branch["diagnostics"].append(
-                {"kind": "BRANCH_FICHA_PUBLISHES_HOME_LEI", "lei": plei,
-                 "note": "DGSFP E-ficha LEI equals resolved parent LEI — "
-                         "branch and home are the same legal person"})
-        else:
-            add_rel(M.make_relation(
-                "BRANCH_OF",
-                [{"entity_id": eid}, {"entity_id": parent["entity_id"]}],
-                "EXACT", ["BDE_PARENT_CODE"] + (["LEI"] if plei else []),
-                [a_par["assertion_id"], a_h["assertion_id"]],
-                "branch -> home undertaking"))
-        # single-endpoint edge when the resolution lands on the same legal
-        # person (branch ficha published the home LEI); two endpoints otherwise
-        endpoints = ([{"entity_id": eid,
-                      "identifier": f"bde:european_code:{cc.upper()}:{matriz}"}]
-                     if same_legal_person else
-                     [{"entity_id": eid,
-                       "identifier": f"bde:european_code:{cc.upper()}:{matriz}"},
-                      {"entity_id": parent["entity_id"]}])
+        # classify the DGSFP-published LEI by subject (deferred from section 1)
+        pending = e_lei_pending.pop(clave, None)
+        if pending:
+            flei, faid = pending
+            if flei == plei:
+                # the E-ficha publishes the home undertaking's LEI — evidence
+                # for the link, not an identifier of the branch node.
+                a_hl = M.make_assertion(
+                    {"scheme": M.NS_DGSFP, "value": clave},
+                    "PUBLISHES_HOME_UNDERTAKING_LEI", {"lei": flei},
+                    next(a["provenance"] for a in branch["source_assertions"]
+                         if a["assertion_id"] == faid))
+                branch["source_assertions"].append(a_hl)
+                di = _add_ident(parent, M.NS_LEI, plei, None)
+                if faid not in di["asserted_by"]:
+                    di["asserted_by"].append(faid)
+                branch["diagnostics"].append(
+                    {"kind": "BRANCH_FICHA_PUBLISHES_HOME_LEI", "lei": flei})
+            else:
+                # different from the home LEI: DGSFP asserts it on the branch
+                # record — kept as the branch's own identifier.
+                _add_ident(branch, M.NS_LEI, flei, faid)
+                branch["diagnostics"].append(
+                    {"kind": "BRANCH_LEI_DIFFERS_FROM_PARENT",
+                     "branch_lei": flei, "home_lei": plei or None})
+
         add_rel(M.make_relation(
-            "BRANCH_PARENT_CODE_RESOLVES_HOME_ENTITY", endpoints,
+            "BRANCH_OF",
+            [{"entity_id": eid}, {"entity_id": parent["entity_id"]}],
+            "EXACT",
+            ["BDE_PARENT_CODE"] + (["LEI"] if plei else []),
+            [a_par["assertion_id"], a_h["assertion_id"]],
+            "branch -> home undertaking"))
+        add_rel(M.make_relation(
+            "BRANCH_PARENT_CODE_RESOLVES_HOME_ENTITY",
+            [{"entity_id": eid,
+              "identifier": f"bde:european_code:{cc.upper()}:{matriz}"},
+             {"entity_id": parent["entity_id"]}],
             "EXACT", ["BDE_PARENT_CODE"],
             [a_par["assertion_id"], a_h["assertion_id"]],
             "ENTIDAD MATRIZ resolves to one row in the home-country IC list"))
@@ -450,32 +484,44 @@ def build_dataset(root=ROOT):
                     "EXACT", ["LEI"], [a_h["assertion_id"], eiopa_aid],
                     "home-list row LEI equals EIOPA home undertaking LEI"))
 
+    # E records whose parent could not be resolved: the ficha-published LEI is
+    # the only claim available, so it stays on the branch node.
+    for clave, (flei, faid) in e_lei_pending.items():
+        ent = by_clave.get(clave)
+        if ent is not None:
+            add_lei(ent, flei, faid)
+
     # divergent BdE-ES LEIs whose subject could not be determined
     for eid, (lei, aid) in bde_lei_pending.items():
         ent = entities.get(eid)
         if ent is None:
             continue
         leis = _lei_of(ent)
-        if lei in leis:
-            continue
         parent_leis = set()
         for r in relations.values():
-            if (r["relation_type"] == "BRANCH_PARENT_CODE_RESOLVES_HOME_ENTITY"
+            if (r["relation_type"] == "BRANCH_OF"
                     and r["endpoints"][0]["entity_id"] == eid):
-                # two endpoints -> distinct parent entity; one -> same subject
-                peid = (r["endpoints"][1]["entity_id"] if len(r["endpoints"]) > 1
-                        else eid)
-                parent_leis |= set(_lei_of(entities.get(peid, {"identifiers": []})))
-        parent_leis |= set(leis)
+                parent_leis |= set(_lei_of(
+                    entities.get(r["endpoints"][1]["entity_id"],
+                                 {"identifiers": []})))
+        if lei in leis:
+            continue  # already an identifier of this entity
         if lei in parent_leis:
-            _add_ident(ent, M.NS_LEI, lei, aid)
+            # BdE asserted the home undertaking's LEI on the branch row
+            peid = next(r["endpoints"][1]["entity_id"]
+                        for r in relations.values()
+                        if r["relation_type"] == "BRANCH_OF"
+                        and r["endpoints"][0]["entity_id"] == eid)
+            di = _add_ident(entities[peid], M.NS_LEI, lei, None)
+            if aid not in di["asserted_by"]:
+                di["asserted_by"].append(aid)
         else:
             ent["conflicts"].append(M.make_conflict(
                 "IDENTIFIER_SUBJECT_UNDETERMINED", M.CL_IDENTIFIER_ASSIGNMENT,
                 [aid], f"BdE lista-ic-es asserts LEI {lei} for this register "
-                       f"key, but DGSFP/other sources identify the subject as "
-                       f"{leis or parent_leis}; subject of {lei} undetermined "
-                       f"(possibly a branch-establishment LEI)"))
+                       f"key, but the home/other sources identify the subject "
+                       f"as {leis or sorted(parent_leis)}; subject of {lei} "
+                       f"undetermined (possibly a branch-establishment LEI)"))
 
     # ---------------- 5. LPS (L entities) ----------------
     ei_by_name = collections.defaultdict(list)
@@ -645,13 +691,10 @@ def build_dataset(root=ROOT):
 
     # ---------------- 8. status + deterministic ordering ----------------
     for ent in entities.values():
-        # an entity merged with a home-undertaking registration is the legal
-        # person itself (e.g. an E-branch whose ficha carries the home LEI):
-        # branch-ness then lives in registrations, not in entity_kind.
-        if (ent["entity_kind"] in ("EEA_BRANCH", "UNDERTAKING")
+        # an L-anchored entity merged with an EIOPA home registration is the
+        # home undertaking itself; its LPS-ness stays in registrations.
+        if (ent["entity_kind"] == "UNDERTAKING"
                 and any(r["register_type"] == "HOME_UNDERTAKING"
-                        or r["register_type"].startswith("IC_LIST_")
-                        and r["register_type"] != "IC_LIST_ES"
                         for r in ent["registrations"])):
             ent["entity_kind"] = "INSURANCE_UNDERTAKING"
         id_conflict = any(c["level"] == M.CL_IDENTITY for c in ent["conflicts"])

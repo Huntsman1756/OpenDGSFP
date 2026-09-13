@@ -2,25 +2,25 @@
   "counts": {
     "by_identity_status": {
       "CONFLICT": 1,
-      "EXACT": 1991,
+      "EXACT": 2008,
       "UNRESOLVED": 1344
     },
     "by_kind": {
-      "EEA_BRANCH": 172,
-      "INSURANCE_UNDERTAKING": 1795,
+      "EEA_BRANCH": 210,
+      "INSURANCE_UNDERTAKING": 1774,
       "REINSURANCE_UNDERTAKING": 19,
       "UNDERTAKING": 1350
     },
     "by_source_coverage": {
-      "MULTI_SOURCE": 554,
+      "MULTI_SOURCE": 571,
       "SOURCE_ONLY": 2782
     },
-    "entities": 3336,
-    "relations": 4317
+    "entities": 3353,
+    "relations": 4322
   },
-  "data_bytes": 13895218,
+  "data_bytes": 13911670,
   "data_file": "opendgsfp-0.1.jsonl",
-  "data_sha256": "71eb2d97e8c37806f66b87853d1b608a46bb1bdabdfa037d9242477463982ce1",
+  "data_sha256": "deeff585c448ce8720bde64a04ed7196e9a10de3384536dd2f1ac675f9a2b514",
   "frozen_inputs": {
     "g0_commit": "42bb59de4925eabcefdca31e211c63e9ae9e4917",
     "g0_tag": "g0",

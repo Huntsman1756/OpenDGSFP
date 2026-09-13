@@ -152,6 +152,44 @@ def test_branch_to_home(ds, ents):
                for c in e245["conflicts"])
 
 
+def test_branch_presence_not_collapsed_into_home(ds, ents):
+    """Every DGSFP E-key remains an addressable EEA_BRANCH node; when the home
+    is resolved, BRANCH_OF links to a *distinct* entity (no self-loops)."""
+    by_clave, _ = ents
+    e_claves = {k for k in by_clave if k.startswith("E")}
+    assert e_claves
+    for k in e_claves:
+        e = by_clave[k]
+        assert e["entity_kind"] == "EEA_BRANCH", k
+        assert any(r["system"] == "DGSFP_RRPP" and r["register_type"] == "E"
+                   for r in e["registrations"])
+        bo = [r for r in ds["relations"]
+              if r["relation_type"] == "BRANCH_OF"
+              and r["endpoints"][0]["entity_id"] == e["entity_id"]]
+        for r in bo:
+            assert r["endpoints"][1]["entity_id"] != e["entity_id"]
+
+
+def test_home_lei_asserted_on_branch_does_not_force_merge(ds, ents):
+    """An E-ficha publishing the *home* LEI is evidence for the link, not an
+    identifier that merges branch and undertaking (E0245/Accelerant)."""
+    by_clave, by_lei = ents
+    e245 = by_clave["E0245"]
+    assert e245["entity_kind"] == "EEA_BRANCH"
+    assert "699400GVF1570ZK5NJ34" not in {
+        i["value"] for i in e245["identifiers"] if i["scheme"] == "lei"}
+    bo = next(r for r in ds["relations"] if r["relation_type"] == "BRANCH_OF"
+              and r["endpoints"][0]["entity_id"] == e245["entity_id"])
+    parent = next(x for x in ds["entities"]
+                  if x["entity_id"] == bo["endpoints"][1]["entity_id"])
+    assert "699400GVF1570ZK5NJ34" in {
+        i["value"] for i in parent["identifiers"] if i["scheme"] == "lei"}
+    # the DGSFP assertion is preserved with explicit subject
+    assert any(a["predicate"] == "PUBLISHES_HOME_UNDERTAKING_LEI"
+               and a["object"]["lei"] == "699400GVF1570ZK5NJ34"
+               for a in e245["source_assertions"])
+
+
 # ---- 7. conflicts preserved --------------------------------------------------
 def test_conflicts_preserved(ds, ents):
     by_clave, _ = ents
