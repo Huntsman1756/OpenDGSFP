@@ -26,9 +26,9 @@ remains subject to its publisher's terms of use.
 
 | Source | Material | Publisher terms |
 |--------|----------|-----------------|
-| DGSFP RRPP | 2,759 insurer detail pages (`data/raw/dgsfp/rrpp_details/`) | Dirección General de Seguros y Fondos de Pensiones — public register, ministerio de Economía; reuse per Spanish public-sector information rules (Ley 37/2007 / RD 1495/2011) |
-| Banco de España | IC entity classification lists (`data/raw/bde/lista-ic-*.csv`) | Banco de España — statistical dissemination; attribution required; see bde.es "Aviso legal" |
-| EIOPA | Register of insurance undertakings (`data/raw/eiopa/`) | EIOPA public register; reuse per EIOPA/EU reuse policy |
+| DGSFP RRPP | 2,759 insurer detail pages (`data/raw/dgsfp/rrpp_details/`) | Public-sector register information. Potential reuse is subject to the applicable DGSFP/Ministerio legal notice and the Spanish public-sector information reuse framework, including Ley 37/2007 and RD 1495/2011. OpenDGSFP does not grant additional rights over the captured material. |
+| Banco de España | IC entity classification lists (`data/raw/bde/lista-ic-*.csv`) | BdE statistical reuse terms require preserving integrity/meaning, citing Banco de España as source, indicating the update date when available, and distinguishing own elaboration from raw data — see https://www.bde.es/wbe/en/estadisticas/condiciones-uso/ |
+| EIOPA | Register of insurance undertakings (`data/raw/eiopa/`) | Publicly accessible EIOPA register data. EIOPA's general legal notice permits reproduction subject to attribution and additional conditions for transformed material; the legacy register.eiopa.europa.eu legal notice contains more restrictive language for commercial reuse. OpenDGSFP does not grant any additional rights over this data; commercial redistribution/reuse of captured register material should be verified against the applicable EIOPA terms before use. |
 | GLEIF | LEI records (`data/raw/gleif/`) | GLEIF publishes LEI data under **CC0** |
 
 No personal data is intentionally collected beyond what these official

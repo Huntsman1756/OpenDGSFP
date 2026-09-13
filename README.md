@@ -4,10 +4,11 @@ A read-only, reproducible identity and provenance layer for Spanish
 insurance entities, built over official public registers.
 
 Public sources disagree: names differ between registers, identifiers go
-stale, snapshots lag each other, and ~75% of freedom-of-services operators
-have no published LEI at all. OpenDGSFP does not fabricate a clean master
-database — it preserves evidence, conflicts and documented gaps, and only
-builds canonical identity on **exact official identifiers**.
+stale, snapshots lag each other, and 74.7% of active DGSFP L registrations
+in the frozen snapshot (616/825) do not publish a LEI in RRPP. OpenDGSFP
+does not fabricate a clean master database — it preserves evidence,
+conflicts and documented gaps, and only builds canonical identity on
+**exact official identifiers**.
 
 ## Status
 

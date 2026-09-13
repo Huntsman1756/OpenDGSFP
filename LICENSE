@@ -30,7 +30,8 @@ this repository. It does NOT apply to:
     (see THIRD_PARTY_NOTICES.md — MIT for pipeline code, CC BY 4.0 for
     ontology/SKOS/SHACL/docs), nor to
 
-  * official third-party datasets and captured source material under
-    data/raw/ and data/derived/ (DGSFP, Banco de España, EIOPA, GLEIF).
+  * official third-party source material under data/raw/, and derived
+    datasets under data/derived/ insofar as they incorporate or reproduce
+    third-party source data (DGSFP, Banco de España, EIOPA, GLEIF).
     Those materials remain subject to their publishers' own terms of use.
     See THIRD_PARTY_NOTICES.md, section "Official data sources".
