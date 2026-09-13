@@ -89,7 +89,9 @@ def write_export(ds, out_dir=OUT_DIR, root=None):
         },
     }
     manifest_path = base / "manifest.json"
-    manifest_path.write_text(
-        json.dumps(manifest, ensure_ascii=False, indent=2,
-                   sort_keys=True) + "\n", encoding="utf-8")
+    # write bytes, not text: '\n' must stay LF on every platform (Windows
+    # write_text would translate to CRLF and break byte-reproducibility)
+    manifest_path.write_bytes(
+        (json.dumps(manifest, ensure_ascii=False, indent=2,
+                    sort_keys=True) + "\n").encode("utf-8"))
     return data_path, manifest_path

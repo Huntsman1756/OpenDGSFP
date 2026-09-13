@@ -1,0 +1,30 @@
+name: ci
+
+on:
+  push:
+    branches: [main]
+  pull_request:
+
+jobs:
+  test:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-python@v5
+        with:
+          python-version: "3.11"
+
+      - name: Install test dependencies
+        run: pip install pytest
+
+      - name: Run test suite (G0 invariants + v0.1 contract)
+        run: python -m pytest tests/ -q
+
+      - name: Verify deterministic export reproduces committed golden
+        run: |
+          python -m scripts.build_v01_export
+          git diff --exit-code data/derived/v0.1/ || {
+            echo "::error::derived export is not reproducible from frozen inputs"
+            exit 1
+          }
