@@ -1,0 +1,18 @@
+cff-version: 1.2.0
+title: OpenDGSFP
+message: "If you use OpenDGSFP, cite this repository and the exact tag or commit used so the source snapshot and identity semantics are reproducible."
+type: software
+authors:
+  - name: "OpenDGSFP contributors"
+repository-code: "https://github.com/Huntsman1756/OpenDGSFP"
+license: MIT
+keywords:
+  - insurance
+  - regulation
+  - DGSFP
+  - EIOPA
+  - LEI
+  - GLEIF
+  - entity-resolution
+  - provenance
+  - reproducibility

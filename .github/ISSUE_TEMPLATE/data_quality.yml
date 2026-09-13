@@ -1,0 +1,66 @@
+name: Data quality / source disagreement
+description: Report a reproducible discrepancy between official sources or an identity/provenance issue.
+title: "data: "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        OpenDGSFP preserves contradictions rather than choosing a winner silently. Please provide exact source evidence so the disagreement can be reproduced.
+  - type: input
+    id: identifier
+    attributes:
+      label: Primary identifier
+      description: DGSFP key, LEI, BdE code, EIOPA code or other exact identifier.
+      placeholder: L1522
+    validations:
+      required: true
+  - type: dropdown
+    id: source
+    attributes:
+      label: Source(s)
+      multiple: true
+      options:
+        - DGSFP RRPP
+        - Banco de España / IC lists
+        - EIOPA
+        - GLEIF
+        - Derived OpenDGSFP output
+        - Other official source
+    validations:
+      required: true
+  - type: textarea
+    id: snapshots
+    attributes:
+      label: Snapshot / retrieval context
+      description: Include source dates, retrieval dates, URLs and hashes where available.
+    validations:
+      required: true
+  - type: textarea
+    id: observation
+    attributes:
+      label: Observed disagreement or gap
+      description: State exactly what each source asserts. Avoid conclusions not supported by the evidence.
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected OpenDGSFP representation
+      description: Should this be EXACT, CONFLICT, UNRESOLVED, a candidate relation, or a provenance correction?
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Reproduction / evidence
+      description: Commands, file paths, source excerpts or fixture references sufficient to reproduce the claim.
+    validations:
+      required: true
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I am not asking OpenDGSFP to merge entities solely by name similarity.
+          required: true
+        - label: I have included enough source context to distinguish snapshot lag from identity disagreement.
+          required: true

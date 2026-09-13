@@ -1,0 +1,53 @@
+name: Bug report
+description: Report reproducible software behavior that violates the documented contract.
+title: "bug: "
+labels: []
+body:
+  - type: markdown
+    attributes:
+      value: |
+        Please distinguish a software bug from a source-data disagreement. For regulatory/data-quality discrepancies, use the Data quality template.
+  - type: input
+    id: commit
+    attributes:
+      label: Commit or tag
+      description: Exact OpenDGSFP commit/tag used.
+      placeholder: 96c63b7...
+    validations:
+      required: true
+  - type: textarea
+    id: expected
+    attributes:
+      label: Expected behavior
+      description: What should happen according to the current contract/documentation?
+    validations:
+      required: true
+  - type: textarea
+    id: actual
+    attributes:
+      label: Actual behavior
+      description: What happened instead?
+    validations:
+      required: true
+  - type: textarea
+    id: reproduce
+    attributes:
+      label: Minimal reproduction
+      description: Commands, identifiers and files required to reproduce the problem.
+      render: shell
+    validations:
+      required: true
+  - type: textarea
+    id: evidence
+    attributes:
+      label: Relevant output
+      description: Test failure, traceback, diff or other evidence. Remove secrets/personal data.
+  - type: checkboxes
+    id: checks
+    attributes:
+      label: Checks
+      options:
+        - label: I checked the current documentation and open issues.
+          required: true
+        - label: I have not included credentials, secrets or unnecessary personal data.
+          required: true
