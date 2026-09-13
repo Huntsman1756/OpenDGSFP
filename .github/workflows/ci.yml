@@ -19,7 +19,7 @@ jobs:
         run: pip install pytest
 
       - name: Run test suite (G0 invariants + v0.1 contract)
-        run: python -m pytest -q
+        run: python -m pytest tests/ -q
 
       - name: Verify deterministic export reproduces committed golden
         run: |
