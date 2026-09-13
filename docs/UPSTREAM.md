@@ -52,13 +52,13 @@ Examples include generic GLEIF lifecycle handling, cache correctness, cross-regi
 
 ## Current upstream work
 
-Issue #1 in the donor proposes preserving GLEIF lifecycle/successor metadata currently discarded by the harvester:
+Donor issue #1 proposes preserving GLEIF lifecycle/successor metadata currently discarded by the harvester:
 
 `Preserve GLEIF lifecycle and successor metadata in harvested LEI records`
 
 The proposed scope is intentionally generic: expiration data, successor declarations, relevant legal-entity events, cache migration and an informational governance-report breakdown. It must not infer successor identity where GLEIF does not formally declare it.
 
-A local, unpublished spike exists in the donor submodule worktree while maintainer feedback is pending. It is not part of OpenDGSFP `main`, is not a published fork, and must not be represented as accepted upstream work until the maintainer decides the scope.
+Until an upstream PR is accepted/merged, OpenDGSFP must describe this work as a proposal rather than an upstream capability. Experimental downstream/local spikes are implementation evidence only; they do not change the pinned donor behavior on `main`.
 
 ## Submodule updates
 
