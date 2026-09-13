@@ -70,12 +70,37 @@ def test_raw_integrity_pinned(ds):
 # ---- 3. no fuzzy canonical ---------------------------------------------------
 def test_no_fuzzy_canonical(ds):
     allowed = {"DGSFP_KEY", "LEI", "BDE_PARENT_CODE", "OFFICIAL_BRIDGE", "NONE"}
+    exact_bases = {"SHARED_LEI", "SHARED_DGSFP_KEY",
+                   "SHARED_AUTHORITY_SCOPED_ID", "OFFICIAL_BRIDGE"}
     for r in ds["relations"]:
         assert set(r["resolution_method"]) <= allowed
         assert "NAME" not in str(r["resolution_method"]).upper()
         if r["link_status"] == "EXACT":
             assert r["resolution_method"] != ["NONE"]
             assert r["evidence"], r
+    # EVERY_CANONICAL_MERGE_HAS_EXACT_BASIS: merges are only possible through
+    # merge_into(), which requires an exact basis; every merge event must be
+    # recorded with a basis in the allowed set and a real identifier.
+    presence = {"DGSFP_RRPP", "BDE", "EIOPA"}
+    for e in ds["entities"]:
+        for m in e["merge_basis"]:
+            assert m["basis"] in exact_bases, (e["entity_id"], m)
+            assert m["identifier"] and m["evidence"]
+        systems = ({r["system"] for r in e["registrations"]}
+                   | {o["asserted_by"] for o in e["cross_border_operations"]}
+                   & presence)
+        if len(systems) >= 2:
+            assert e["merge_basis"], \
+                f"multi-source entity without merge basis: {e['entity_id']}"
+    # successor candidates are UNRESOLVED by construction — never canonical
+    for r in ds["relations"]:
+        if r["relation_type"] == "IDENTIFIER_SUCCESSOR_CANDIDATE":
+            assert r["link_status"] == "UNRESOLVED"
+            assert r["resolution_method"] == ["NONE"]
+    # no self-referential edges
+    for r in ds["relations"]:
+        eids = [ep.get("entity_id") for ep in r["endpoints"]]
+        assert len(set(eids)) == len(eids) or len(eids) == 1, r["edge_id"]
 
 
 # ---- 4. lookup by DGSFP key --------------------------------------------------
@@ -95,9 +120,16 @@ def test_lookup_by_dgsfp_key(ds, ents):
 def test_lookup_by_lei(ds, ents):
     by_clave, by_lei = ents
     assert by_lei["9598003REPS2DQZC4946"] is by_clave["C0001"]
-    # L1522: stale and current LEIs both resolve to the same (conflicted) entity
+    # L1522: stale LEI resolves the DGSFP entity; the current EIOPA LEI resolves
+    # a *separate* entity — joined only by an UNRESOLVED successor candidate.
     assert by_lei["7245004QN0BFE9Q9EV42"] is by_clave["L1522"]
-    assert by_lei["724500D3EHHJWKLWY913"] is by_clave["L1522"]
+    other = by_lei["724500D3EHHJWKLWY913"]
+    assert other["entity_id"] != by_clave["L1522"]["entity_id"]
+    cand = [r for r in ds["relations"]
+            if r["relation_type"] == "IDENTIFIER_SUCCESSOR_CANDIDATE"
+            and {ep["entity_id"] for ep in r["endpoints"]}
+            == {by_clave["L1522"]["entity_id"], other["entity_id"]}]
+    assert cand and cand[0]["link_status"] == "UNRESOLVED"
 
 
 # ---- 6. branch -> home undertaking -------------------------------------------
@@ -108,9 +140,16 @@ def test_branch_to_home(ds, ents):
                if r["relation_type"] == "BRANCH_OF"
                and r["endpoints"][0]["entity_id"] == e["entity_id"])
     assert set(rel["resolution_method"]) <= {"BDE_PARENT_CODE", "LEI"}
+    assert len(rel["evidence"]) >= 2    # both IC lists: ES row + home-country row
     parent = next(x for x in ds["entities"]
                   if x["entity_id"] == rel["endpoints"][1]["entity_id"])
     assert any(i["scheme"] == "bde:european_code" for i in parent["identifiers"])
+    # divergent branch LEIs (E0245: DGSFP ficha publishes the parent's LEI while
+    # BdE asserts another) are preserved as IDENTIFIER_ASSIGNMENT conflicts —
+    # subject undetermined — not identity conflicts.
+    e245 = by_clave["E0245"]
+    assert any(c["kind"] == "IDENTIFIER_SUBJECT_UNDETERMINED"
+               for c in e245["conflicts"])
 
 
 # ---- 7. conflicts preserved --------------------------------------------------
@@ -124,11 +163,13 @@ def test_conflicts_preserved(ds, ents):
     assert e1522["identity_status"] == "CONFLICT"       # identity-level conflict
     assert any(c["kind"] == "IDENTIFIER_LIFECYCLE_CONFLICT"
                for c in e1522["conflicts"])
-    # every conflict cites real assertions of its entity
+    # conflicts may cite assertions from other entities (cross-source disputes);
+    # every cited assertion must exist somewhere in the dataset.
+    all_aids = {a["assertion_id"] for e in ds["entities"]
+                for a in e["source_assertions"]}
     for e in ds["entities"]:
-        aids = {a["assertion_id"] for a in e["source_assertions"]}
         for c in e["conflicts"]:
-            assert set(c["assertions"]) <= aids, (e["entity_id"], c["kind"])
+            assert set(c["assertions"]) <= all_aids, (e["entity_id"], c["kind"])
 
 
 # ---- 8. unresolved LPS preserved ---------------------------------------------

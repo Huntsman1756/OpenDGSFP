@@ -1,26 +1,26 @@
 {
   "counts": {
     "by_identity_status": {
-      "CONFLICT": 4,
+      "CONFLICT": 1,
       "EXACT": 1991,
       "UNRESOLVED": 1344
     },
     "by_kind": {
-      "EEA_BRANCH": 208,
-      "INSURANCE_UNDERTAKING": 1539,
+      "EEA_BRANCH": 172,
+      "INSURANCE_UNDERTAKING": 1795,
       "REINSURANCE_UNDERTAKING": 19,
-      "UNDERTAKING": 1573
+      "UNDERTAKING": 1350
     },
     "by_source_coverage": {
-      "MULTI_SOURCE": 511,
-      "SOURCE_ONLY": 2828
+      "MULTI_SOURCE": 554,
+      "SOURCE_ONLY": 2782
     },
-    "entities": 3339,
-    "relations": 4324
+    "entities": 3336,
+    "relations": 4317
   },
-  "data_bytes": 12790303,
+  "data_bytes": 13895218,
   "data_file": "opendgsfp-0.1.jsonl",
-  "data_sha256": "09a9c7e4d32787ef45b77a253bdcc1cd77a201671720a1f9541bfdd4404dadb9",
+  "data_sha256": "71eb2d97e8c37806f66b87853d1b608a46bb1bdabdfa037d9242477463982ce1",
   "frozen_inputs": {
     "g0_commit": "42bb59de4925eabcefdca31e211c63e9ae9e4917",
     "g0_tag": "g0",
@@ -87,6 +87,17 @@
       "source_url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/"
     },
     {
+      "content_sha256": "7bc3d20479be379ae8d52d88d8ce9a29fb49e060bf447dcd7b3df5f54caa5b2f",
+      "evidence_tier": "T1_PRIMARY_DOCUMENT",
+      "jurisdiction": "IT",
+      "parser_version": "bde_ic_list/0.1",
+      "raw_file": "data/raw/bde/lista-ic-it.csv",
+      "retrieved_at": "2026-09-13T12:12:31.311713+00:00",
+      "source_snapshot_date": "2026-09-11",
+      "source_system": "BDE",
+      "source_url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/"
+    },
+    {
       "content_sha256": "50cc33c3bfcad2dabf3357aa08cc3fc0a8adb8c0266490ad8254a6b0371300cf",
       "evidence_tier": "T1_PRIMARY_DOCUMENT",
       "jurisdiction": "LU",
@@ -98,12 +109,34 @@
       "source_url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/"
     },
     {
+      "content_sha256": "68535f088c9f0858d53cfa5fa77eae1ee13cf978252c9836b5c12cb3fee5aebe",
+      "evidence_tier": "T1_PRIMARY_DOCUMENT",
+      "jurisdiction": "MT",
+      "parser_version": "bde_ic_list/0.1",
+      "raw_file": "data/raw/bde/lista-ic-mt.csv",
+      "retrieved_at": "2026-09-13T12:12:31.367864+00:00",
+      "source_snapshot_date": "2026-09-11",
+      "source_system": "BDE",
+      "source_url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/"
+    },
+    {
       "content_sha256": "13b2a4d0fa44348bec1d15d10cbc6e945b56730cc327168d31b5b00894350ef7",
       "evidence_tier": "T1_PRIMARY_DOCUMENT",
       "jurisdiction": "PT",
       "parser_version": "bde_ic_list/0.1",
       "raw_file": "data/raw/bde/lista-ic-pt.csv",
       "retrieved_at": "2026-09-13T12:12:31.450957+00:00",
+      "source_snapshot_date": "2026-09-11",
+      "source_system": "BDE",
+      "source_url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/"
+    },
+    {
+      "content_sha256": "b37085e52c495099f46959b2156a015cd4038b7f9278e8d5cb765e4b36fbaf18",
+      "evidence_tier": "T1_PRIMARY_DOCUMENT",
+      "jurisdiction": "SE",
+      "parser_version": "bde_ic_list/0.1",
+      "raw_file": "data/raw/bde/lista-ic-se.csv",
+      "retrieved_at": "2026-09-13T12:12:31.523255+00:00",
       "source_snapshot_date": "2026-09-11",
       "source_system": "BDE",
       "source_url": "https://www.bde.es/wbe/es/estadisticas/otras-clasificaciones/clasificacion-entidades/listas-instituciones-financieras/listas-empresas-seguros-pais/"

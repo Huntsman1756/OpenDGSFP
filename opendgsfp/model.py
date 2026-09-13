@@ -89,4 +89,5 @@ def empty_entity(entity_kind):
             "identity_status": None, "source_coverage": None,
             "identifiers": [], "registrations": [],
             "cross_border_operations": [], "source_assertions": [],
-            "conflicts": [], "snapshots": [], "diagnostics": []}
+            "conflicts": [], "snapshots": [], "diagnostics": [],
+            "merge_basis": []}

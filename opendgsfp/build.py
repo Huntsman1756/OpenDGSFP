@@ -1,11 +1,12 @@
 # -*- coding: utf-8 -*-
 """Build the v0.1 canonical dataset from frozen G0 inputs.
 
-Merging rule: records merge iff they share an authority-scoped identifier
-(lei, dgsfp:clave, bde:european_code, eiopa:identification_code[ES-only]).
-Name similarity is diagnostic-only and never merges. Everything else —
-unresolved links, stale identifiers, country disagreements — is preserved
-as conflicts/observations, never silently dropped.
+Merging rule (auditable): records merge iff they share an authority-scoped
+identifier. Every merge/attach event is recorded in entity["merge_basis"] with
+basis in {SHARED_LEI, SHARED_DGSFP_KEY, SHARED_AUTHORITY_SCOPED_ID,
+OFFICIAL_BRIDGE} — name similarity is diagnostic-only and can only produce
+UNRESOLVED candidate relations (e.g. IDENTIFIER_SUCCESSOR_CANDIDATE), never a
+canonical merge.
 """
 import collections
 import pathlib
@@ -23,6 +24,9 @@ DGSFP_KIND = {"C": "INSURANCE_UNDERTAKING", "M": "INSURANCE_UNDERTAKING",
 FTS_STATUSES = {"EEA FPS", "FPS for EEA Branches"}          # freedom of services (LPS)
 BRANCH_STATUSES = {"EEA branch", "3rd country branch"}      # branch presence
 PRESENCE_SYSTEMS = {"DGSFP_RRPP", "BDE", "EIOPA"}           # GLEIF validates, not presence
+
+MERGE_BASES = ("SHARED_LEI", "SHARED_DGSFP_KEY",
+               "SHARED_AUTHORITY_SCOPED_ID", "OFFICIAL_BRIDGE")
 
 
 def _add_ident(ent, scheme, value, aid, country=None):
@@ -53,9 +57,9 @@ def build_dataset(root=ROOT):
     eiopa = load_eiopa(root)
     dgsfp_by_clave = {e["clave"]: e for e in dgsfp}
 
-    entities = {}          # entity_id -> entity dict (mutable during build)
-    by_clave = {}          # dgsfp clave -> entity
-    by_lei = {}            # lei -> entity (canonical merge key)
+    entities = {}
+    by_clave = {}
+    by_lei = {}
     relations = {}
     observations = []
 
@@ -68,6 +72,16 @@ def build_dataset(root=ROOT):
                 return f"ent:{scheme}:{c}{i['value']}"
         return None
 
+    def log_merge(ent, basis, identifier, evidence):
+        if basis not in MERGE_BASES:
+            raise ValueError(f"non-exact merge basis: {basis}")
+        for m in ent["merge_basis"]:
+            if m["basis"] == basis and m["identifier"] == identifier:
+                m["evidence"] = sorted(set(m["evidence"]) | set(evidence))
+                return
+        ent["merge_basis"].append({"basis": basis, "identifier": identifier,
+                                   "evidence": sorted(set(evidence))})
+
     def register(ent):
         ent["entity_id"] = anchor_for(ent["identifiers"]) or M.content_id("ent", ent)
         entities[ent["entity_id"]] = ent
@@ -78,23 +92,34 @@ def build_dataset(root=ROOT):
                 by_lei.setdefault(i["value"], ent)
         return ent
 
-    def add_rel(rel):
-        relations[rel["edge_id"]] = rel
-
-    def merge_into(dst, src):
-        """Merge src into dst (same legal subject via shared exact identifier)."""
+    def merge_into(dst, src, basis, identifier, evidence):
+        """Merge src into dst. basis MUST be an exact shared-identifier ground."""
+        if basis not in MERGE_BASES:
+            raise ValueError(f"non-exact merge basis: {basis}")
         for i in src["identifiers"]:
             di = _add_ident(dst, i["scheme"], i["value"], None, i.get("country"))
             for a in i["asserted_by"]:
                 if a not in di["asserted_by"]:
                     di["asserted_by"].append(a)
         for k in ("registrations", "cross_border_operations", "source_assertions",
-                      "conflicts", "snapshots", "diagnostics"):
+                  "conflicts", "snapshots", "diagnostics"):
             dst[k].extend(src[k])
+        log_merge(dst, basis, identifier, evidence)
         entities.pop(src["entity_id"], None)
         for i in src["identifiers"]:
             if i["scheme"] == M.NS_LEI:
                 by_lei[i["value"]] = dst
+
+    def add_lei(ent, lei, aid):
+        """Attach an LEI identifier; if another entity already claims it, merge."""
+        other = by_lei.get(lei)
+        if other is not None and other is not ent:
+            merge_into(ent, other, "SHARED_LEI", f"lei:{lei}", [aid])
+        _add_ident(ent, M.NS_LEI, lei, aid)
+        by_lei[lei] = ent
+
+    def add_rel(rel):
+        relations[rel["edge_id"]] = rel
 
     # ---------------- provenance blocks ----------------
     prov_bde = make_prov("BDE", "ES", "data/raw/bde/lista-ic-es.csv", midx,
@@ -138,7 +163,7 @@ def build_dataset(root=ROOT):
             a_lei = M.make_assertion(subj, "PUBLISHES_IDENTIFIER",
                                      {"scheme": M.NS_LEI, "value": lei}, prov)
             ent["source_assertions"].append(a_lei)
-            _add_ident(ent, M.NS_LEI, lei, a_lei["assertion_id"])
+            add_lei(ent, lei, a_lei["assertion_id"])
         if tipo in ("E", "L"):
             a_hc = M.make_assertion(subj, "PUBLISHES_HOME_COUNTRY",
                                     {"pais_origen": e.get("pais_origen") or None,
@@ -162,6 +187,7 @@ def build_dataset(root=ROOT):
 
     # ---------------- 2. BdE lista-ic-es ----------------
     e_matriz = {}
+    bde_lei_pending = {}      # entity_id -> (lei, assertion_id)
     for r in load_bde(root / "data/raw/bde/lista-ic-es.csv"):
         sup = norm_dgsfp_key(r.get("CÓDIGO DE SUPERVISOR", ""))
         euc = r.get("CÓDIGO EUROPEO", "").strip()
@@ -172,10 +198,10 @@ def build_dataset(root=ROOT):
             {"list": "lista-ic-es", "nombre": r.get("NOMBRE"),
              "tipo_de_seguro": r.get("TIPO DE SEGURO") or None,
              "supervisor_code_raw": r.get("CÓDIGO DE SUPERVISOR") or None,
+             "lei": lei or None,
              "entidad_matriz": r.get("ENTIDAD MATRIZ") or None}, prov_bde)
         ent = by_clave.get(sup) if sup else None
         if ent is None:
-            # record that represents an entity asserted only by BdE
             ent = M.empty_entity("INSURANCE_UNDERTAKING")
             ent["source_assertions"].append(a_row)
             ent["registrations"].append(
@@ -183,7 +209,7 @@ def build_dataset(root=ROOT):
                  "situacion": None, "assertion": a_row["assertion_id"]})
             _add_ident(ent, M.NS_BDE_EU, euc, a_row["assertion_id"], "ES")
             if lei:
-                _add_ident(ent, M.NS_LEI, lei, a_row["assertion_id"])
+                add_lei(ent, lei, a_row["assertion_id"])
             register(ent)
             continue
         ent["source_assertions"].append(a_row)
@@ -192,18 +218,21 @@ def build_dataset(root=ROOT):
              "situacion": None, "assertion": a_row["assertion_id"]})
         _add_ident(ent, M.NS_BDE_SUP, sup, a_row["assertion_id"])
         _add_ident(ent, M.NS_BDE_EU, euc, a_row["assertion_id"], "ES")
+        log_merge(ent, "SHARED_DGSFP_KEY", f"dgsfp:clave:{sup}",
+                  [a_row["assertion_id"]])
         if lei:
-            prior = [i["value"] for i in ent["identifiers"] if i["scheme"] == M.NS_LEI]
-            if prior and lei not in prior:
-                ent["conflicts"].append(M.make_conflict(
-                    "IDENTIFIER_LIFECYCLE_CONFLICT", M.CL_IDENTITY,
-                    [a_row["assertion_id"]],
-                    f"BdE asserts LEI {lei} but another source asserts {prior}"))
-            _add_ident(ent, M.NS_LEI, lei, a_row["assertion_id"])
+            prior = _lei_of(ent)
+            if not prior or lei in prior:
+                add_lei(ent, lei, a_row["assertion_id"])
+            else:
+                # divergent LEI on the same register record: keep it in the
+                # assertion (evidence) but out of canonical identifiers until
+                # the subject is determined (see section 4 for branches).
+                bde_lei_pending[ent["entity_id"]] = (lei, a_row["assertion_id"])
         add_rel(M.make_relation(
             "DGSFP_KEY_BDE_SUPERVISOR_CODE_EXACT",
-            [{"entity_id": ent["entity_id"], "identifier": f"dgsfp:clave:{sup}"},
-             {"entity_id": ent["entity_id"], "identifier": f"bde:european_code:ES:{euc}"}],
+            [{"entity_id": ent["entity_id"],
+              "identifier": f"dgsfp:clave:{sup} == bde:european_code:ES:{euc}"}],
             "EXACT", ["DGSFP_KEY", "OFFICIAL_BRIDGE"], [a_row["assertion_id"]],
             "lista-ic-es row carries supervisor code + european code in one artifact"))
         matriz = (r.get("ENTIDAD MATRIZ") or "").strip()
@@ -225,37 +254,52 @@ def build_dataset(root=ROOT):
         elif r["EU Country where the entity operates"].strip() == "ES" and lei:
             ei_es_ops[lei].append(r)
 
-    def eiopa_home_entity(lei):
-        """Get/create the undertaking entity for an EIOPA home row (by LEI)."""
-        if lei in by_lei:
-            return by_lei[lei]
-        homes = sorted(ei_home_by_lei.get(lei, []),
-                       key=lambda r: r["Identification code"])
-        if not homes:
-            return None
-        h = homes[0]
-        ent = M.empty_entity("INSURANCE_UNDERTAKING")
-        subj = {"scheme": M.NS_LEI, "value": lei}
+    def attach_eiopa_home(ent, h):
+        """Attach the EIOPA home-undertaking row to ent (idempotent)."""
+        lei = h["LEI"].strip().upper()
+        subj = {"scheme": M.NS_EIOPA,
+                "value": h["Identification code"].strip(),
+                "country": h["Home Country"].strip()}
+        existing = {a["assertion_id"] for a in ent["source_assertions"]}
         a = M.make_assertion(
             subj, "REGISTERED_AS",
             {"identification_code": h["Identification code"].strip(),
              "nca": h["Name of NCA"].strip(),
              "home_country": h["Home Country"].strip(),
              "official_name": h["Official name of the entity"].strip()}, prov_eiopa)
-        a_name = M.make_assertion(subj, "PUBLISHES_NAME",
-                                  h["Official name of the entity"].strip(), prov_eiopa)
-        a_hc = M.make_assertion(subj, "PUBLISHES_HOME_COUNTRY",
-                                {"pais_origen": None,
-                                 "iso": h["Home Country"].strip()}, prov_eiopa)
-        ent["source_assertions"] += [a, a_name, a_hc]
-        ent["registrations"].append(
-            {"system": "EIOPA", "register_key": h["Identification code"].strip(),
-             "register_type": "HOME_UNDERTAKING", "situacion": None,
-             "assertion": a["assertion_id"]})
-        _add_ident(ent, M.NS_LEI, lei, a["assertion_id"])
-        _add_ident(ent, M.NS_EIOPA, h["Identification code"].strip(),
-                   a["assertion_id"], h["Home Country"].strip())
-        register(ent)
+        if a["assertion_id"] not in existing:
+            ent["source_assertions"] += [
+                a,
+                M.make_assertion(subj, "PUBLISHES_NAME",
+                                 h["Official name of the entity"].strip(), prov_eiopa),
+                M.make_assertion(subj, "PUBLISHES_HOME_COUNTRY",
+                                 {"pais_origen": None,
+                                  "iso": h["Home Country"].strip()}, prov_eiopa)]
+            ent["registrations"].append(
+                {"system": "EIOPA",
+                 "register_key": h["Identification code"].strip(),
+                 "register_type": "HOME_UNDERTAKING", "situacion": None,
+                 "assertion": a["assertion_id"]})
+            _add_ident(ent, M.NS_EIOPA, h["Identification code"].strip(),
+                       a["assertion_id"], h["Home Country"].strip())
+            _add_ident(ent, M.NS_LEI, lei, a["assertion_id"])
+        return a
+
+    def eiopa_home_entity(lei):
+        """Get the entity for an EIOPA home LEI, creating it if needed."""
+        ent = by_lei.get(lei)
+        homes = sorted(ei_home_by_lei.get(lei, []),
+                       key=lambda r: r["Identification code"])
+        if ent is None:
+            if not homes:
+                return None
+            ent = M.empty_entity("INSURANCE_UNDERTAKING")
+            a = attach_eiopa_home(ent, homes[0])
+            register(ent)
+            return ent
+        if homes:
+            a = attach_eiopa_home(ent, homes[0])
+            log_merge(ent, "SHARED_LEI", f"lei:{lei}", [a["assertion_id"]])
         return ent
 
     # ES domestic rows -> merge into DGSFP entities by clave
@@ -265,32 +309,21 @@ def build_dataset(root=ROOT):
             continue
         h = sorted(rows, key=lambda r: r["LEI"])[0]
         lei = h["LEI"].strip().upper()
-        a = M.make_assertion(
-            {"scheme": M.NS_EIOPA, "value": h["Identification code"].strip(),
-             "country": "ES"},
-            "REGISTERED_AS",
-            {"identification_code": h["Identification code"].strip(),
-             "nca": h["Name of NCA"].strip(), "home_country": "ES",
-             "official_name": h["Official name of the entity"].strip()}, prov_eiopa)
-        ent["source_assertions"].append(a)
-        ent["registrations"].append(
-            {"system": "EIOPA", "register_key": h["Identification code"].strip(),
-             "register_type": "HOME_UNDERTAKING", "situacion": None,
-             "assertion": a["assertion_id"]})
-        _add_ident(ent, M.NS_EIOPA, h["Identification code"].strip(),
-                   a["assertion_id"], "ES")
-        prior = [i["value"] for i in ent["identifiers"] if i["scheme"] == M.NS_LEI]
+        a = attach_eiopa_home(ent, h)
+        log_merge(ent, "SHARED_DGSFP_KEY", f"dgsfp:clave:{k}", [a["assertion_id"]])
+        prior = _lei_of(ent)
         if lei and prior and lei not in prior:
             ent["conflicts"].append(M.make_conflict(
-                "IDENTIFIER_LIFECYCLE_CONFLICT", M.CL_IDENTITY, [a["assertion_id"]],
+                "IDENTIFIER_LIFECYCLE_CONFLICT", M.CL_IDENTITY,
+                [a["assertion_id"]],
                 f"EIOPA asserts LEI {lei}; other source asserts {prior}"))
         if lei:
-            _add_ident(ent, M.NS_LEI, lei, a["assertion_id"])
+            add_lei(ent, lei, a["assertion_id"])
         add_rel(M.make_relation(
             "DGSFP_KEY_EIOPA_ID_EXACT",
-            [{"entity_id": ent["entity_id"], "identifier": f"dgsfp:clave:{k}"},
-             {"entity_id": ent["entity_id"],
-              "identifier": f"eiopa:identification_code:{h['Identification code'].strip()}"}],
+            [{"entity_id": ent["entity_id"],
+              "identifier": f"dgsfp:clave:{k} == "
+                            f"eiopa:identification_code:{h['Identification code'].strip()}"}],
             "EXACT", ["DGSFP_KEY"], [a["assertion_id"]],
             "EIOPA identification code equals DGSFP clave (ES domestic only)"))
         dname = dgsfp_by_clave.get(k, {}).get("denominacion", "")
@@ -321,10 +354,10 @@ def build_dataset(root=ROOT):
         cc = matriz[:2].lower()
         rows, prov_h = bde_home_list(cc)
         hits = [h for h in rows if h.get("CÓDIGO EUROPEO", "").strip() == matriz]
+        beuc = next((i["value"] for i in branch["identifiers"]
+                     if i["scheme"] == M.NS_BDE_EU), None)
         a_par = M.make_assertion(
-            {"scheme": M.NS_BDE_EU,
-             "value": next((i["value"] for i in branch["identifiers"]
-                           if i["scheme"] == M.NS_BDE_EU), eid)},
+            {"scheme": M.NS_BDE_EU, "value": beuc or eid},
             "ASSERTS_PARENT", {"entidad_matriz": matriz}, prov_bde)
         branch["source_assertions"].append(a_par)
         if not hits:
@@ -336,51 +369,113 @@ def build_dataset(root=ROOT):
             continue
         h = hits[0]
         plei = h.get("LEI", "").strip().upper()
+        # assertion for the home-list row: always emitted, so every edge that
+        # used the second artifact cites it.
+        a_h = M.make_assertion(
+            {"scheme": M.NS_BDE_EU, "value": matriz, "country": cc.upper()},
+            "LISTS_ROW",
+            {"list": f"lista-ic-{cc}", "nombre": h.get("NOMBRE"),
+             "tipo_de_seguro": h.get("TIPO DE SEGURO") or None,
+             "lei": plei or None}, prov_h)
+
         parent = by_lei.get(plei) if plei else None
         if parent is None:
             parent = M.empty_entity("INSURANCE_UNDERTAKING")
-            a_h = M.make_assertion(
-                {"scheme": M.NS_BDE_EU, "value": matriz, "country": cc.upper()},
-                "LISTS_ROW",
-                {"list": f"lista-ic-{cc}", "nombre": h.get("NOMBRE"),
-                 "tipo_de_seguro": h.get("TIPO DE SEGURO") or None}, prov_h)
             parent["source_assertions"].append(a_h)
             parent["registrations"].append(
                 {"system": "BDE", "register_key": matriz,
                  "register_type": f"IC_LIST_{cc.upper()}", "situacion": None,
                  "assertion": a_h["assertion_id"]})
             _add_ident(parent, M.NS_BDE_EU, matriz, a_h["assertion_id"], cc.upper())
-            if plei:
-                _add_ident(parent, M.NS_LEI, plei, a_h["assertion_id"])
             register(parent)
+            if plei:
+                add_lei(parent, plei, a_h["assertion_id"])
         else:
-            _add_ident(parent, M.NS_BDE_EU, matriz, a_par["assertion_id"], cc.upper())
+            if a_h["assertion_id"] not in {a["assertion_id"]
+                                           for a in parent["source_assertions"]}:
+                parent["source_assertions"].append(a_h)
+                parent["registrations"].append(
+                    {"system": "BDE", "register_key": matriz,
+                     "register_type": f"IC_LIST_{cc.upper()}", "situacion": None,
+                     "assertion": a_h["assertion_id"]})
+            _add_ident(parent, M.NS_BDE_EU, matriz, a_h["assertion_id"], cc.upper())
+            if plei:
+                log_merge(parent, "SHARED_LEI", f"lei:{plei}",
+                          [a_h["assertion_id"]])
+
+        same_legal_person = parent is branch
+        if same_legal_person:
+            # branch ficha published the home undertaking's LEI: one legal
+            # person, two registrations. No self-edge.
+            branch["diagnostics"].append(
+                {"kind": "BRANCH_FICHA_PUBLISHES_HOME_LEI", "lei": plei,
+                 "note": "DGSFP E-ficha LEI equals resolved parent LEI — "
+                         "branch and home are the same legal person"})
+        else:
+            add_rel(M.make_relation(
+                "BRANCH_OF",
+                [{"entity_id": eid}, {"entity_id": parent["entity_id"]}],
+                "EXACT", ["BDE_PARENT_CODE"] + (["LEI"] if plei else []),
+                [a_par["assertion_id"], a_h["assertion_id"]],
+                "branch -> home undertaking"))
+        # single-endpoint edge when the resolution lands on the same legal
+        # person (branch ficha published the home LEI); two endpoints otherwise
+        endpoints = ([{"entity_id": eid,
+                      "identifier": f"bde:european_code:{cc.upper()}:{matriz}"}]
+                     if same_legal_person else
+                     [{"entity_id": eid,
+                       "identifier": f"bde:european_code:{cc.upper()}:{matriz}"},
+                      {"entity_id": parent["entity_id"]}])
+        add_rel(M.make_relation(
+            "BRANCH_PARENT_CODE_RESOLVES_HOME_ENTITY", endpoints,
+            "EXACT", ["BDE_PARENT_CODE"],
+            [a_par["assertion_id"], a_h["assertion_id"]],
+            "ENTIDAD MATRIZ resolves to one row in the home-country IC list"))
+
         # parent LEI -> EIOPA home undertaking (exact)
         if plei and plei in ei_home_by_lei:
             eh = eiopa_home_entity(plei)
             if eh is not parent:
-                merge_into(parent, eh)
-            eiopa_reg = next((r["register_key"] for r in parent["registrations"]
+                merge_into(parent, eh, "SHARED_LEI", f"lei:{plei}",
+                           [a_h["assertion_id"]])
+            eiopa_aid = next((r["assertion"] for r in parent["registrations"]
                               if r["system"] == "EIOPA"), None)
-            add_rel(M.make_relation(
-                "HOME_LEI_MATCHES_EIOPA_HOME_UNDERTAKING",
-                [{"entity_id": parent["entity_id"], "identifier": f"lei:{plei}"},
-                 {"entity_id": parent["entity_id"],
-                  "identifier": f"eiopa:identification_code:{eiopa_reg}"}],
-                "EXACT", ["LEI"], [a_par["assertion_id"]],
-                "parent LEI equals EIOPA home undertaking LEI"))
-        add_rel(M.make_relation(
-            "BRANCH_PARENT_CODE_RESOLVES_HOME_ENTITY",
-            [{"entity_id": eid,
-              "identifier": f"bde:european_code:{cc.upper()}:{matriz}"},
-             {"entity_id": parent["entity_id"]}],
-            "EXACT", ["BDE_PARENT_CODE"], [a_par["assertion_id"]],
-            "ENTIDAD MATRIZ resolves to one row in the home-country IC list"))
-        add_rel(M.make_relation(
-            "BRANCH_OF",
-            [{"entity_id": eid}, {"entity_id": parent["entity_id"]}],
-            "EXACT", ["BDE_PARENT_CODE"] + (["LEI"] if plei else []),
-            [a_par["assertion_id"]], "branch -> home undertaking"))
+            eiopa_code = next((r["register_key"] for r in parent["registrations"]
+                               if r["system"] == "EIOPA"), None)
+            if eiopa_aid:
+                add_rel(M.make_relation(
+                    "HOME_LEI_MATCHES_EIOPA_HOME_UNDERTAKING",
+                    [{"entity_id": parent["entity_id"],
+                      "identifier": f"lei:{plei} == eiopa:{eiopa_code}"}],
+                    "EXACT", ["LEI"], [a_h["assertion_id"], eiopa_aid],
+                    "home-list row LEI equals EIOPA home undertaking LEI"))
+
+    # divergent BdE-ES LEIs whose subject could not be determined
+    for eid, (lei, aid) in bde_lei_pending.items():
+        ent = entities.get(eid)
+        if ent is None:
+            continue
+        leis = _lei_of(ent)
+        if lei in leis:
+            continue
+        parent_leis = set()
+        for r in relations.values():
+            if (r["relation_type"] == "BRANCH_PARENT_CODE_RESOLVES_HOME_ENTITY"
+                    and r["endpoints"][0]["entity_id"] == eid):
+                # two endpoints -> distinct parent entity; one -> same subject
+                peid = (r["endpoints"][1]["entity_id"] if len(r["endpoints"]) > 1
+                        else eid)
+                parent_leis |= set(_lei_of(entities.get(peid, {"identifiers": []})))
+        parent_leis |= set(leis)
+        if lei in parent_leis:
+            _add_ident(ent, M.NS_LEI, lei, aid)
+        else:
+            ent["conflicts"].append(M.make_conflict(
+                "IDENTIFIER_SUBJECT_UNDETERMINED", M.CL_IDENTIFIER_ASSIGNMENT,
+                [aid], f"BdE lista-ic-es asserts LEI {lei} for this register "
+                       f"key, but DGSFP/other sources identify the subject as "
+                       f"{leis or parent_leis}; subject of {lei} undetermined "
+                       f"(possibly a branch-establishment LEI)"))
 
     # ---------------- 5. LPS (L entities) ----------------
     ei_by_name = collections.defaultdict(list)
@@ -399,8 +494,6 @@ def build_dataset(root=ROOT):
         home_rows = ei_home_by_lei.get(lei, [])
         if home_rows:
             eh = eiopa_home_entity(lei)
-            if eh is not ent:
-                merge_into(ent, eh)
             h0 = sorted(home_rows, key=lambda r: r["Identification code"])[0]
             iso = pais_to_iso(e.get("pais_origen"))
             home_cc = h0["Home Country"].strip()
@@ -419,8 +512,7 @@ def build_dataset(root=ROOT):
             add_rel(M.make_relation(
                 "LPS_REGISTER_KEY_PUBLISHES_LEI",
                 [{"entity_id": ent["entity_id"],
-                  "identifier": f"dgsfp:clave:{e['clave']}"},
-                 {"entity_id": ent["entity_id"], "identifier": f"lei:{lei}"}],
+                  "identifier": f"dgsfp:clave:{e['clave']} == lei:{lei}"}],
                 "EXACT", ["OFFICIAL_BRIDGE", "LEI"],
                 [a["assertion_id"] for a in ent["source_assertions"]
                  if a["predicate"] == "PUBLISHES_IDENTIFIER"],
@@ -434,36 +526,54 @@ def build_dataset(root=ROOT):
                     "LEI resolves to an EIOPA home with no FTS operation into ES; "
                     "DGSFP may publish the group LEI, not the operator's"))
         else:
-            # lifecycle conflict: same subject in EIOPA under a different LEI
+            # Possible identifier lifecycle: an EIOPA home undertaking with the
+            # same normalized name + home country operates into ES under a
+            # different LEI. This is a CANDIDATE, not a merge: names never
+            # create canonical identity.
             iso = pais_to_iso(e.get("pais_origen"))
             cands = [(l2, h) for l2, h in
                      ei_by_name.get((norm_name(e["denominacion"]), iso or ""), [])
                      if l2 != lei and l2 in ei_es_ops]
             if cands:
                 other_lei, h = sorted(cands)[0]
-                eh = eiopa_home_entity(other_lei)
-                ids = [a["assertion_id"] for a in ent["source_assertions"]
-                       if a["predicate"] == "PUBLISHES_IDENTIFIER"]
+                other = eiopa_home_entity(other_lei)
+                own_aids = [a["assertion_id"] for a in ent["source_assertions"]
+                            if a["predicate"] in ("PUBLISHES_IDENTIFIER",
+                                                  "PUBLISHES_NAME",
+                                                  "PUBLISHES_HOME_COUNTRY")]
+                other_aids = [a["assertion_id"] for a in other["source_assertions"]
+                              if a["predicate"] in ("REGISTERED_AS",
+                                                    "PUBLISHES_NAME",
+                                                    "PUBLISHES_HOME_COUNTRY")]
                 ent["conflicts"].append(M.make_conflict(
-                    "IDENTIFIER_LIFECYCLE_CONFLICT", M.CL_IDENTITY, ids,
-                    f"DGSFP publishes stale LEI {lei}; EIOPA lists the same "
-                    f"undertaking ({h['Identification code'].strip()}) under "
-                    f"LEI {other_lei}"))
-                if eh is not ent:
-                    merge_into(ent, eh)
+                    "IDENTIFIER_LIFECYCLE_CONFLICT", M.CL_IDENTITY,
+                    own_aids + other_aids,
+                    f"DGSFP publishes LEI {lei} (stale/inactive); EIOPA lists a "
+                    f"same-named {iso} undertaking operating into ES under LEI "
+                    f"{other_lei} ({h['Identification code'].strip()}). "
+                    f"Candidate successor only — no exact bridge in snapshot."))
                 ent["diagnostics"].append(
                     {"kind": "SAME_SUBJECT_DIFFERENT_IDENTIFIER",
                      "dgsfp_lei": lei, "eiopa_lei": other_lei,
-                     "basis": "identical normalized name + home country + "
-                              "ES operation (documented G0 gap)"})
+                     "basis": "identical normalized name + home country + ES "
+                              "operation (documented G0 gap; diagnostic only)"})
+                add_rel(M.make_relation(
+                    "IDENTIFIER_SUCCESSOR_CANDIDATE",
+                    [{"entity_id": ent["entity_id"],
+                      "identifier": f"lei:{lei}"},
+                     {"entity_id": other["entity_id"],
+                      "identifier": f"lei:{other_lei}"}],
+                    "UNRESOLVED", ["NONE"], own_aids + other_aids,
+                    "same normalized name + home country + ES operation; "
+                    "requires an official LEI-successor bridge to merge"))
 
     # ---------------- 6. EIOPA operations into ES ----------------
     for lei_, ops in ei_es_ops.items():
         ent = eiopa_home_entity(lei_)
         if ent is None:
             ent = M.empty_entity("UNDERTAKING")
-            _add_ident(ent, M.NS_LEI, lei_, None)
             register(ent)
+            add_lei(ent, lei_, None)
         for r in ops:
             a = M.make_assertion(
                 {"scheme": M.NS_LEI, "value": lei_}, "ASSERTS_OPERATION",
@@ -526,6 +636,7 @@ def build_dataset(root=ROOT):
             ent["source_assertions"].append(a)
             if a["assertion_id"] not in i["asserted_by"]:
                 i["asserted_by"].append(a["assertion_id"])
+            log_merge(ent, "SHARED_LEI", f"lei:{i['value']}", [a["assertion_id"]])
             add_rel(M.make_relation(
                 "LEI_RESOLVES_GLEIF",
                 [{"entity_id": ent["entity_id"], "identifier": f"lei:{i['value']}"}],
@@ -534,6 +645,15 @@ def build_dataset(root=ROOT):
 
     # ---------------- 8. status + deterministic ordering ----------------
     for ent in entities.values():
+        # an entity merged with a home-undertaking registration is the legal
+        # person itself (e.g. an E-branch whose ficha carries the home LEI):
+        # branch-ness then lives in registrations, not in entity_kind.
+        if (ent["entity_kind"] in ("EEA_BRANCH", "UNDERTAKING")
+                and any(r["register_type"] == "HOME_UNDERTAKING"
+                        or r["register_type"].startswith("IC_LIST_")
+                        and r["register_type"] != "IC_LIST_ES"
+                        for r in ent["registrations"])):
+            ent["entity_kind"] = "INSURANCE_UNDERTAKING"
         id_conflict = any(c["level"] == M.CL_IDENTITY for c in ent["conflicts"])
         has_lei = bool(_lei_of(ent))
         is_l_registration_only = (
@@ -559,6 +679,7 @@ def build_dataset(root=ROOT):
             i["asserted_by"].sort()
         ent["source_assertions"].sort(key=lambda a: a["assertion_id"])
         ent["conflicts"].sort(key=lambda c: c["conflict_id"])
+        ent["merge_basis"].sort(key=lambda m: (m["basis"], m["identifier"]))
         ent["registrations"].sort(key=lambda r: (r["system"], r["register_key"]))
         ent["cross_border_operations"].sort(key=lambda o: (o["country"], o["regime"],
                                                            o["asserted_by"]))
